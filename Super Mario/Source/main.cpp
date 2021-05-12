@@ -9,16 +9,22 @@
 #include "../Header/Mario.h"
 #include "../Header/Menu.h"
 
+/***		Include Helper Libraries		***/
+#include <windows.h>
+
 using namespace sf;
 
 int main()
 {
+	// Hide Console open when run the game
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
+
 	// Open Startup Game Window 
 	RenderWindow window(sf::VideoMode(1600, 900), "Super Mario");
 	
 	// Create New Mario
 	Mario mario = Mario();
-
+	mario.Small_State();
 	
 	while (window.isOpen())
 	{
@@ -26,32 +32,20 @@ int main()
 		while (window.pollEvent(event))
 		{
 			// Close the game when Cross button right most the form clicked
-			if (event.type == Event::Closed)
-			{
+			if (event.type == Event::Closed){
 				window.close();
 			}
-			
+
+			// Mario movement
+			mario.Move();
+
 			/// Try your code here
+			
 
 
 
 
 
-
-
-
-
-
-			// /// /////////////////////////////////////////////////
-			if (Keyboard::isKeyPressed(Keyboard::Right)) {
-				mario.Mario_Sprite.setScale(1, 1);
-				mario.Mario_Sprite.move(15, 0);
-			}
-			if (Keyboard::isKeyPressed(Keyboard::Left)) {
-				mario.Mario_Sprite.setScale(-1, 1);
-				mario.Mario_Sprite.move(-15, 0);
-			}
-			// /// /////////////////////////////////////////////////
 		}
 
 		window.clear();
@@ -62,7 +56,7 @@ int main()
 
 
 
-		/// ////////////////////////////////////
+		
 		window.display();
 	}
 	return 0;
