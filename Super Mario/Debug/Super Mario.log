@@ -1,14 +1,2 @@
 ﻿  main.cpp
-E:\Work\Super Mario\Super Mario\Source\main.cpp(32,12): error C4996: 'sf::Text::setColor': was declared deprecated
-  Mario.cpp
-E:\Work\Super Mario\Super Mario\Source\Mario.cpp(23,52): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\Super Mario\Super Mario\Source\Mario.cpp(23,45): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-  Generating Code...
+  Super Mario.vcxproj -> E:\Work\Super Mario\Debug\Super Mario.exe

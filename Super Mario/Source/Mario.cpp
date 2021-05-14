@@ -18,8 +18,8 @@ Mario::Mario() {
 
 void Mario::Small_State() {
 	MarioState = SMALL;
-	float Height = 32;
-	float Width = 28;
+	int Height = 32;
+	int Width = 28;
 	Mario_Sprite.setTextureRect(IntRect(0, 96, Width, Height));
 	Mario_Sprite.setOrigin(Height / 2, Width / 2);
 }
@@ -31,20 +31,25 @@ void Mario::Move() {
 	{
 		IntRect Mario_Rect = Mario_Sprite.getTextureRect();
 
+		Mario_Sprite.move(Mario_XSpeed, 0);
 		// Move to right
 		if (Keyboard::isKeyPressed(Keyboard::Right)) {
 			setMarioRectForWalk(Mario_Rect);
 			Mario_Sprite.setTextureRect(Mario_Rect);
 			Mario_Sprite.setScale(2, 2);
-			Mario_Sprite.move(15, 0);
-		}
+			Mario_XSpeed = 15;
+			
 
+		}
+		else {
+
+		}
 		// Move to left
 		if (Keyboard::isKeyPressed(Keyboard::Left)) {
 			setMarioRectForWalk(Mario_Rect);
 			Mario_Sprite.setTextureRect(Mario_Rect);
 			Mario_Sprite.setScale(-2, 2);
-			Mario_Sprite.move(-15, 0);
+			Mario_XSpeed = -15;
 		}
 
 		// Jump when press arrow up
@@ -94,6 +99,8 @@ void Mario::setMarioRectForWalk(IntRect& intRect) {
 void Mario::StandStill() {
 	if (!Keyboard::isKeyPressed(Keyboard::Left) && !Keyboard::isKeyPressed(Keyboard::Right))
 	{
+		Mario_XSpeed = 0;
+
 		if (MarioState == SMALL)
 		{
 			Small_State();

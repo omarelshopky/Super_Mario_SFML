@@ -26,6 +26,9 @@ int main()
 	Mario mario = Mario();
 	mario.Small_State();
 	
+	// Create new GameEnigne
+	GameEngine gameEngine = GameEngine();
+	
 	while (window.isOpen())
 	{
 		Event event;
@@ -36,24 +39,25 @@ int main()
 				window.close();
 			}
 
+			if (Keyboard::isKeyPressed(Keyboard::Z)) {
+				gameEngine.TimeToScore();
+			}
 			// Mario movement
 			mario.Move();
 
-			/// Try your code here
 			
-
-
-
-
 
 		}
 
+		//gameEngine.Update_Timer();
+
+
+
 		window.clear();
 		window.draw(mario.Mario_Sprite);
-		/// Draw what you do in screen 
-
-
-
+		window.draw(gameEngine.Score_Text);
+		window.draw(gameEngine.Timer_Text);
+		/// Draw what you do in screen
 
 
 		
