@@ -1,7 +1,9 @@
 #include "../Header/GameEngine.h"
 
 
-GameEngine::GameEngine() {
+GameEngine::GameEngine(RenderWindow& window) {
+	GameWindow = &window;
+
 	// Set initial values
 	Level_Time = 300;
 	Score_Int = 0, Current_Time = 0, Counter_Time = 0;
@@ -39,19 +41,12 @@ void GameEngine::Start_CountDown() {
 }
 
 
-void GameEngine::Update_Timer(int Counter) {
-	Counter_Time = Counter;
-
+void GameEngine::Update_Timer() {
 	// clear timer_str
 	Timer_Str.str(string());
 	Current_Time = Timer.getElapsedTime().asSeconds();
+	Counter_Time = Level_Time - Current_Time;
 	
-	// if we didn't provide an argument calculate Time
-	if (Counter_Time == -1) {
-		Counter_Time = Level_Time - Current_Time;
-	}
-	else {/*  Do Nothing  */ }
-
 	if (Counter_Time >= 0) {
 		Timer_Str << "TIME: " << setw(3) << setfill('0') << Counter_Time;
 		Timer_Text.setString(Timer_Str.str());
@@ -69,8 +64,25 @@ bool GameEngine::isTimerFinished() {
 
 
 void GameEngine::TimeToScore() {
-	for (int x = Counter_Time; x > 0; x--) {
-		Update_Timer(x);
-		Update_Score(50);
+	Clock clock;
+	int x = Counter_Time;
+	while (x >= 0) {
+		if (clock.getElapsedTime().asMilliseconds() >= 6) {
+			Timer.restart();
+			clock.restart();
+			Level_Time = x;
+			Update_Timer();
+			Update_Score(50);
+			Draw();
+			x--;
+		}
 	}
+}
+
+
+void GameEngine::Draw() {
+	GameWindow->clear();
+	GameWindow->draw(Score_Text);
+	GameWindow->draw(Timer_Text);
+	GameWindow->display();
 }

@@ -27,7 +27,7 @@ int main()
 	mario.Small_State();
 	
 	// Create new GameEnigne
-	GameEngine gameEngine = GameEngine();
+	GameEngine gameEngine = GameEngine(window);
 	
 	while (window.isOpen())
 	{
@@ -49,7 +49,7 @@ int main()
 
 		}
 
-		//gameEngine.Update_Timer();
+		gameEngine.Update_Timer();
 
 
 

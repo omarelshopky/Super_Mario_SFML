@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  GameEngine.cpp
+E:\Work\Super Mario\Super Mario\Source\GameEngine.cpp(47,49): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+  Generating Code...
   Super Mario.vcxproj -> E:\Work\Super Mario\Debug\Super Mario.exe

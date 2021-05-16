@@ -17,9 +17,10 @@ private:
 
 public:
     Text Timer_Text, Score_Text;
+    RenderWindow *GameWindow;
 
     /*         Constractar          */
-    GameEngine();
+    GameEngine(RenderWindow& window);
 
     /*          Method         */
     
@@ -32,7 +33,7 @@ public:
 
 
     // Update timer
-    void Update_Timer(int Counter = -1);
+    void Update_Timer();
 
 
     // Check wheater Level time is finished or not
@@ -41,5 +42,9 @@ public:
 
     // Convert remain time to score when player won
     void TimeToScore();
+
+
+    // draw GameEngine objects into screen
+    void Draw();
 };
 
