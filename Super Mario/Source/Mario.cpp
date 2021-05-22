@@ -1,6 +1,5 @@
 #include "../Header/Mario.h"
 
-#include <iostream>
 
 Mario::Mario() {
 	// Init Mario motion varible
@@ -12,7 +11,7 @@ Mario::Mario() {
 
 	MarioTexture.loadFromFile("Resource/Textures/Mario.png");
 	MarioTexture.setSmooth(true);
-	MarioSprite.setTexture(MarioTexture);
+	MarioSprite.setTexture(MarioTexture); 	
 	MarioSprite.setPosition(300, 500);
 	MarioSprite.setScale(2, 2);
 	SmallState();

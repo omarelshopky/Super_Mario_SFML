@@ -26,9 +26,10 @@ int main()
 	Mario mario = Mario();
 	mario.SmallState();
 	
-	// Create new GameEnigne
+	// Create GameEnigne and Menu
 	GameEngine gameEngine = GameEngine(window);
-	
+    Menu menu = Menu();
+
 	while (window.isOpen())
 	{
 		Event event;
@@ -45,6 +46,7 @@ int main()
 			
 			mario.CatchEvents();
 
+            menu.CatchEvents(event, window);
 		}
 
 		// Mario movement
@@ -56,6 +58,7 @@ int main()
 		window.clear();
 		window.draw(mario.MarioSprite);
 		gameEngine.Draw();
+        menu.Draw(window);
 		/// Draw what you do in screen
 
 
@@ -64,5 +67,4 @@ int main()
 	}
 	return 0;
 }
-
 
