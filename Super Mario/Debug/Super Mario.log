@@ -1,6 +1,7 @@
 ﻿  Mario.cpp
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(27,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(27,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(64,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(124,24): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(66,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(70,24): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(82,22): warning C4305: '+=': truncation from 'double' to 'float'
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

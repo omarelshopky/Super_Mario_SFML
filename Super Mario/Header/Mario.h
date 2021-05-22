@@ -10,7 +10,7 @@ class Mario
 {	
 	// Mario properties
 private:
-	Clock timer;
+	Clock timer1, timer2;
 	float MarioAcceleration[2], MarioSpeed[2];
 	bool GoRight, GoUp, GoLeft, GoDown, Jumping;
 	float StartJumpPosition;
@@ -39,6 +39,13 @@ private:
 	// Make mario animation stand still 
 	void StandStill();
 
-	// Make animation for mario turn from right to left and vice versa
+	// make mario jump
+	void Jump(IntRect& intRect, int RectPosition, float waiting);
+
+	// make mario walk to the right
+	void MoveRight(IntRect& intRect);
+
+	// make mario walk to the left
+	void MoveLeft(IntRect& intRect);
 };
 
