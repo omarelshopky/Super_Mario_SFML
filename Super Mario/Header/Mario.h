@@ -11,12 +11,13 @@ class Mario
 	// Mario properties
 private:
 	Clock timer;
-	float Mario_XAcceleration, Mario_YAcceleration;
-	float Mario_XSpeed, Mario_YSpeed;
+	float MarioAcceleration[2], MarioSpeed[2];
+	bool GoRight, GoUp, GoLeft, GoDown, Jumping;
+	float StartJumpPosition;
 
 public:
-	Texture Mario_Texture;
-	Sprite Mario_Sprite;
+	Texture MarioTexture;
+	Sprite MarioSprite;
 	MarioState_t MarioState;
 	
 	
@@ -24,17 +25,20 @@ public:
 	Mario();
 
 	// set Mario to small state
-	void Small_State();
+	void SmallState();
 
 	// Move mario
 	void Move();
 
+	void CatchEvents();
+
 private:
 	// Make animation for mario while walking
-	void setMarioRectForWalk(IntRect& intRect);
+	void SetMarioRectForWalk(IntRect& intRect);
 
 	// Make mario animation stand still 
 	void StandStill();
 
+	// Make animation for mario turn from right to left and vice versa
 };
 

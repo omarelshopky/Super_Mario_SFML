@@ -7,7 +7,7 @@ GameEngine::GameEngine(RenderWindow& window) {
 	// Set initial values
 	Level_Time = 300;
 	Score_Int = 0, Current_Time = 0, Counter_Time = 0;
-	Score_Str << "MARIO: 000000";
+	Score_Str << "MARIO: 0000000";
 	Font_Size = 45;
 
 	// Load font from file
@@ -31,7 +31,7 @@ void GameEngine::Update_Score(int IncScore) {
 	Score_Int += IncScore;
 	// clear score_str
 	Score_Str.str(string());
-	Score_Str << "MARIO: " << setw(6) << setfill('0') << Score_Int;
+	Score_Str << "MARIO: " << setw(7) << setfill('0') << Score_Int;
 	Score_Text.setString(Score_Str.str());
 }
 
@@ -73,7 +73,11 @@ void GameEngine::TimeToScore() {
 			Level_Time = x;
 			Update_Timer();
 			Update_Score(50);
+
+			GameWindow->clear();
 			Draw();
+			GameWindow->display();
+
 			x--;
 		}
 	}
@@ -81,8 +85,6 @@ void GameEngine::TimeToScore() {
 
 
 void GameEngine::Draw() {
-	GameWindow->clear();
 	GameWindow->draw(Score_Text);
 	GameWindow->draw(Timer_Text);
-	GameWindow->display();
 }

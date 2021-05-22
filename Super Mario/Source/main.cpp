@@ -17,14 +17,14 @@ using namespace sf;
 int main()
 {
 	// Hide Console open when run the game
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
 
 	// Open Startup Game Window 
 	RenderWindow window(sf::VideoMode(1600, 900), "Super Mario");
 	
 	// Create New Mario
 	Mario mario = Mario();
-	mario.Small_State();
+	mario.SmallState();
 	
 	// Create new GameEnigne
 	GameEngine gameEngine = GameEngine(window);
@@ -42,21 +42,20 @@ int main()
 			if (Keyboard::isKeyPressed(Keyboard::Z)) {
 				gameEngine.TimeToScore();
 			}
-			// Mario movement
-			mario.Move();
-
 			
+			mario.CatchEvents();
 
 		}
 
+		// Mario movement
+		mario.Move();
 		gameEngine.Update_Timer();
-
+		
 
 
 		window.clear();
-		window.draw(mario.Mario_Sprite);
-		window.draw(gameEngine.Score_Text);
-		window.draw(gameEngine.Timer_Text);
+		window.draw(mario.MarioSprite);
+		gameEngine.Draw();
 		/// Draw what you do in screen
 
 
@@ -65,3 +64,5 @@ int main()
 	}
 	return 0;
 }
+
+
