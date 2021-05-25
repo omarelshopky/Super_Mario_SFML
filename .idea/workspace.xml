@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8e41544a-99a7-4160-a64a-18a55e3bdbe6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/Super Mario.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/Super Mario.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/Super Mario.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/Super Mario.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/Super Mario.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/Super Mario.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/Mario.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/Mario.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/Menu.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/Menu.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.log" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/Super Mario.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/main.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/main.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/vc142.idb" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/vc142.idb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Debug/vc142.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Debug/vc142.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Header/Mario.h" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Header/Mario.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Source/Mario.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Source/Mario.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Mario/Source/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Super Mario/Source/main.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1t2MzAeibnibTFY6S5bbKZEArdR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8e41544a-99a7-4160-a64a-18a55e3bdbe6" name="Default Changelist" comment="" />
+      <created>1621962993584</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621962993584</updated>
+    </task>
+    <servers />
   </component>
 </project>

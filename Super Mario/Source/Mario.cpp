@@ -60,14 +60,6 @@ void Mario::CatchEvents(Event& event) {
 		case Keyboard::Key::Left:
 			GoLeft = false;
 			break;
-
-		case Keyboard::Key::Space:
-			GoUp = false;
-			break;
-
-		case Keyboard::Key::Down:
-			GoDown = false;
-			break;
 		}
 		break;
 	}
@@ -91,7 +83,7 @@ void Mario::Move() {
 				MarioSpeed[1] = -60;
 				Jumping = true;
 			}
-			//GoUp = false;
+			GoUp = false;
 		}
 		Jump(MarioRect, jumpRectPosition, waitingTime);
 
@@ -100,12 +92,10 @@ void Mario::Move() {
 			
 			if (GoRight) { // Move to right
 				MoveRight(MarioRect);
-				//GoRight = false;
 			}
 
 			else if (GoLeft) { // Move to left
 				MoveLeft(MarioRect);
-				//GoLeft = false;
 			}
 			else {
 				// acceleration movement when release keyboard
@@ -122,7 +112,7 @@ void Mario::Move() {
 			// set down when press arrow down
 			if (GoDown && MarioState != SMALL) {
 
-				//GoDown = false;
+				GoDown = false;
 			}
 
 			timer2.restart();
