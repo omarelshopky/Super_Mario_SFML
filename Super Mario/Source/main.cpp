@@ -35,16 +35,24 @@ int main()
 		Event event;
 		while (window.pollEvent(event))
 		{
-			// Close the game when Cross button right most the form clicked
-			if (event.type == Event::Closed){
-				window.close();
-			}
+			switch (event.type) {
 
+			case Event::Closed:
+				// Close the game when Cross button right most the form clicked
+				window.close();
+				break;
+
+			
+				
+
+			}
+			mario.CatchEvents(event);
+			
 			if (Keyboard::isKeyPressed(Keyboard::Z)) {
 				gameEngine.TimeToScore();
 			}
 			
-			mario.CatchEvents();
+			
 
             menu.CatchEvents(event, window);
 		}
@@ -56,13 +64,13 @@ int main()
 
 
 		window.clear();
-		window.draw(mario.MarioSprite);
+		window.draw(mario.MarioSprite);                   
 		gameEngine.Draw();
-        menu.Draw(window);
-		/// Draw what you do in screen
+        //menu.Draw(window)     ;
+  		/// Draw what you do in screen
 
 
-		
+	 	           
 		window.display();
 	}
 	return 0;

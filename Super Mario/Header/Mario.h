@@ -30,7 +30,7 @@ public:
 	// Move mario
 	void Move();
 
-	void CatchEvents();
+	void CatchEvents(Event& event);
 
 private:
 	// Make animation for mario while walking
