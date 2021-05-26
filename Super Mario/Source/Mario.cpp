@@ -27,6 +27,15 @@ void Mario::smallState() {
 }
 
 
+void Mario::bigState() {
+	marioState = BIG;
+	int Height = 60;
+	int Width = 31;
+	marioSprite.setTextureRect(IntRect(0, 36, Width, Height));
+	marioSprite.setOrigin(Height / 2, Width / 2);
+}
+
+
 void Mario::catchEvents(Event& event) {
 	switch (event.type) {
 	case Event::KeyPressed:
@@ -74,7 +83,9 @@ void Mario::move() {
 	if (timer1.getElapsedTime().asSeconds() > waitingTime)
 	{
 		// Jump when press arrow up
-		int jumpRectPosition = 162.5;
+		int jumpRectPosition = 161; // Big and Super position = 161
+		if (marioState == SMALL) jumpRectPosition += 1.5; // Small position = 162.5
+
 		if (goUp) {
 			marioRect.left = jumpRectPosition;
 			marioSprite.setTextureRect(marioRect);
@@ -138,7 +149,8 @@ void Mario::setMarioRectForWalk(IntRect& intRect) {
 	}
 	else if (marioState == BIG || marioState == SUPER)
 	{
-		///////////////////////////////////////////////
+		maxLeft = 96;
+		picWidth = 32;
 	}
 	else {/* Do Nothing */ }
 
@@ -156,16 +168,20 @@ void Mario::setMarioRectForWalk(IntRect& intRect) {
 
 void Mario::standStill() {
 	marioSpeed[0] = 0;
-
-	if (marioState == SMALL)
+	switch (marioState)
 	{
+	case SMALL:
 		smallState();
-	}
-	else if (marioState == BIG || marioState == SUPER)
-	{
+		break;
+	case BIG:
+		bigState();
+		break;
+	case SUPER:
 
+		break;
+	default:
+		break;
 	}
-	else {/* Do Nothing */ }
 }
 
 
@@ -188,7 +204,8 @@ void Mario::jump(IntRect& intRect, int RectPosition, float waiting) {
 void Mario::moveRight(IntRect& intRect) {
 	// check turnAround
 	if (marioSpeed[0] <= -1) {
-		intRect.left = 132;
+		intRect.left = 129; // Big and Super position
+		if (marioState == SMALL) intRect.left = 132; // Small Position	
 	}
 	else {
 		if (!jumping) setMarioRectForWalk(intRect);
@@ -207,7 +224,8 @@ void Mario::moveRight(IntRect& intRect) {
 void Mario::moveLeft(IntRect& intRect) {
 	// check turnAround
 	if (marioSpeed[0] >= 1) {
-		intRect.left = 132;
+		intRect.left = 129; // Big and Super position
+		if (marioState == SMALL) intRect.left = 132; // Small Position	
 	}
 	else {
 		if (!jumping) setMarioRectForWalk(intRect);

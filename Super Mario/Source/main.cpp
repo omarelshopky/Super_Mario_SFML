@@ -24,11 +24,14 @@ int main()
 	
 	// Create New Mario
 	Mario mario = Mario();
-	//mario.smallState();
+	//mario.bigState();
 	
 	// Create GameEnigne and Menu
 	GameEngine gameEngine = GameEngine(window);
     Menu menu = Menu();
+
+	bool omar = true;
+	Clock timer;
 
 	while (window.isOpen())
 	{
@@ -60,7 +63,21 @@ int main()
 		// Mario movement
 		mario.move();
 		gameEngine.Update_Timer();
-		
+		if (omar) {
+			int cnt = 0;
+			while (cnt < 11) {
+				if (timer.getElapsedTime().asSeconds() > 0.2) {
+					if(cnt % 2 == 0) mario.smallState();
+					else mario.bigState();
+					cnt++;
+					window.clear();
+					window.draw(mario.marioSprite);
+					window.display();
+					timer.restart();
+				}
+			}
+			omar = false;
+		}
 
 
 		window.clear();
