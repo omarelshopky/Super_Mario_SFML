@@ -4,48 +4,51 @@
 using namespace sf;
 
 // Make enum for mario state
-typedef enum { SMALL, BIG, SUPER } MarioState_t;
+typedef enum { SMALL, BIG, SUPER } marioState_t;
 
 class Mario
 {	
 	// Mario properties
 private:
 	Clock timer1, timer2;
-	float MarioAcceleration[2], MarioSpeed[2];
-	bool GoRight, GoUp, GoLeft, GoDown, Jumping;
-	float StartJumpPosition;
+	float marioAcceleration[2], marioSpeed[2];
+	bool goRight, goUp, goLeft, goDown, jumping;
+	float startJumpPosition;
 
 public:
-	Texture MarioTexture;
-	Sprite MarioSprite;
-	MarioState_t MarioState;
+	Texture marioTexture;
+	Sprite marioSprite;
+	marioState_t marioState;
 	
 	
 	// Constractor
 	Mario();
 
 	// set Mario to small state
-	void SmallState();
+	void smallState();
+
+	// set Mario to Big state
+	void bigState();
 
 	// Move mario
-	void Move();
+	void move();
 
-	void CatchEvents(Event& event);
+	void catchEvents(Event& event);
 
 private:
 	// Make animation for mario while walking
-	void SetMarioRectForWalk(IntRect& intRect);
+	void setMarioRectForWalk(IntRect& intRect);
 
 	// Make mario animation stand still 
-	void StandStill();
+	void standStill();
 
 	// make mario jump
-	void Jump(IntRect& intRect, int RectPosition, float waiting);
+	void jump(IntRect& intRect, int RectPosition, float waiting);
 
 	// make mario walk to the right
-	void MoveRight(IntRect& intRect);
+	void moveRight(IntRect& intRect);
 
 	// make mario walk to the left
-	void MoveLeft(IntRect& intRect);
+	void moveLeft(IntRect& intRect);
 };
 

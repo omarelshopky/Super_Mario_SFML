@@ -24,7 +24,7 @@ int main()
 	
 	// Create New Mario
 	Mario mario = Mario();
-	mario.SmallState();
+	//mario.smallState();
 	
 	// Create GameEnigne and Menu
 	GameEngine gameEngine = GameEngine(window);
@@ -46,7 +46,7 @@ int main()
 				
 
 			}
-			mario.CatchEvents(event);
+			mario.catchEvents(event);
 			
 			if (Keyboard::isKeyPressed(Keyboard::Z)) {
 				gameEngine.TimeToScore();
@@ -58,13 +58,13 @@ int main()
 		}
 
 		// Mario movement
-		mario.Move();
+		mario.move();
 		gameEngine.Update_Timer();
 		
 
 
 		window.clear();
-		window.draw(mario.MarioSprite);                   
+		window.draw(mario.marioSprite);                   
 		gameEngine.Draw();
         //menu.Draw(window)     ;
   		/// Draw what you do in screen
