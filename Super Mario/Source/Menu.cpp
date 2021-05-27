@@ -25,9 +25,9 @@ Menu::Menu()
 
 	// Set Player Name Text Properties
 	playerNameText.setFont(playerNameFont);
-	playerNameText.setStyle(Text::Style::Bold);
 	playerNameText.setCharacterSize(70);
-	playerNameText.setPosition(445, 411);
+	playerNameText.setStyle(Text::Style::Bold);
+	playerNameText.setPosition(447, 411);
 
 	// Helper varibles
 	float width = 628;
@@ -115,13 +115,7 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 				this->moveDown();
 				break;
 			case Keyboard::Enter:
-				// Check current selected option
-				switch (selectedOption)
-				{
-				case 0:
-					openPlayerName();
-					break;
-				}
+				mainMenuHandleSelection();
 				break;
 			}
 			break;
@@ -133,12 +127,13 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 		case Event::KeyReleased:
 			switch (event.key.code)
 			{
-			case sf::Keyboard::BackSpace:
+			case sf::Keyboard::Backspace:
 				// Erase last character form string
 				playerNameStr = playerNameStr.substring(0, playerNameStr.getSize() - 1);
+				playerNameText.setString(playerNameStr);
 				break;
 			case sf::Keyboard::Enter:
-				if (playerNameStr.getSize() > 0) {
+				if (!playerNameStr.isEmpty()) {
 					playerNameDisplay = false;
 
 					// Convert sfml String to std String
@@ -150,7 +145,7 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 			break;
 
 		case Event::TextEntered:
-			if (playerNameStr.getSize() <= 20) {
+			if (playerNameStr.getSize() <= 20 && !Keyboard::isKeyPressed(Keyboard::Enter) && !Keyboard::isKeyPressed(Keyboard::BackSpace)) {
 				playerNameStr += event.text.unicode;
 				playerNameText.setString(playerNameStr);
 			}
@@ -163,4 +158,18 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 void Menu::openPlayerName() {
 	playerNameDisplay = true;
 	mainMenuDisplay = false;
+}
+
+
+void Menu::mainMenuHandleSelection() {
+	// Check current selected option
+	switch (selectedOption)
+	{
+	case 0:
+		openPlayerName();
+		break;
+	case 5:
+		exit(0);
+		break;
+	}
 }

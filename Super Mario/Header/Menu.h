@@ -47,4 +47,8 @@ private:
 
 	// Make player name menu display
 	void openPlayerName();
+
+
+	// Handle what would done when chose specific option
+	void mainMenuHandleSelection();
 };
