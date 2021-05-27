@@ -51,7 +51,7 @@ int main()
 			mario.catchEvents(event);
 			
 			if (Keyboard::isKeyPressed(Keyboard::Z)) {
-				gameEngine.TimeToScore();
+				gameEngine.timeToScore();
 			}
 			
 			
@@ -61,7 +61,7 @@ int main()
 
 		// Mario movement
 		mario.move();
-		gameEngine.Update_Timer();
+		gameEngine.updateTimer();
 		if (omar) {
 			int cnt = 0;
 			while (cnt < 11) {
@@ -81,7 +81,7 @@ int main()
 
 		window.clear();
  		window.draw(mario.marioSprite);                   
-		gameEngine.Draw();
+		gameEngine.draw();
         menu.draw(window);
   		/// Draw what you do in screen
 

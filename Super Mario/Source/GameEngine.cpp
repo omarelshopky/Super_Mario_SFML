@@ -2,81 +2,81 @@
 
 
 GameEngine::GameEngine(RenderWindow& window) {
-	GameWindow = &window;
+	gameWindow = &window;
 
 	// Set initial values
-	Level_Time = 300;
-	Score_Int = 0, Current_Time = 0, Counter_Time = 0;
-	Score_Str << "MARIO: 0000000";
-	Font_Size = 45;
+	levelTime = 300;
+	scoreInt = 0, currentTime = 0, counterTime = 0;
+	scoreStr << "MARIO: 0000000";
+	fontSize = 45;
 
 	// Load font from file
-	if(!Header_Font.loadFromFile(GAME_HEADER_FONT)) { std::cout << "Can't load GAME_HEADER_FONT\n"; }
+	if(!headerFont.loadFromFile(GAME_HEADER_FONT)) { std::cout << "Can't load GAME_HEADER_FONT\n"; }
 	
 	// set Score Text properties
-	Score_Text.setFont(Header_Font);
-	Score_Text.setCharacterSize(Font_Size);
-	Score_Text.setPosition(20, 5);
-	Score_Text.setString(Score_Str.str());
+	scoreText.setFont(headerFont);
+	scoreText.setCharacterSize(fontSize);
+	scoreText.setPosition(20, 5);
+	scoreText.setString(scoreStr.str());
 
 	// set Timer Text Properties
-	Timer_Text.setPosition(1395,5);
-	Timer_Text.setCharacterSize(Font_Size);
-	Timer_Text.setFont(Header_Font);
+	timerText.setPosition(1395,5);
+	timerText.setCharacterSize(fontSize);
+	timerText.setFont(headerFont);
 }
 
 
-void GameEngine::Update_Score(int IncScore) {
+void GameEngine::updateScore(int IncScore) {
 	// Increase current score
-	Score_Int += IncScore;
+	scoreInt += IncScore;
 	// clear score_str
-	Score_Str.str(string());
-	Score_Str << "MARIO: " << setw(7) << setfill('0') << Score_Int;
-	Score_Text.setString(Score_Str.str());
+	scoreStr.str(string());
+	scoreStr << "MARIO: " << setw(7) << setfill('0') << scoreInt;
+	scoreText.setString(scoreStr.str());
 }
 
 
-void GameEngine::Start_CountDown() {
-	Timer.restart();
+void GameEngine::startCountDown() {
+	timer.restart();
 }
 
 
-void GameEngine::Update_Timer() {
+void GameEngine::updateTimer() {
 	// clear timer_str
-	Timer_Str.str(string());
-	Current_Time = Timer.getElapsedTime().asSeconds();
-	Counter_Time = Level_Time - Current_Time;
+	timerStr.str(string());
+	currentTime = timer.getElapsedTime().asSeconds();
+	counterTime = levelTime - currentTime;
 	
-	if (Counter_Time >= 0) {
-		Timer_Str << "TIME: " << setw(3) << setfill('0') << Counter_Time;
-		Timer_Text.setString(Timer_Str.str());
+	if (counterTime >= 0) {
+		timerStr << "TIME: " << setw(3) << setfill('0') << counterTime;
+		timerText.setString(timerStr.str());
 	}
 	else{/* Do Nothing */ }
 }
 
 
 bool GameEngine::isTimerFinished() {
-	if (Counter_Time == 0)
+	if (counterTime == 0)
 		return true;
 	else
 		return false;
 }
 
 
-void GameEngine::TimeToScore() {
+void GameEngine::timeToScore() {
 	Clock clock;
-	int x = Counter_Time;
+	int x = counterTime;
 	while (x >= 0) {
 		if (clock.getElapsedTime().asMilliseconds() >= 6) {
-			Timer.restart();
+			timer.restart();
 			clock.restart();
-			Level_Time = x;
-			Update_Timer();
-			Update_Score(50);
+			levelTime = x;
+			updateTimer();
+			updateScore(50);
 
-			GameWindow->clear();
-			Draw();
-			GameWindow->display();
+			gameWindow->clear();
+			draw();
+			gameWindow->display();
 
 			x--;
 		}
@@ -84,7 +84,7 @@ void GameEngine::TimeToScore() {
 }
 
 
-void GameEngine::Draw() {
-	GameWindow->draw(Score_Text);
-	GameWindow->draw(Timer_Text);
+void GameEngine::draw() {
+	gameWindow->draw(scoreText);
+	gameWindow->draw(timerText);
 }

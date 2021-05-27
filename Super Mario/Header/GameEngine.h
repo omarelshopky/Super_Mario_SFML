@@ -11,14 +11,14 @@ class GameEngine
 {
     /*          Properties          */
 private:
-    Font Header_Font;
-    ostringstream Score_Str, Timer_Str;
-    Clock Timer;
-    int Current_Time, Level_Time, Counter_Time, Score_Int, Font_Size;
+    Font headerFont;
+    ostringstream scoreStr, timerStr;
+    Clock timer;
+    int currentTime, levelTime, counterTime, scoreInt, fontSize;
 
 public:
-    Text Timer_Text, Score_Text;
-    RenderWindow *GameWindow;
+    Text timerText, scoreText;
+    RenderWindow *gameWindow;
 
     /*         Constractar          */
     GameEngine(RenderWindow& window);
@@ -26,15 +26,15 @@ public:
     /*          Method         */
     
     // Update current score with Increased Score and display it
-    void Update_Score(int IncScore);
+    void updateScore(int IncScore);
 
 
     // Start timer
-    void Start_CountDown();
+    void startCountDown();
 
 
     // Update timer
-    void Update_Timer();
+    void updateTimer();
 
 
     // Check wheater Level time is finished or not
@@ -42,10 +42,10 @@ public:
     
 
     // Convert remain time to score when player won
-    void TimeToScore();
+    void timeToScore();
 
 
     // draw GameEngine objects into screen
-    void Draw();
+    void draw();
 };
 
