@@ -9,7 +9,7 @@ Mario::Mario() {
 	startJumpPosition = 500;
 	goRight = goUp = goLeft = goDown = jumping = false;
 
-	marioTexture.loadFromFile("Resource/Textures/Mario.png");
+	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
 	marioTexture.setSmooth(true);
 	marioSprite.setTexture(marioTexture); 	
 	marioSprite.setPosition(300, 500);

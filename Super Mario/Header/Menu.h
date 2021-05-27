@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+
+#include "../Header/DEFINITION.h"
 using namespace sf;
 
 #define NUM_OF_OPTIONS 6

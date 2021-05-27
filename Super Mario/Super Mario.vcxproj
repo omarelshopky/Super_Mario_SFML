@@ -157,6 +157,7 @@
     <ClInclude Include="Header\Blocks.h" />
     <ClInclude Include="Header\Enemy.h" />
     <ClInclude Include="Header\GameEngine.h" />
+    <ClInclude Include="Header\DEFINITION.h" />
     <ClInclude Include="Header\Items.h" />
     <ClInclude Include="Header\Mario.h" />
     <ClInclude Include="Header\Menu.h" />

@@ -11,7 +11,7 @@ GameEngine::GameEngine(RenderWindow& window) {
 	Font_Size = 45;
 
 	// Load font from file
-	Header_Font.loadFromFile("Resource/Fonts/some_font.ttf");
+	if(!Header_Font.loadFromFile(GAME_HEADER_FONT)) { std::cout << "Can't load GAME_HEADER_FONT\n"; }
 	
 	// set Score Text properties
 	Score_Text.setFont(Header_Font);

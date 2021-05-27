@@ -7,14 +7,14 @@ Menu::Menu()
 	SelectedOption = 0;
 
 	// Load font from file
-	if (!MenuFont.loadFromFile("Resource/Fonts/Barkentina_font.ttf")) {}
+	if (!MenuFont.loadFromFile(MAIN_MENU_FONT)) { std::cout << "Can't load MAIN_MENU_FONT\n"; }
 	
 	// Load background 
-	BackGroundTexture.loadFromFile("Resource/Textures/Backgrounds/Menu.jpg");
+	if(!BackGroundTexture.loadFromFile(MAIN_MENU_BACKGROUND)) { std::cout << "Can't load MAIN_MENU_BACKGROUND\n"; }
 	BackGroundSprite.setTexture(BackGroundTexture);
 
 	// Set OptionShadow properties
-	OptionShadowTexture.loadFromFile("Resource/Textures/MenuShadow.png");
+	if(!OptionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
 	OptionShadowSprite.setTexture(OptionShadowTexture);
 	OptionShadowSprite.setPosition(620, 295); // Start position 
 

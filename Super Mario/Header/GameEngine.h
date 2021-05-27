@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../Header/DEFINITION.h"
 #include <sstream>
 #include<iomanip>
 
