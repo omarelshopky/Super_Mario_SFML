@@ -4,19 +4,30 @@
 Menu::Menu()
 {
 	// Set initial values
-	SelectedOption = 0;
+	selectedOption = 0;
+	mainMenuDisplay = true, playerNameDisplay = false, levelsListDisplay = false;
 
-	// Load font from file
-	if (!MenuFont.loadFromFile(MAIN_MENU_FONT)) { std::cout << "Can't load MAIN_MENU_FONT\n"; }
-	
-	// Load background 
-	if(!BackGroundTexture.loadFromFile(MAIN_MENU_BACKGROUND)) { std::cout << "Can't load MAIN_MENU_BACKGROUND\n"; }
-	BackGroundSprite.setTexture(BackGroundTexture);
+	// Load fonts from file
+	if (!menuFont.loadFromFile(MAIN_MENU_FONT)) { std::cout << "Can't load MAIN_MENU_FONT\n"; }
+	if (!playerNameFont.loadFromFile(PLAYER_NAME_FONT)) { std::cout << "Can't load PLAYER_NAME_FONT\n"; }
+
+	// Load backgrounds
+	if(!backGroundTexture.loadFromFile(MAIN_MENU_BACKGROUND)) { std::cout << "Can't load MAIN_MENU_BACKGROUND\n"; }
+	backGroundSprite.setTexture(backGroundTexture);
+
+	if (!playerNameTexture.loadFromFile(PLAYER_NAME_BACKGROUND)) { std::cout << "Can't load PLAYER_NAME_BACKGROUND\n"; }
+	playerNameSprite.setTexture(playerNameTexture);
 
 	// Set OptionShadow properties
-	if(!OptionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
-	OptionShadowSprite.setTexture(OptionShadowTexture);
-	OptionShadowSprite.setPosition(620, 295); // Start position 
+	if(!optionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
+	optionShadowSprite.setTexture(optionShadowTexture);
+	optionShadowSprite.setPosition(620, 295); // Start position 
+
+	// Set Player Name Text Properties
+	playerNameText.setFont(playerNameFont);
+	playerNameText.setStyle(Text::Style::Bold);
+	playerNameText.setCharacterSize(70);
+	playerNameText.setPosition(445, 411);
 
 	// Helper varibles
 	float width = 628;
@@ -30,77 +41,126 @@ Menu::Menu()
 		"       EXIT"};
 
 	for (int i = 0; i < NUM_OF_OPTIONS; i++) {
-		MenuOptions[i].setFont(MenuFont);
-		MenuOptions[i].setFillColor(sf::Color::White);
-		MenuOptions[i].setCharacterSize(43);
-		MenuOptions[i].setStyle(sf::Text::Bold);
-		MenuOptions[i].setString(OptionsTemp[i]);
+		menuOptions[i].setFont(menuFont);
+		menuOptions[i].setFillColor(sf::Color::White);
+		menuOptions[i].setCharacterSize(43);
+		menuOptions[i].setStyle(sf::Text::Bold);
+		menuOptions[i].setString(OptionsTemp[i]);
 		
 		hight += 70;
-		MenuOptions[i].setPosition(width, hight);
+		menuOptions[i].setPosition(width, hight);
 	}
 }
 
 
-void Menu::Draw(RenderWindow& window)
+void Menu::draw(RenderWindow& window)
 {
-	window.draw(BackGroundSprite);
-	window.draw(OptionShadowSprite);
-	
-	for (int i = 0; i < NUM_OF_OPTIONS; i++) {
-		window.draw(MenuOptions[i]);
+	if (mainMenuDisplay) {
+		window.draw(backGroundSprite);
+		window.draw(optionShadowSprite);
+
+		for (int i = 0; i < NUM_OF_OPTIONS; i++) {
+			window.draw(menuOptions[i]);
+		}
 	}
+	else if (playerNameDisplay) {
+		window.draw(playerNameSprite);
+		window.draw(playerNameText);
+	}
+	
 }
 
 
-int  Menu::GetSelectedOption() {
-	return SelectedOption;
-}
-
-
-void Menu::MoveDown()
+void Menu::moveDown()
 {
 	// if box in Exit postion set to Start 
-	if (OptionShadowSprite.getPosition().y == 645)
+	if (optionShadowSprite.getPosition().y == 645)
 	{
-		OptionShadowSprite.setPosition(620, 295);
-		SelectedOption = 0;
+		optionShadowSprite.setPosition(620, 295);
+		selectedOption = 0;
 	}
 	else {
-		OptionShadowSprite.move(0, 70);
-		SelectedOption++;
+		optionShadowSprite.move(0, 70);
+		selectedOption++;
 	}
 }
 
 
-void Menu::MoveUp()
+void Menu::moveUp()
 {
 	// if box in Start postion set to Exit 
-	if (OptionShadowSprite.getPosition().y == 295)
+	if (optionShadowSprite.getPosition().y == 295)
 	{
-		OptionShadowSprite.setPosition(620, 645);
-		SelectedOption = 5;
+		optionShadowSprite.setPosition(620, 645);
+		selectedOption = 5;
 	}
 	else {
-		OptionShadowSprite.move(0, -70);
-		SelectedOption--;
+		optionShadowSprite.move(0, -70);
+		selectedOption--;
 	}
 }
 
 
-void Menu::CatchEvents(Event& event, RenderWindow& window) {
-	if (event.type == sf::Event::KeyReleased)
-	{
-		if (event.key.code == sf::Keyboard::Up) {
-			this->MoveUp();
+void Menu::catchEvents(Event& event, RenderWindow& window) {
+	if (mainMenuDisplay) {
+		switch (event.type)
+		{
+		case Event::KeyReleased:
+			switch (event.key.code)
+			{
+			case Keyboard::Up:
+				this->moveUp();
+				break;
+			case Keyboard::Down:
+				this->moveDown();
+				break;
+			case Keyboard::Enter:
+				// Check current selected option
+				switch (selectedOption)
+				{
+				case 0:
+					openPlayerName();
+					break;
+				}
+				break;
+			}
+			break;
 		}
-		else if (event.key.code == sf::Keyboard::Down) {
-			this->MoveDown();
-		}
-		else if (event.key.code == sf::Keyboard::Return){//enter
-			
-			window.close();
-		}
-		else{/*  Do Nothing  */ }
 	}
+	else if (playerNameDisplay) {
+		switch (event.type)
+		{
+		case Event::KeyReleased:
+			switch (event.key.code)
+			{
+			case sf::Keyboard::BackSpace:
+				// Erase last character form string
+				playerNameStr = playerNameStr.substring(0, playerNameStr.getSize() - 1);
+				break;
+			case sf::Keyboard::Enter:
+				if (playerNameStr.getSize() > 0) {
+					playerNameDisplay = false;
+
+					// Convert sfml String to std String
+					std::wstring pnameTemp = playerNameStr.toWideString();
+					playerName = std::string(pnameTemp.begin(), pnameTemp.end());
+				}
+				break;
+			}
+			break;
+
+		case Event::TextEntered:
+			if (playerNameStr.getSize() <= 20) {
+				playerNameStr += event.text.unicode;
+				playerNameText.setString(playerNameStr);
+			}
+			break;
+		}
+	}
+}
+
+
+void Menu::openPlayerName() {
+	playerNameDisplay = true;
+	mainMenuDisplay = false;
 }

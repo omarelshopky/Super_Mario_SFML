@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
 #include "../Header/DEFINITION.h"
 using namespace sf;
 
@@ -11,11 +10,15 @@ class Menu
 {
 	// Menu properties
 private:
-	int SelectedOption;
-	Font MenuFont;
-	Text MenuOptions[NUM_OF_OPTIONS];
-	Texture OptionShadowTexture, BackGroundTexture;
-	Sprite OptionShadowSprite, BackGroundSprite;
+	int selectedOption;
+	std::string playerName;
+	Font menuFont, playerNameFont;
+	Text menuOptions[NUM_OF_OPTIONS];
+	Texture optionShadowTexture, backGroundTexture, playerNameTexture;
+	Sprite optionShadowSprite, backGroundSprite, playerNameSprite;
+	String playerNameStr;
+	Text playerNameText;
+	bool mainMenuDisplay, playerNameDisplay, levelsListDisplay;
 
 public:
 
@@ -24,21 +27,24 @@ public:
 
 
 	// Draw Menu Options
-	void Draw(RenderWindow& window);
-
-
-	// Geter for get current selected option
-	int  GetSelectedOption();
+	void draw(RenderWindow& window);
 
 
 	// Control Menu events
-	void CatchEvents(Event& event, RenderWindow& window);
+	void catchEvents(Event& event, RenderWindow& window);
+
+
+	
 
 private:
 	// Move up to the previous option
-	void MoveUp();
+	void moveUp();
 
 
 	// Move to the next option
-	void MoveDown();
+	void moveDown();
+
+
+	// Make player name menu display
+	void openPlayerName();
 };
