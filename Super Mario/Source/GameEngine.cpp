@@ -6,23 +6,40 @@ GameEngine::GameEngine(RenderWindow& window) {
 
 	// Set initial values
 	levelTime = 300;
-	scoreInt = 0, currentTime = 0, counterTime = 0;
-	scoreStr << "MARIO: 0000000";
+	scoreInt = 0, coinsInt = 0, currentTime = 0, counterTime = 0;
+	scoreStr << "MARIO: 000000";
+	coinsStr << "x00";
 	fontSize = 45;
-
+	
 	// Load font from file
 	if(!headerFont.loadFromFile(GAME_HEADER_FONT)) { std::cout << "Can't load GAME_HEADER_FONT\n"; }
 	
 	// set Score Text properties
+	scoreText.setPosition(20, 5);
 	scoreText.setFont(headerFont);
 	scoreText.setCharacterSize(fontSize);
-	scoreText.setPosition(20, 5);
 	scoreText.setString(scoreStr.str());
 
 	// set Timer Text Properties
 	timerText.setPosition(1395,5);
-	timerText.setCharacterSize(fontSize);
 	timerText.setFont(headerFont);
+	timerText.setCharacterSize(fontSize);
+
+	// Set Coins Text Properties
+	coinsText.setPosition(600, 5);
+	coinsText.setFont(headerFont);
+	coinsText.setCharacterSize(fontSize);
+	coinsText.setString(coinsStr.str());
+
+	// Set Level name Text Properties
+	levelText.setPosition(1000, 5);
+	levelText.setFont(headerFont);
+	levelText.setCharacterSize(fontSize);
+	levelText.setStyle(Text::Bold);
+
+	// Set levels Map values
+	levelsMap["level 1"] = 1;
+	levelsMap["level 2"] = 2;
 }
 
 
@@ -31,7 +48,7 @@ void GameEngine::updateScore(int IncScore) {
 	scoreInt += IncScore;
 	// clear score_str
 	scoreStr.str(string());
-	scoreStr << "MARIO: " << setw(7) << setfill('0') << scoreInt;
+	scoreStr << "MARIO: " << setw(6) << setfill('0') << scoreInt;
 	scoreText.setString(scoreStr.str());
 }
 
@@ -52,6 +69,14 @@ void GameEngine::updateTimer() {
 		timerText.setString(timerStr.str());
 	}
 	else{/* Do Nothing */ }
+}
+
+
+void GameEngine::updateCoins() {
+	coinsInt++;
+	coinsStr.str(string());
+	coinsStr << "x" << setw(2) << setfill('0') << coinsInt;
+	coinsText.setString(coinsStr.str());
 }
 
 
@@ -87,4 +112,24 @@ void GameEngine::timeToScore() {
 void GameEngine::draw() {
 	gameWindow->draw(scoreText);
 	gameWindow->draw(timerText);
+	gameWindow->draw(coinsText);
+	gameWindow->draw(levelText);
+}
+
+
+void GameEngine::setLevelName(std::string levelName) {
+	levelText.setString(levelName);
+}
+
+
+void GameEngine::addPlayerInfo(std::string playerName) {
+	playersFile.open("Files/Players.txt", ios::app);
+	playersFile << playerName << ' ' << scoreInt << ' ' << levelsMap[std::string(levelText.getString())] << '\n';
+	playersFile.close();
+}
+
+
+void GameEngine::sortPlayersFile() {
+	playersFile.open("Files/Players.txt", ios::in | ios::out);
+	
 }

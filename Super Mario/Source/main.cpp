@@ -33,6 +33,8 @@ int main()
 
 	bool omar = false;
 	Clock timer;
+	
+	gameEngine.setLevelName("level 1-1");
 
 	while (window.isOpen())
 	{

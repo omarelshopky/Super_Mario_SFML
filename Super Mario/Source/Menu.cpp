@@ -137,8 +137,7 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 					playerNameDisplay = false;
 
 					// Convert sfml String to std String
-					std::wstring pnameTemp = playerNameStr.toWideString();
-					playerName = std::string(pnameTemp.begin(), pnameTemp.end());
+					playerName = std::string(playerNameStr);
 				}
 				break;
 			}

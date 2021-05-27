@@ -11,7 +11,6 @@ class Menu
 	// Menu properties
 private:
 	int selectedOption;
-	std::string playerName;
 	Font menuFont, playerNameFont;
 	Text menuOptions[NUM_OF_OPTIONS];
 	Texture optionShadowTexture, backGroundTexture, playerNameTexture;
@@ -21,6 +20,7 @@ private:
 	bool mainMenuDisplay, playerNameDisplay, levelsListDisplay;
 
 public:
+	std::string playerName;
 
 	// Constractor
 	Menu(); 
