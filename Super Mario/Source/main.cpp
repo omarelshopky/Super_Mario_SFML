@@ -1,7 +1,5 @@
-/***		Include SFML files			***/
-#include <SFML/Graphics.hpp>
-
 /***		Include Modules			***/
+#include "../Header/DEFINITION.h"
 #include "../Header/Blocks.h"
 #include "../Header/Enemy.h"
 #include "../Header/GameEngine.h"
@@ -9,11 +7,6 @@
 #include "../Header/Mario.h"
 #include "../Header/Menu.h"
 
-/***		Include Helper Libraries		***/
-#include <windows.h>
-
-#include<iostream>
-using namespace sf;
 
 int main()
 {

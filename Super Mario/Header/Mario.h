@@ -1,11 +1,5 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
 #include "../Header/DEFINITION.h"
-using namespace sf;
-
-// Make enum for mario state
-typedef enum { SMALL, BIG, SUPER } marioState_t;
 
 class Mario
 {	

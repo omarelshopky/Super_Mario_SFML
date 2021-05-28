@@ -1,5 +1,23 @@
 #pragma once
+/***		Include SFML files			***/
+#include <SFML/Graphics.hpp>
+
+/***		Include Helper Libraries		***/
+#include <windows.h>
 #include<iostream>
+#include <sstream>
+#include<iomanip>
+#include<fstream>
+#include<map>
+#include<string>
+
+
+using namespace std;
+using namespace sf;
+
+// Make enum for mario state
+typedef enum { SMALL, BIG, SUPER } marioState_t;
+
 
 /***						Menu						***/
 #define MAIN_MENU_FONT "Resource/Fonts/Barkentina_font.ttf"

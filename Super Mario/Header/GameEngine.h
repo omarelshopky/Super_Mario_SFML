@@ -1,14 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "../Header/DEFINITION.h"
-#include <sstream>
-#include<iomanip>
-#include<fstream>
-#include<map>
-#include<string>
-
-using namespace sf;
-using namespace std;
 
 class GameEngine
 {
