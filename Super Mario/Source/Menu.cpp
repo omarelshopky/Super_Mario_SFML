@@ -6,6 +6,7 @@ Menu::Menu()
 	// Set initial values
 	openMainMenu();
 	selectedOption = activeOptionsMenu = 0;
+	selectedDifficulty = 2;
 	muteMusic = handControlled = false;
 	newPlayer.lifes = 3;
 
@@ -51,12 +52,12 @@ Menu::Menu()
 	// Set Difficulty Ball Properties
 	if (!difficultyBallTexture.loadFromFile(DIFFICULTY_BALL)) { std::cout << "Can't load DIFFICULTY_BALL\n"; }
 	difficultyBallSprite.setTexture(difficultyBallTexture);
-	difficultyBallSprite.setPosition(1377, 275);
+	difficultyBallSprite.setPosition(1377, 363);
 
 	// Set Control Ball Properties
 	if (!controlBallTexture.loadFromFile(CONTROL_BALL)) { std::cout << "Can't load CONTROL_BALL\n"; }
 	controlBallSprite.setTexture(controlBallTexture);
-	controlBallSprite.setPosition(966, 450);
+	controlBallSprite.setPosition(966, 255);
 
 	// Set Back Text Properties
 	backText.setString("press esc to back");
@@ -184,119 +185,135 @@ void Menu::moveUp()
 }
 
 
-void Menu::catchEvents(Event& event, RenderWindow& window) {
+void Menu::catchEvents(Event& event) {
 	if (mainMenuDisplay) {
-		switch (event.type)
-		{
-		case Event::KeyReleased:
-			switch (event.key.code)
-			{
-			case Keyboard::Up:
-				this->moveUp();
-				break;
-			case Keyboard::Down:
-				this->moveDown();
-				break;
-			case Keyboard::Enter:
-				mainMenuHandleSelection();
-				break;
-			}
-			break;
-		}
+		handleMenuEvents(event);
 	}
 	else if (playerNameDisplay) {
-		switch (event.type)
-		{
-		case Event::KeyReleased:
-			switch (event.key.code)
-			{
-			case sf::Keyboard::Backspace:
-				// Erase last character form string
-				playerNameStr = playerNameStr.substring(0, playerNameStr.getSize() - 1);
-				playerNameText.setString(playerNameStr);
-				break;
-			case sf::Keyboard::Enter:
-				if (!playerNameStr.isEmpty()) {
-					playerNameDisplay = false;
-
-					// Convert sfml String to std String
-					newPlayer.name = std::string(playerNameStr);
-				}
-				break;
-			case Keyboard::Escape:
-				openMainMenu();
-				break;
-			}
-			break;
-
-		case Event::TextEntered:
-			bool notForbidinKeys = (!Keyboard::isKeyPressed(Keyboard::Enter) && !Keyboard::isKeyPressed(Keyboard::BackSpace)) && (!Keyboard::isKeyPressed(Keyboard::Escape) && !Keyboard::isKeyPressed(Keyboard::Space));
-			if (playerNameStr.getSize() <= 20 && notForbidinKeys) {
-				playerNameStr += event.text.unicode;
-				playerNameText.setString(playerNameStr);
-			}
-			break;
-		}
+		handlePlayerNameEvents(event);
 	}
 	else if ((howToPlayDisplay || highScoreDisplay) || creditsDisplay) {
-		switch (event.type)
-		{
-		case Event::KeyReleased:
-			switch (event.key.code)
-			{
-			case Keyboard::Escape:
-				openMainMenu();
-				break;
-			}
-			break;
-		}
+		handleBackEvent(event);
 	}
 	else if (optionsDisplay) {
-		switch (event.type)
+		handleOptionsEvents(event);
+	}
+}
+
+
+void Menu::handleMenuEvents(Event event) {
+	switch (event.type)
+	{
+	case Event::KeyReleased:
+		switch (event.key.code)
 		{
-		case Event::KeyReleased:
-			switch (event.key.code)
-			{
-			case Keyboard::Right:
-				changeOptionsMenu(true);
-				break;
-
-			case Keyboard::Left:
-				changeOptionsMenu(false);
-				break;
-
-			case Keyboard::Up:
-				switch (activeOptionsMenu) {
-				case 0:
-					changeActiveMusicOption();
-					break;
-				case 1:
-					changeActiveControlOption();
-					break;
-				case 2:
-					break;
-				}
-				break;
-
-			case Keyboard::Down:
-				switch (activeOptionsMenu) {
-				case 0:
-					changeActiveMusicOption();
-					break;
-				case 1:
-					changeActiveControlOption();
-					break;
-				case 2:
-					break;
-				}
-				break;
-
-			case Keyboard::Escape:
-				openMainMenu();
-				break;
-			}
+		case Keyboard::Up:
+			this->moveUp();
+			break;
+		case Keyboard::Down:
+			this->moveDown();
+			break;
+		case Keyboard::Enter:
+			mainMenuHandleSelection();
 			break;
 		}
+		break;
+	}
+}
+
+
+void Menu::handlePlayerNameEvents(Event event) {
+	switch (event.type)
+	{
+	case Event::KeyReleased:
+		switch (event.key.code)
+		{
+		case sf::Keyboard::Backspace:
+			// Erase last character form string
+			playerNameStr = playerNameStr.substring(0, playerNameStr.getSize() - 1);
+			playerNameText.setString(playerNameStr);
+			break;
+		case sf::Keyboard::Enter:
+			if (!playerNameStr.isEmpty()) {
+				playerNameDisplay = false;
+
+				// Convert sfml String to std String
+				newPlayer.name = std::string(playerNameStr);
+			}
+			break;
+		case Keyboard::Escape:
+			openMainMenu();
+			break;
+		}
+		break;
+
+	case Event::TextEntered:
+		bool notForbidinKeys = (!Keyboard::isKeyPressed(Keyboard::Enter) && !Keyboard::isKeyPressed(Keyboard::BackSpace)) && (!Keyboard::isKeyPressed(Keyboard::Escape) && !Keyboard::isKeyPressed(Keyboard::Space));
+		if (playerNameStr.getSize() <= 20 && notForbidinKeys) {
+			playerNameStr += event.text.unicode;
+			playerNameText.setString(playerNameStr);
+		}
+		break;
+	}
+}
+
+
+void Menu::handleOptionsEvents(Event event) {
+	switch (event.type)
+	{
+	case Event::KeyReleased:
+		switch (event.key.code)
+		{
+		case Keyboard::Right:
+			changeOptionsMenu(true);
+			break;
+
+		case Keyboard::Left:
+			changeOptionsMenu(false);
+			break;
+
+		case Keyboard::Up:
+			moveOptionsUpDown(false);
+			break;
+
+		case Keyboard::Down:
+			moveOptionsUpDown(true);
+			break;
+
+		case Keyboard::Escape:
+			openMainMenu();
+			break;
+		}
+		break;
+	}
+}
+
+
+void Menu::handleBackEvent(Event event) {
+	switch (event.type)
+	{
+	case Event::KeyReleased:
+		switch (event.key.code)
+		{
+		case Keyboard::Escape:
+			openMainMenu();
+			break;
+		}
+		break;
+	}
+}
+
+void Menu::moveOptionsUpDown(bool down) {
+	switch (activeOptionsMenu) {
+	case 0:
+		changeActiveMusicOption();
+		break;
+	case 1:
+		changeActiveControlOption();
+		break;
+	case 2:
+		changeActiveDifficultyOption(down);
+		break;
 	}
 }
 
@@ -485,22 +502,67 @@ void Menu::updateMusicSettings() {
 }
 
 void Menu::changeActiveControlOption() {
+	handControlled = !handControlled;
 	if (handControlled) {
-		controlBallSprite.setPosition(966, 255);
-	}
-	else {
 		controlBallSprite.setPosition(966, 450);
 	}
-	handControlled = !handControlled;
+	else {
+		controlBallSprite.setPosition(966, 255);
+	}
 	updateControlSettings();
 }
 
 
 void Menu::updateControlSettings() {
 	if (handControlled) {
-		//system("");////////////////////                 Hand Script                   //////////
+		//system("python \"../Super Mario/HandControler/HandControl.py\"");
 	}
 	else {
 		
 	}
 }
+
+
+void Menu::changeActiveDifficultyOption(bool Down) {
+	if (Down) {
+		if (selectedDifficulty == 3) {
+			difficultyBallSprite.setPosition(1377, 275);
+			selectedDifficulty = 1;
+		}
+		else {
+			difficultyBallSprite.move(0, 88);
+			selectedDifficulty++;
+		}
+	}
+	else {
+		if (selectedDifficulty == 1) {
+			difficultyBallSprite.setPosition(1377, 451);
+			selectedDifficulty = 3;
+		}
+		else {
+			difficultyBallSprite.move(0, -88);
+			selectedDifficulty--;
+		}
+	}
+	updateDifficultySettings();
+}
+
+
+void Menu::updateDifficultySettings() {
+	switch (selectedDifficulty)
+	{
+	case 1:
+		newPlayer.lifes = 5;
+		break;
+	case 2:
+		newPlayer.lifes = 3;
+		break;
+	case 3:
+		newPlayer.lifes = 1;
+		break;
+	default:
+		break;
+	}
+}
+
+

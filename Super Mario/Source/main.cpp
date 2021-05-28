@@ -51,7 +51,7 @@ int main()
 			
 			
 
-            menu.catchEvents(event, window);
+            menu.catchEvents(event);
 		}
 
 		// Mario movement

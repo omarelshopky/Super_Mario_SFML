@@ -1,6 +1,7 @@
 #pragma once
 /***		Include SFML files			***/
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 /***		Include Helper Libraries		***/
 #include <windows.h>
@@ -24,6 +25,7 @@ struct player {
 	string name;
 	string score;
 	string level;
+	int lifes;
 };
 
 struct area {
@@ -60,6 +62,8 @@ struct position {
 #define DIFFICULTY_BALL "Resource/Textures/Menu/difficultyBall.png"
 
 #define CONTROL_BALL "Resource/Textures/Menu/controlBall.png"
+
+#define MENU_SOUND "Resource/Music/menu.ogg"
 /**********************************************************/
 
 

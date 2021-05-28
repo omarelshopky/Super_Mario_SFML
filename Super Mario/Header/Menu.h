@@ -8,7 +8,7 @@ class Menu
 private:
 	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay, howToPlayDisplay, optionsDisplay, creditsDisplay,
 		handControlled;
-	int selectedOption, activeOptionsMenu;
+	int selectedOption, activeOptionsMenu, selectedDifficulty;
 	Font menuFont, playerNameFont;
 	String playerNameStr;
 	Text menuOptions[6], playerNameText, highScoreText[10][2], backText;
@@ -35,9 +35,28 @@ public:
 
 
 	// Control Menu events
-	void catchEvents(Event& event, RenderWindow& window);
+	void catchEvents(Event& event);
 
 private:
+	// Handle all event happend on Main menu
+	void handleMenuEvents(Event event);
+
+
+	// Handle all event happend on Player Name window
+	void handlePlayerNameEvents(Event event);
+
+
+	// Handle event that make user return back to Main Menu
+	void handleBackEvent(Event event);
+
+
+	// Handle all event happend on Options Menu
+	void handleOptionsEvents(Event event);
+
+
+	// handle move Up and Down in Options menu
+	void moveOptionsUpDown(bool down);
+
 	// Move up to the previous option
 	void moveUp();
 
@@ -108,4 +127,14 @@ private:
 
 	// Start hand control script
 	void updateControlSettings();
+
+
+	// Change Difficulty ball (Keyboard or Hand)
+	void changeActiveDifficultyOption(bool Down);
+
+
+	// Change how many lifes player have according to his choise
+	void updateDifficultySettings();
+
+
 };
