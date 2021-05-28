@@ -15,9 +15,10 @@ private:
 	Texture optionShadowTexture, backGroundTexture, playerNameTexture, highScoreTexture;
 	Sprite optionShadowSprite, backGroundSprite, playerNameSprite, highScoreSprite;
 	String playerNameStr;
-	Text playerNameText;
+	Text playerNameText, highScoreText[10][2];
 	fstream playersFile;
 	vector <pair<int, pair<int, string>>> players;
+	position highScoresPos;
 
 public:
 	std::string playerName;
@@ -32,11 +33,6 @@ public:
 
 	// Control Menu events
 	void catchEvents(Event& event, RenderWindow& window);
-
-	
-	// Sort players info according to score
-	void sortPlayersFile();
-	
 
 private:
 	// Move up to the previous option
@@ -65,4 +61,12 @@ private:
 
 	// Count how many lines in specific file 
 	int getNumberOfLines();
+
+
+	// Sort players info according to score
+	void sortPlayersFile();
+
+
+	// Fill High score board with the top 10
+	void fillHighScore();
 };

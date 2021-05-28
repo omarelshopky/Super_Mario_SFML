@@ -34,6 +34,22 @@ Menu::Menu()
 	playerNameText.setStyle(Text::Style::Bold);
 	playerNameText.setPosition(447, 411);
 
+	// Set High Score Text Properties
+	highScoresPos.x = 440;
+	highScoresPos.y = 185;
+	for (int i = 0; i < 10; i++) {
+		highScoreText[i][0].setFont(playerNameFont);
+		highScoreText[i][1].setFont(playerNameFont);
+
+		highScoreText[i][0].setCharacterSize(40);
+		highScoreText[i][1].setCharacterSize(40);
+
+		highScoreText[i][0].setPosition(highScoresPos.x, highScoresPos.y);
+		highScoreText[i][1].setPosition(highScoresPos.x + 600, highScoresPos.y);
+		highScoresPos.y += 56.5;
+	}
+	
+
 	// Helper varibles
 	float width = 628;
 	float hight = 225;
@@ -74,6 +90,10 @@ void Menu::draw(RenderWindow& window)
 	}
 	else if (highScoreDisplay) {
 		window.draw(highScoreSprite);
+		for (int i = 0; i < 10; i++) {
+			window.draw(highScoreText[i][0]);
+			window.draw(highScoreText[i][1]);
+		}
 	}
 }
 
@@ -170,6 +190,7 @@ void Menu::openPlayerName() {
 void Menu::openHighScore() {
 	highScoreDisplay = true;
 	mainMenuDisplay = false;
+	fillHighScore();
 }
 
 
@@ -241,4 +262,14 @@ void Menu::sortPlayersFile() {
 	}
 	playersFile.close();
 	playersFile.clear();
+}
+
+
+void Menu::fillHighScore() {
+	sortPlayersFile();
+
+	for (int i = 0; i < 10; i++) {
+		highScoreText[i][0].setString(players[i].second.second);
+		highScoreText[i][1].setString(to_string(players[i].first));
+	}
 }

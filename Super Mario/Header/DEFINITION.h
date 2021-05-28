@@ -31,6 +31,10 @@ struct area {
 	float height;
 };
 
+struct position {
+	float x;
+	float y;
+};
 
 /***						Menu						***/
 #define MAIN_MENU_FONT "Resource/Fonts/Barkentina_font.ttf"
