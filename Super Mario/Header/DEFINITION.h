@@ -15,8 +15,16 @@
 using namespace std;
 using namespace sf;
 
-// Make enum for mario state
+
+/***			Special Variable			***/
 typedef enum { SMALL, BIG, SUPER } marioState_t;
+
+
+struct player {
+	string name;
+	string score;
+	string level;
+};
 
 
 /***						Menu						***/

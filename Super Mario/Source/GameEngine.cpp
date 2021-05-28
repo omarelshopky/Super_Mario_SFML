@@ -148,14 +148,14 @@ int GameEngine::getNumberOfLines() {
 
 void GameEngine::arrangePlayersInfo() {
 	int lines = getNumberOfLines();
-	string name, score, level;
+	player newPlayer;
 
 	playersFile.open(PLAYERS_FILE);
 
 	// Add players information to vector
 	for (int i = 0; i < lines; i++) {
-		playersFile >> name >> score >> level;
-		players.push_back({ atoi(score.c_str()), {atoi(level.c_str()), name} });
+		playersFile >> newPlayer.name >> newPlayer.score >> newPlayer.level;
+		players.push_back({ atoi(newPlayer.score.c_str()), {atoi(newPlayer.level.c_str()), newPlayer.name} });
 	}
 
 	playersFile.close();
