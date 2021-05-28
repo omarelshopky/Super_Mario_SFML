@@ -8,14 +8,14 @@ class Menu
 {
 	// Menu properties
 private:
+	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay;
 	int selectedOption;
 	Font menuFont, playerNameFont;
 	Text menuOptions[NUM_OF_OPTIONS];
-	Texture optionShadowTexture, backGroundTexture, playerNameTexture;
-	Sprite optionShadowSprite, backGroundSprite, playerNameSprite;
+	Texture optionShadowTexture, backGroundTexture, playerNameTexture, highScoreTexture;
+	Sprite optionShadowSprite, backGroundSprite, playerNameSprite, highScoreSprite;
 	String playerNameStr;
 	Text playerNameText;
-	bool mainMenuDisplay, playerNameDisplay, levelsListDisplay;
 	fstream playersFile;
 	vector <pair<int, pair<int, string>>> players;
 
@@ -49,6 +49,10 @@ private:
 
 	// Make player name menu display
 	void openPlayerName();
+
+
+	// Make high score menu display
+	void openHighScore();
 
 
 	// Handle what would done when chose specific option

@@ -5,7 +5,8 @@ Menu::Menu()
 {
 	// Set initial values
 	selectedOption = 0;
-	mainMenuDisplay = true, playerNameDisplay = false, levelsListDisplay = false;
+	mainMenuDisplay = true;
+	playerNameDisplay = highScoreDisplay = levelsListDisplay = false;
 
 	// Load fonts from file
 	if (!menuFont.loadFromFile(MAIN_MENU_FONT)) { std::cout << "Can't load MAIN_MENU_FONT\n"; }
@@ -17,6 +18,10 @@ Menu::Menu()
 
 	if (!playerNameTexture.loadFromFile(PLAYER_NAME_BACKGROUND)) { std::cout << "Can't load PLAYER_NAME_BACKGROUND\n"; }
 	playerNameSprite.setTexture(playerNameTexture);
+
+	if (!highScoreTexture.loadFromFile(HIGH_SCORE_BACKGROUND)) { std::cout << "Can't load HIGH_SCORE_BACKGROUND\n"; }
+	highScoreSprite.setTexture(highScoreTexture);
+
 
 	// Set OptionShadow properties
 	if(!optionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
@@ -67,7 +72,9 @@ void Menu::draw(RenderWindow& window)
 		window.draw(playerNameSprite);
 		window.draw(playerNameText);
 	}
-	
+	else if (highScoreDisplay) {
+		window.draw(highScoreSprite);
+	}
 }
 
 
@@ -160,12 +167,21 @@ void Menu::openPlayerName() {
 }
 
 
+void Menu::openHighScore() {
+	highScoreDisplay = true;
+	mainMenuDisplay = false;
+}
+
+
 void Menu::mainMenuHandleSelection() {
 	// Check current selected option
 	switch (selectedOption)
 	{
 	case 0:
 		openPlayerName();
+		break;
+	case 2:
+		openHighScore();
 		break;
 	case 5:
 		exit(0);

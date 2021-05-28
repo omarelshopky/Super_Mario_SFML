@@ -43,6 +43,8 @@ struct area {
 
 #define MENU_SHADOW "Resource/Textures/MenuShadow.png"
 
+#define HIGH_SCORE_BACKGROUND "Resource/Textures/Menu/highScore.jpg"
+
 /**********************************************************/
 
 
