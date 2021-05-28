@@ -49,6 +49,11 @@ struct position {
 
 #define HIGH_SCORE_BACKGROUND "Resource/Textures/Menu/highScore.jpg"
 
+#define HOW_TO_PLAY_BACKGROUND "Resource/Textures/Menu/howToPlay.jpg"
+
+#define OPTIONS_BACKGROUND "Resource/Textures/Menu/Options.jpg"
+
+#define CREDITS_BACKGROUND "Resource/Textures/Menu/Credits.jpg"
 /**********************************************************/
 
 

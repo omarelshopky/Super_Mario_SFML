@@ -18,8 +18,17 @@ Menu::Menu()
 	if (!playerNameTexture.loadFromFile(PLAYER_NAME_BACKGROUND)) { std::cout << "Can't load PLAYER_NAME_BACKGROUND\n"; }
 	playerNameSprite.setTexture(playerNameTexture);
 
+	if (!howToPlayTexture.loadFromFile(HOW_TO_PLAY_BACKGROUND)) { std::cout << "Can't load HOW_TO_PLAY_BACKGROUND\n"; }
+	howToPlaySprite.setTexture(howToPlayTexture);
+
 	if (!highScoreTexture.loadFromFile(HIGH_SCORE_BACKGROUND)) { std::cout << "Can't load HIGH_SCORE_BACKGROUND\n"; }
 	highScoreSprite.setTexture(highScoreTexture);
+
+	if (!optionsTexture.loadFromFile(OPTIONS_BACKGROUND)) { std::cout << "Can't load OPTIONS_BACKGROUND\n"; }
+	optionsSprite.setTexture(optionsTexture);
+
+	if (!creditsTexture.loadFromFile(CREDITS_BACKGROUND)) { std::cout << "Can't load CREDITS_BACKGROUND\n"; }
+	creditsSprite.setTexture(creditsTexture);
 
 
 	// Set OptionShadow properties
@@ -31,7 +40,7 @@ Menu::Menu()
 	backButtonText.setString("press esc to back");
 	backButtonText.setFont(playerNameFont);
 	backButtonText.setCharacterSize(30);
-	backButtonText.setPosition(1190, 760);
+	backButtonText.setPosition(1350, 855);
 
 	// Set Player Name Text Properties
 	playerNameText.setFont(playerNameFont);
@@ -94,6 +103,11 @@ void Menu::draw(RenderWindow& window)
 	else if (playerNameDisplay) {
 		window.draw(playerNameSprite);
 		window.draw(playerNameText);
+		window.draw(backButtonText);
+	}
+	else if (howToPlayDisplay) {
+		window.draw(howToPlaySprite);
+		window.draw(backButtonText);
 	}
 	else if (highScoreDisplay) {
 		window.draw(highScoreSprite);
@@ -101,9 +115,14 @@ void Menu::draw(RenderWindow& window)
 			window.draw(highScoreText[i][0]);
 			window.draw(highScoreText[i][1]);
 		}
+		window.draw(backButtonText);
 	}
-
-	if (!mainMenuDisplay) {
+	else if (optionsDisplay) {
+		window.draw(optionsSprite);
+		window.draw(backButtonText);
+	}
+	else if (creditsDisplay) {
+		window.draw(creditsSprite);
 		window.draw(backButtonText);
 	}
 }
@@ -193,7 +212,20 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 			break;
 		}
 	}
-	else if (highScoreDisplay) {
+	else if ((howToPlayDisplay || highScoreDisplay) || creditsDisplay) {
+		switch (event.type)
+		{
+		case Event::KeyReleased:
+			switch (event.key.code)
+			{
+			case Keyboard::Escape:
+				openMainMenu();
+				break;
+			}
+			break;
+		}
+	}
+	else if (optionsDisplay) {
 		switch (event.type)
 		{
 		case Event::KeyReleased:
@@ -211,8 +243,7 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 
 void Menu::openMainMenu() {
 	mainMenuDisplay = true;
-	playerNameDisplay = false;
-	highScoreDisplay = false;
+	playerNameDisplay = highScoreDisplay = howToPlayDisplay = optionsDisplay = creditsDisplay = false;
 }
 
 
@@ -229,6 +260,24 @@ void Menu::openHighScore() {
 }
 
 
+void Menu::openHowToPlay() {
+	howToPlayDisplay = true;
+	mainMenuDisplay = false;
+}
+
+
+void Menu::openOptions() {
+	optionsDisplay = true;
+	mainMenuDisplay = false;
+}
+
+
+void Menu::openCredits() {
+	creditsDisplay = true;
+	mainMenuDisplay = false;
+}
+
+
 void Menu::mainMenuHandleSelection() {
 	// Check current selected option
 	switch (selectedOption)
@@ -236,8 +285,17 @@ void Menu::mainMenuHandleSelection() {
 	case 0:
 		openPlayerName();
 		break;
+	case 1:
+		openHowToPlay();
+		break;
 	case 2:
 		openHighScore();
+		break;
+	case 3:
+		openOptions();
+		break;
+	case 4:
+		openCredits();
 		break;
 	case 5:
 		exit(0);

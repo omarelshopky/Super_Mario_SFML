@@ -6,13 +6,13 @@ class Menu
 {
 	// Menu properties
 private:
-	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay;
+	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay, howToPlayDisplay, optionsDisplay, creditsDisplay;
 	int selectedOption;
 	Font menuFont, playerNameFont;
 	String playerNameStr;
 	Text menuOptions[6], playerNameText, highScoreText[10][2], backButtonText;
-	Texture optionShadowTexture, backGroundTexture, playerNameTexture, highScoreTexture;
-	Sprite optionShadowSprite, backGroundSprite, playerNameSprite, highScoreSprite;
+	Texture optionShadowTexture, backGroundTexture, playerNameTexture, highScoreTexture, howToPlayTexture, optionsTexture, creditsTexture;
+	Sprite optionShadowSprite, backGroundSprite, playerNameSprite, highScoreSprite, howToPlaySprite, optionsSprite, creditsSprite;
 	fstream playersFile;
 	vector <pair<int, pair<int, string>>> players;
 	position highScoresPos;
@@ -40,6 +40,10 @@ private:
 	void moveDown();
 
 
+	// Make Main menu display
+	void openMainMenu();
+
+
 	// Make player name menu display
 	void openPlayerName();
 
@@ -49,8 +53,16 @@ private:
 
 
 	// Make Main menu display
-	void openMainMenu();
+	void openHowToPlay();
 
+
+	// Make Options menu display
+	void openOptions();
+
+
+	// Make Credits display
+	void openCredits();
+	
 
 	// Handle what would done when chose specific option
 	void mainMenuHandleSelection();
