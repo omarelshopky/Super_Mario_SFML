@@ -54,6 +54,12 @@ struct position {
 #define OPTIONS_BACKGROUND "Resource/Textures/Menu/Options.jpg"
 
 #define CREDITS_BACKGROUND "Resource/Textures/Menu/Credits.jpg"
+
+#define MUSIC_BALL "Resource/Textures/Menu/musicBall.png"
+
+#define DIFFICULTY_BALL "Resource/Textures/Menu/difficultyBall.png"
+
+#define CONTROL_BALL "Resource/Textures/Menu/controlBall.png"
 /**********************************************************/
 
 

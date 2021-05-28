@@ -10,9 +10,11 @@ private:
 	int selectedOption;
 	Font menuFont, playerNameFont;
 	String playerNameStr;
-	Text menuOptions[6], playerNameText, highScoreText[10][2], backButtonText;
-	Texture optionShadowTexture, backGroundTexture, playerNameTexture, highScoreTexture, howToPlayTexture, optionsTexture, creditsTexture;
-	Sprite optionShadowSprite, backGroundSprite, playerNameSprite, highScoreSprite, howToPlaySprite, optionsSprite, creditsSprite;
+	Text menuOptions[6], playerNameText, highScoreText[10][2], backText;
+	Texture optionShadowTexture, backGroundTexture, playerNameTexture, highScoreTexture, howToPlayTexture, optionsTexture, creditsTexture,
+		musicBallTexture, difficultyBallTexture, controlBallTexture;
+	Sprite optionShadowSprite, backGroundSprite, playerNameSprite, highScoreSprite, howToPlaySprite, optionsSprite, creditsSprite,
+		musicBallSprite, difficultyBallSprite, controlBallSprite;
 	fstream playersFile;
 	vector <pair<int, pair<int, string>>> players;
 	position highScoresPos;

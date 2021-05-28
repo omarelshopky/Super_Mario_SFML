@@ -31,16 +31,31 @@ Menu::Menu()
 	creditsSprite.setTexture(creditsTexture);
 
 
-	// Set OptionShadow properties
+	// Load OptionShadow 
 	if(!optionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
 	optionShadowSprite.setTexture(optionShadowTexture);
-	optionShadowSprite.setPosition(620, 295); // Start position 
+	optionShadowSprite.setColor(Color(255, 255, 255, 100));
 
-	// Set Back Button Text Properties
-	backButtonText.setString("press esc to back");
-	backButtonText.setFont(playerNameFont);
-	backButtonText.setCharacterSize(30);
-	backButtonText.setPosition(1350, 855);
+	// Set Music Ball Properties
+	if (!musicBallTexture.loadFromFile(MUSIC_BALL)) { std::cout << "Can't load MUSIC_BALL\n"; }
+	musicBallSprite.setTexture(musicBallTexture);
+	musicBallSprite.setPosition(482, 410);
+
+	// Set Difficulty Ball Properties
+	if (!difficultyBallTexture.loadFromFile(DIFFICULTY_BALL)) { std::cout << "Can't load DIFFICULTY_BALL\n"; }
+	difficultyBallSprite.setTexture(difficultyBallTexture);
+	difficultyBallSprite.setPosition(1377, 275);
+
+	// Set Control Ball Properties
+	if (!controlBallTexture.loadFromFile(CONTROL_BALL)) { std::cout << "Can't load CONTROL_BALL\n"; }
+	controlBallSprite.setTexture(controlBallTexture);
+	controlBallSprite.setPosition(966, 255);
+
+	// Set Back Text Properties
+	backText.setString("press esc to back");
+	backText.setFont(playerNameFont);
+	backText.setCharacterSize(30);
+	backText.setPosition(1350, 855);
 
 	// Set Player Name Text Properties
 	playerNameText.setFont(playerNameFont);
@@ -103,11 +118,11 @@ void Menu::draw(RenderWindow& window)
 	else if (playerNameDisplay) {
 		window.draw(playerNameSprite);
 		window.draw(playerNameText);
-		window.draw(backButtonText);
+		window.draw(backText);
 	}
 	else if (howToPlayDisplay) {
 		window.draw(howToPlaySprite);
-		window.draw(backButtonText);
+		window.draw(backText);
 	}
 	else if (highScoreDisplay) {
 		window.draw(highScoreSprite);
@@ -115,15 +130,19 @@ void Menu::draw(RenderWindow& window)
 			window.draw(highScoreText[i][0]);
 			window.draw(highScoreText[i][1]);
 		}
-		window.draw(backButtonText);
+		window.draw(backText);
 	}
 	else if (optionsDisplay) {
 		window.draw(optionsSprite);
-		window.draw(backButtonText);
+		window.draw(optionShadowSprite);
+		window.draw(backText);
+		window.draw(musicBallSprite);
+		window.draw(controlBallSprite);
+		window.draw(difficultyBallSprite);
 	}
 	else if (creditsDisplay) {
 		window.draw(creditsSprite);
-		window.draw(backButtonText);
+		window.draw(backText);
 	}
 }
 
@@ -231,6 +250,18 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 		case Event::KeyReleased:
 			switch (event.key.code)
 			{
+			case Keyboard::Left:
+
+				break;
+			case Keyboard::Right:
+
+				break;
+			case Keyboard::Up:
+
+				break;
+			case Keyboard::Down:
+
+				break;
 			case Keyboard::Escape:
 				openMainMenu();
 				break;
@@ -244,6 +275,10 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 void Menu::openMainMenu() {
 	mainMenuDisplay = true;
 	playerNameDisplay = highScoreDisplay = howToPlayDisplay = optionsDisplay = creditsDisplay = false;
+
+	// Set shadow properties
+	optionShadowSprite.setPosition(620, 295 + selectedOption * 70);
+	optionShadowSprite.setScale(1, 1);
 }
 
 
@@ -269,6 +304,10 @@ void Menu::openHowToPlay() {
 void Menu::openOptions() {
 	optionsDisplay = true;
 	mainMenuDisplay = false;
+
+	// Set shadow properties
+	optionShadowSprite.setPosition(200, 140);
+	optionShadowSprite.setScale(0.8, 1);
 }
 
 
