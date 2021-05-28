@@ -16,6 +16,8 @@ private:
 	String playerNameStr;
 	Text playerNameText;
 	bool mainMenuDisplay, playerNameDisplay, levelsListDisplay;
+	fstream playersFile;
+	vector <pair<int, pair<int, string>>> players;
 
 public:
 	std::string playerName;
@@ -31,7 +33,9 @@ public:
 	// Control Menu events
 	void catchEvents(Event& event, RenderWindow& window);
 
-
+	
+	// Sort players info according to score
+	void sortPlayersFile();
 	
 
 private:
@@ -49,4 +53,12 @@ private:
 
 	// Handle what would done when chose specific option
 	void mainMenuHandleSelection();
+
+
+	// Make a vector contain players information collected form file
+	void arrangePlayersInfo();
+
+
+	// Count how many lines in specific file 
+	int getNumberOfLines();
 };

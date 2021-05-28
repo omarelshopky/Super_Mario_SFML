@@ -130,57 +130,5 @@ void GameEngine::addPlayerInfo(string playerName) {
 }
 
 
-int GameEngine::getNumberOfLines() {
-	// Open the file to read 
-	playersFile.open(PLAYERS_FILE);
-
-	// Count how many lines in the file
-	int cnt = 0;
-	string temp;
-	while (getline(playersFile, temp)) cnt++;
-
-	playersFile.close();
-	playersFile.clear();
-
-	return cnt;
-}
-
-
-void GameEngine::arrangePlayersInfo() {
-	int lines = getNumberOfLines();
-	player newPlayer;
-
-	playersFile.open(PLAYERS_FILE);
-
-	// Add players information to vector
-	for (int i = 0; i < lines; i++) {
-		playersFile >> newPlayer.name >> newPlayer.score >> newPlayer.level;
-		players.push_back({ atoi(newPlayer.score.c_str()), {atoi(newPlayer.level.c_str()), newPlayer.name} });
-	}
-	
-	playersFile.close();
-	playersFile.clear();
-}
-
-
-void GameEngine::sortPlayersFile() {
-	// Clear all players from vector
-	players.clear();
-
-	// get data from players file
-	arrangePlayersInfo();
-
-	// sort scores
-	sort(players.rbegin(), players.rend());
-
-	
-	playersFile.open(PLAYERS_FILE);
-
-	for (int i = 0; i < players.size() ; i++) {
-		playersFile << players[i].second.second << ' ' << players[i].first << ' ' << players[i].second.first << '\n';
-	}
-	playersFile.close();
-	playersFile.clear();
-}
 
 

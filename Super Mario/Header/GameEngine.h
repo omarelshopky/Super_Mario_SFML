@@ -11,7 +11,6 @@ private:
     int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt;
     fstream playersFile;
     map<string, int> levelsMap;
-    vector <pair<int, pair<int, string>>> players;
 
 public:
     Text timerText, scoreText, coinsText, levelText;
@@ -54,20 +53,7 @@ public:
     void addPlayerInfo(std::string playerName);
 
 
-    // Sort players info according to score
-    void sortPlayersFile();
-
-
     // Set level Name text
     void setLevelName(std::string levelName);
-
-private:
-
-    // Make a vector contain players information collected form file
-    void arrangePlayersInfo();
-
-
-    // Count how many lines in specific file 
-    int getNumberOfLines();
 };
 
