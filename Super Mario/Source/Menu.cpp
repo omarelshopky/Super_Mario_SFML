@@ -5,7 +5,8 @@ Menu::Menu()
 {
 	// Set initial values
 	openMainMenu();
-	selectedOption = 0;
+	selectedOption = activeOptionsMenu = 0;
+	muteMusic = false;
 
 	// Load fonts from file
 	if (!menuFont.loadFromFile(MAIN_MENU_FONT)) { std::cout << "Can't load MAIN_MENU_FONT\n"; }
@@ -31,7 +32,7 @@ Menu::Menu()
 	creditsSprite.setTexture(creditsTexture);
 
 
-	// Load OptionShadow 
+	// Set OptionShadow Properties
 	if(!optionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
 	optionShadowSprite.setTexture(optionShadowTexture);
 	optionShadowSprite.setColor(Color(255, 255, 255, 100));
@@ -250,17 +251,34 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 		case Event::KeyReleased:
 			switch (event.key.code)
 			{
-			case Keyboard::Left:
-
-				break;
 			case Keyboard::Right:
-
+				changeOptionsMenu(true);
+				break;
+			case Keyboard::Left:
+				changeOptionsMenu(false);
 				break;
 			case Keyboard::Up:
-
+				switch (activeOptionsMenu) {
+				case 0:
+					changeActiveMusicOption();
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				}
 				break;
 			case Keyboard::Down:
-
+				switch (activeOptionsMenu) {
+				case 0:
+					changeActiveMusicOption();
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				}
+				break;
 				break;
 			case Keyboard::Escape:
 				openMainMenu();
@@ -306,8 +324,8 @@ void Menu::openOptions() {
 	mainMenuDisplay = false;
 
 	// Set shadow properties
-	optionShadowSprite.setPosition(200, 140);
-	optionShadowSprite.setScale(0.8, 1);
+	optionShadowSprite.setPosition(185, 140);
+	optionShadowSprite.setScale(0.9, 1);
 }
 
 
@@ -404,4 +422,43 @@ void Menu::fillHighScore() {
 		highScoreText[i][0].setString(players[i].second.second);
 		highScoreText[i][1].setString(to_string(players[i].first));
 	}
+}
+
+
+void Menu::changeOptionsMenu(bool Right) {
+	if (Right) {
+		// if box in Difficulty postion set to Music 
+		if (optionShadowSprite.getPosition().x == 1105)
+		{
+			optionShadowSprite.setPosition(185, 140);
+			activeOptionsMenu = 0;
+		}
+		else {
+			optionShadowSprite.move(460, 0);
+			activeOptionsMenu++;
+		}
+	}
+	else {
+		// if box in Music postion set to Difficulty 
+		if (optionShadowSprite.getPosition().x == 185)
+		{
+			optionShadowSprite.setPosition(1105, 140);
+			activeOptionsMenu = 2;
+		}
+		else {
+			optionShadowSprite.move(-460, 0);
+			activeOptionsMenu--;
+		}
+	}
+}
+
+
+void Menu::changeActiveMusicOption() {
+	if (muteMusic) {
+		musicBallSprite.setPosition(482, 410);
+	}
+	else {
+		musicBallSprite.setPosition(482, 468);
+	}
+	muteMusic = !muteMusic;
 }

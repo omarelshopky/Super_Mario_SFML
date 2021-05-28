@@ -6,8 +6,9 @@ class Menu
 {
 	// Menu properties
 private:
-	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay, howToPlayDisplay, optionsDisplay, creditsDisplay;
-	int selectedOption;
+	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay, howToPlayDisplay, optionsDisplay, creditsDisplay,
+		muteMusic;
+	int selectedOption, activeOptionsMenu;
 	Font menuFont, playerNameFont;
 	String playerNameStr;
 	Text menuOptions[6], playerNameText, highScoreText[10][2], backText;
@@ -84,4 +85,12 @@ private:
 
 	// Fill High score board with the top 10
 	void fillHighScore();
+
+
+	// change between music , control and difficulty
+	void changeOptionsMenu(bool Right);
+
+
+	// Change Music ball (on and off)
+	void changeActiveMusicOption();
 };
