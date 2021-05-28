@@ -185,7 +185,8 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 			break;
 
 		case Event::TextEntered:
-			if (playerNameStr.getSize() <= 20 && !Keyboard::isKeyPressed(Keyboard::Enter) && !Keyboard::isKeyPressed(Keyboard::BackSpace)) {
+			bool notForbidinKeys = (!Keyboard::isKeyPressed(Keyboard::Enter) && !Keyboard::isKeyPressed(Keyboard::BackSpace)) && (!Keyboard::isKeyPressed(Keyboard::Escape) && !Keyboard::isKeyPressed(Keyboard::Space));
+			if (playerNameStr.getSize() <= 20 && notForbidinKeys) {
 				playerNameStr += event.text.unicode;
 				playerNameText.setString(playerNameStr);
 			}
