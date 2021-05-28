@@ -31,7 +31,7 @@ int main()
 	GameEngine gameEngine = GameEngine(window);
     Menu menu = Menu();
 
-	bool omar = false;
+	bool omar = true;
 	Clock timer;
 	
 	gameEngine.setLevelName("level 1-1");
@@ -65,6 +65,9 @@ int main()
 		mario.move();
 		gameEngine.updateTimer();
 		if (omar) {
+			gameEngine.updateScore(12);
+			gameEngine.addPlayerInfo("ayman");
+			gameEngine.sortPlayersFile();
 			int cnt = 0;
 			while (cnt < 11) {
 				if (timer.getElapsedTime().asSeconds() > 0.2) {
@@ -79,7 +82,6 @@ int main()
 			}
 			omar = false;
 		}
-
 
 		window.clear();
  		window.draw(mario.marioSprite);                   

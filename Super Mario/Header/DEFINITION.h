@@ -26,6 +26,8 @@
 
 
 /***					GameEngine						***/
+#define PLAYERS_FILE "Files/Players.txt"
+
 #define GAME_HEADER_FONT "Resource/Fonts/some_font.ttf"
 
 /**********************************************************/

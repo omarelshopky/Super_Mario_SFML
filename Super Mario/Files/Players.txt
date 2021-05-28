@@ -1,1 +1,10 @@
-omar 0 level 1-1
+rk 99999 0
+knight 10000 0
+hesham 5000 0
+mohy 2000 1
+tamer 1050 0
+fady 155 0
+omar 100 0
+ayman 12 0
+os -20000 0
+osama -90009 0

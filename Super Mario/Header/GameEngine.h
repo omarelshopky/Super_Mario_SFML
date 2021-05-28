@@ -5,6 +5,7 @@
 #include<iomanip>
 #include<fstream>
 #include<map>
+#include<string>
 
 using namespace sf;
 using namespace std;
@@ -18,7 +19,8 @@ private:
     Clock timer;
     int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt;
     fstream playersFile;
-    std::map<string, int> levelsMap;
+    map<string, int> levelsMap;
+    vector <pair<int, pair<int, string>>> players;
 
 public:
     Text timerText, scoreText, coinsText, levelText;
@@ -67,5 +69,14 @@ public:
 
     // Set level Name text
     void setLevelName(std::string levelName);
+
+private:
+
+    // Make a vector contain players information collected form file
+    void arrangePlayersInfo();
+
+
+    // Count how many lines in specific file 
+    int getNumberOfLines();
 };
 
