@@ -6,7 +6,13 @@ Menu::Menu()
 	// Set initial values
 	openMainMenu();
 	selectedOption = activeOptionsMenu = 0;
-	muteMusic = false;
+	muteMusic = handControlled = false;
+	newPlayer.lifes = 3;
+
+	// Set Menu Sound Properties
+	if (!menuBuffer.loadFromFile(MENU_SOUND)) { std::cout << "Can't load MENU_SOUND\n"; }
+	menuSound.setBuffer(menuBuffer);
+	menuSound.play();
 
 	// Load fonts from file
 	if (!menuFont.loadFromFile(MAIN_MENU_FONT)) { std::cout << "Can't load MAIN_MENU_FONT\n"; }
@@ -50,7 +56,7 @@ Menu::Menu()
 	// Set Control Ball Properties
 	if (!controlBallTexture.loadFromFile(CONTROL_BALL)) { std::cout << "Can't load CONTROL_BALL\n"; }
 	controlBallSprite.setTexture(controlBallTexture);
-	controlBallSprite.setPosition(966, 255);
+	controlBallSprite.setPosition(966, 450);
 
 	// Set Back Text Properties
 	backText.setString("press esc to back");
@@ -214,7 +220,7 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 					playerNameDisplay = false;
 
 					// Convert sfml String to std String
-					playerName = std::string(playerNameStr);
+					newPlayer.name = std::string(playerNameStr);
 				}
 				break;
 			case Keyboard::Escape:
@@ -254,32 +260,37 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 			case Keyboard::Right:
 				changeOptionsMenu(true);
 				break;
+
 			case Keyboard::Left:
 				changeOptionsMenu(false);
 				break;
+
 			case Keyboard::Up:
 				switch (activeOptionsMenu) {
 				case 0:
 					changeActiveMusicOption();
 					break;
 				case 1:
+					changeActiveControlOption();
 					break;
 				case 2:
 					break;
 				}
 				break;
+
 			case Keyboard::Down:
 				switch (activeOptionsMenu) {
 				case 0:
 					changeActiveMusicOption();
 					break;
 				case 1:
+					changeActiveControlOption();
 					break;
 				case 2:
 					break;
 				}
 				break;
-				break;
+
 			case Keyboard::Escape:
 				openMainMenu();
 				break;
@@ -379,7 +390,6 @@ int Menu::getNumberOfLines() {
 
 void Menu::arrangePlayersInfo() {
 	int lines = getNumberOfLines();
-	player newPlayer;
 
 	playersFile.open(PLAYERS_FILE);
 
@@ -461,4 +471,36 @@ void Menu::changeActiveMusicOption() {
 		musicBallSprite.setPosition(482, 468);
 	}
 	muteMusic = !muteMusic;
+	updateMusicSettings();
+}
+
+
+void Menu::updateMusicSettings() {
+	if (muteMusic) {
+		menuSound.pause();
+	}
+	else {
+		menuSound.play();
+	}
+}
+
+void Menu::changeActiveControlOption() {
+	if (handControlled) {
+		controlBallSprite.setPosition(966, 255);
+	}
+	else {
+		controlBallSprite.setPosition(966, 450);
+	}
+	handControlled = !handControlled;
+	updateControlSettings();
+}
+
+
+void Menu::updateControlSettings() {
+	if (handControlled) {
+		//system("");////////////////////                 Hand Script                   //////////
+	}
+	else {
+		
+	}
 }

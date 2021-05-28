@@ -7,7 +7,7 @@ class Menu
 	// Menu properties
 private:
 	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay, howToPlayDisplay, optionsDisplay, creditsDisplay,
-		muteMusic;
+		handControlled;
 	int selectedOption, activeOptionsMenu;
 	Font menuFont, playerNameFont;
 	String playerNameStr;
@@ -19,9 +19,12 @@ private:
 	fstream playersFile;
 	vector <pair<int, pair<int, string>>> players;
 	position highScoresPos;
+	player newPlayer;
+	SoundBuffer menuBuffer;
+	Sound menuSound;
 
 public:
-	std::string playerName;
+	bool muteMusic;
 
 	// Constractor
 	Menu(); 
@@ -93,4 +96,16 @@ private:
 
 	// Change Music ball (on and off)
 	void changeActiveMusicOption();
+
+
+	// Mute music 
+	void updateMusicSettings();
+
+
+	// Change Control ball (Keyboard or Hand)
+	void changeActiveControlOption();
+
+
+	// Start hand control script
+	void updateControlSettings();
 };

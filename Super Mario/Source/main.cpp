@@ -18,7 +18,7 @@ int main()
 	
 	// Create New Mario
 	Mario mario = Mario();
-	//mario.bigState();
+	mario.bigState();
 	
 	// Create GameEnigne and Menu
 	GameEngine gameEngine = GameEngine(window);
