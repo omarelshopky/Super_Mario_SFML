@@ -1,3 +1,5 @@
 ﻿  Menu.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Menu.cpp(260,20): warning C4018: '<': signed/unsigned mismatch
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Menu.cpp(294,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  Generating Code...
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

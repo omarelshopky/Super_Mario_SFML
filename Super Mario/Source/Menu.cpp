@@ -4,9 +4,8 @@
 Menu::Menu()
 {
 	// Set initial values
+	openMainMenu();
 	selectedOption = 0;
-	mainMenuDisplay = true;
-	playerNameDisplay = highScoreDisplay = levelsListDisplay = false;
 
 	// Load fonts from file
 	if (!menuFont.loadFromFile(MAIN_MENU_FONT)) { std::cout << "Can't load MAIN_MENU_FONT\n"; }
@@ -27,6 +26,12 @@ Menu::Menu()
 	if(!optionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
 	optionShadowSprite.setTexture(optionShadowTexture);
 	optionShadowSprite.setPosition(620, 295); // Start position 
+
+	// Set Back Button Text Properties
+	backButtonText.setString("press esc to back");
+	backButtonText.setFont(playerNameFont);
+	backButtonText.setCharacterSize(30);
+	backButtonText.setPosition(1190, 760);
 
 	// Set Player Name Text Properties
 	playerNameText.setFont(playerNameFont);
@@ -53,7 +58,7 @@ Menu::Menu()
 	// Helper varibles
 	float width = 628;
 	float hight = 225;
-	std::string OptionsTemp[NUM_OF_OPTIONS] = {
+	std::string OptionsTemp[6] = {
 		"	  START",
 		"HOW TO PLAY",
 		"HIGH  SCORES",
@@ -61,7 +66,7 @@ Menu::Menu()
 		"    CREDITS",
 		"       EXIT"};
 
-	for (int i = 0; i < NUM_OF_OPTIONS; i++) {
+	for (int i = 0; i < 6; i++) {
 		menuOptions[i].setFont(menuFont);
 		menuOptions[i].setFillColor(sf::Color::White);
 		menuOptions[i].setCharacterSize(43);
@@ -71,6 +76,8 @@ Menu::Menu()
 		hight += 70;
 		menuOptions[i].setPosition(width, hight);
 	}
+
+	
 }
 
 
@@ -80,7 +87,7 @@ void Menu::draw(RenderWindow& window)
 		window.draw(backGroundSprite);
 		window.draw(optionShadowSprite);
 
-		for (int i = 0; i < NUM_OF_OPTIONS; i++) {
+		for (int i = 0; i < 6; i++) {
 			window.draw(menuOptions[i]);
 		}
 	}
@@ -94,6 +101,10 @@ void Menu::draw(RenderWindow& window)
 			window.draw(highScoreText[i][0]);
 			window.draw(highScoreText[i][1]);
 		}
+	}
+
+	if (!mainMenuDisplay) {
+		window.draw(backButtonText);
 	}
 }
 
@@ -167,6 +178,9 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 					playerName = std::string(playerNameStr);
 				}
 				break;
+			case Keyboard::Escape:
+				openMainMenu();
+				break;
 			}
 			break;
 
@@ -178,6 +192,26 @@ void Menu::catchEvents(Event& event, RenderWindow& window) {
 			break;
 		}
 	}
+	else if (highScoreDisplay) {
+		switch (event.type)
+		{
+		case Event::KeyReleased:
+			switch (event.key.code)
+			{
+			case Keyboard::Escape:
+				openMainMenu();
+				break;
+			}
+			break;
+		}
+	}
+}
+
+
+void Menu::openMainMenu() {
+	mainMenuDisplay = true;
+	playerNameDisplay = false;
+	highScoreDisplay = false;
 }
 
 

@@ -2,8 +2,6 @@
 #include "../Header/DEFINITION.h"
 
 
-#define NUM_OF_OPTIONS 6
-
 class Menu
 {
 	// Menu properties
@@ -11,11 +9,10 @@ private:
 	bool mainMenuDisplay, playerNameDisplay, highScoreDisplay, levelsListDisplay;
 	int selectedOption;
 	Font menuFont, playerNameFont;
-	Text menuOptions[NUM_OF_OPTIONS];
+	String playerNameStr;
+	Text menuOptions[6], playerNameText, highScoreText[10][2], backButtonText;
 	Texture optionShadowTexture, backGroundTexture, playerNameTexture, highScoreTexture;
 	Sprite optionShadowSprite, backGroundSprite, playerNameSprite, highScoreSprite;
-	String playerNameStr;
-	Text playerNameText, highScoreText[10][2];
 	fstream playersFile;
 	vector <pair<int, pair<int, string>>> players;
 	position highScoresPos;
@@ -49,6 +46,10 @@ private:
 
 	// Make high score menu display
 	void openHighScore();
+
+
+	// Make Main menu display
+	void openMainMenu();
 
 
 	// Handle what would done when chose specific option
