@@ -157,7 +157,7 @@ void GameEngine::arrangePlayersInfo() {
 		playersFile >> newPlayer.name >> newPlayer.score >> newPlayer.level;
 		players.push_back({ atoi(newPlayer.score.c_str()), {atoi(newPlayer.level.c_str()), newPlayer.name} });
 	}
-
+	
 	playersFile.close();
 	playersFile.clear();
 }

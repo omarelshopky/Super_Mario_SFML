@@ -26,6 +26,11 @@ struct player {
 	string level;
 };
 
+struct area {
+	float width;
+	float height;
+};
+
 
 /***						Menu						***/
 #define MAIN_MENU_FONT "Resource/Fonts/Barkentina_font.ttf"

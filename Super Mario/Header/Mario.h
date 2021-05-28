@@ -9,6 +9,7 @@ private:
 	float marioAcceleration[2], marioSpeed[2];
 	bool goRight, goUp, goLeft, goDown, jumping;
 	float startJumpPosition;
+	area marioArea;
 
 public:
 	Texture marioTexture;

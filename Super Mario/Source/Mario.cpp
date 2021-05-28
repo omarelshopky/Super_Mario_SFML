@@ -20,19 +20,19 @@ Mario::Mario() {
 
 void Mario::smallState() {
 	marioState = SMALL;
-	int Height = 32;
-	int Width = 28;
-	marioSprite.setTextureRect(IntRect(0, 96, Width, Height));
-	marioSprite.setOrigin(Height / 2, Width / 2);
+	marioArea.width = 28;
+	marioArea.height = 32;
+	marioSprite.setTextureRect(IntRect(0, 96, marioArea.width, marioArea.height));
+	marioSprite.setOrigin(marioArea.width / 2, marioArea.height / 2);
 }
 
 
 void Mario::bigState() {
 	marioState = BIG;
-	int Height = 60;
-	int Width = 31;
-	marioSprite.setTextureRect(IntRect(0, 36, Width, Height));
-	marioSprite.setOrigin(Height / 2, Width / 2);
+	marioArea.width = 31;
+	marioArea.height = 60;
+	marioSprite.setTextureRect(IntRect(0, 36, marioArea.width, marioArea.height));
+	marioSprite.setOrigin(marioArea.width / 2, marioArea.height / 2);
 }
 
 
