@@ -63,7 +63,7 @@ struct position {
 
 #define CONTROL_BALL "Resource/Textures/Menu/controlBall.png"
 
-#define MENU_SOUND "Resource/Music/menu.ogg"
+#define MENU_SOUND "Resource/Music/MenuMusic.ogg"
 /**********************************************************/
 
 
