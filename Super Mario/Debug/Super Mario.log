@@ -1,34 +1,5 @@
-﻿  GameEngine.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(64,48): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Items.cpp
-  Mario.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(25,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(25,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(34,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(34,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(82,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(87,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(101,22): warning C4305: '+=': truncation from 'double' to 'float'
-  Menu.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Menu.cpp(326,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Menu.cpp(356,36): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Menu.cpp(437,20): warning C4018: '<': signed/unsigned mismatch
+﻿  MainMenu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\MainMenu.cpp(23,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   main.cpp
   Generating Code...
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

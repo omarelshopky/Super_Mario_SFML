@@ -41,7 +41,7 @@ struct position {
 /***						Menu						***/
 #define MAIN_MENU_FONT "Resource/Fonts/Barkentina_font.ttf"
 
-#define PLAYER_NAME_FONT "Resource/Fonts/Cairo-Regular.ttf"
+#define CAIRO_REGULAR "Resource/Fonts/Cairo-Regular.ttf"
 
 #define MAIN_MENU_BACKGROUND "Resource/Textures/Menu/Menu.jpg"
 

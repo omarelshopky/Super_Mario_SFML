@@ -5,30 +5,30 @@
 #include "../Header/GameEngine.h"
 #include "../Header/Items.h"
 #include "../Header/Mario.h"
-#include "../Header/Menu.h"
+#include "../Header/MainMenu.h"
 
 
 int main()
 {
 	// Hide Console open when run the game
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
 
 	// Open Startup Game Window 
 	RenderWindow window(sf::VideoMode(1600, 900), "Super Mario");
 	
 	// Create New Mario
-	Mario mario = Mario();
+	Mario mario;
 	mario.bigState();
 	
 	// Create GameEnigne and Menu
 	GameEngine gameEngine = GameEngine(window);
-    Menu menu = Menu();
+	MainMenu menu;
 
 	bool omar = false;
 	Clock timer;
 	
 	gameEngine.setLevelName("level 1-1");
-
+	
 	while (window.isOpen())
 	{
 		Event event;
@@ -50,10 +50,10 @@ int main()
 			}
 			
 			
-
-            menu.catchEvents(event);
+            menu.handleAllEvents(event);
 		}
 
+		
 		// Mario movement
 		mario.move();
 		gameEngine.updateTimer();
@@ -76,7 +76,7 @@ int main()
 		window.clear();
  		window.draw(mario.marioSprite);                   
 		gameEngine.draw();
-        menu.draw(window);
+        menu.drawAll(window);
   		/// Draw what you do in screen
 
 

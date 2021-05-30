@@ -146,21 +146,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Blocks.cpp" />
+    <ClCompile Include="Source\CreditsMenu.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameEngine.cpp" />
+    <ClCompile Include="Source\HighScoreMenu.cpp" />
+    <ClCompile Include="Source\HowToPlayMenu.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\MainMenu.cpp" />
     <ClCompile Include="Source\Mario.cpp" />
     <ClCompile Include="Source\Menu.cpp" />
+    <ClCompile Include="Source\OptionsMenu.cpp" />
+    <ClCompile Include="Source\PlayerNameMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Blocks.h" />
+    <ClInclude Include="Header\CreditsMenu.h" />
     <ClInclude Include="Header\Enemy.h" />
     <ClInclude Include="Header\GameEngine.h" />
     <ClInclude Include="Header\DEFINITION.h" />
+    <ClInclude Include="Header\HighScoreMenu.h" />
+    <ClInclude Include="Header\HowToPlayMenu.h" />
     <ClInclude Include="Header\Items.h" />
+    <ClInclude Include="Header\MainMenu.h" />
     <ClInclude Include="Header\Mario.h" />
     <ClInclude Include="Header\Menu.h" />
+    <ClInclude Include="Header\OptionsMenu.h" />
+    <ClInclude Include="Header\PlayerNameMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
