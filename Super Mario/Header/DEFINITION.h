@@ -19,6 +19,7 @@ using namespace sf;
 
 /***			Special Variable			***/
 typedef enum { SMALL, BIG, SUPER } marioState_t;
+typedef enum { COIN, MASHROOM, FLOWER , SPARKL} item_t;
 
 
 struct player {
@@ -81,5 +82,13 @@ struct position {
 #define PLAYERS_FILE "Files/Players.txt"
 
 #define GAME_HEADER_FONT "Resource/Fonts/some_font.ttf"
+
+/**********************************************************/
+
+
+
+
+/***						Items							***/
+#define ITEMS "Resource/Textures/Items.png"
 
 /**********************************************************/
