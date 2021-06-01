@@ -1,12 +1,2 @@
-﻿  Items.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(11,38): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(59,44): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
+﻿  main.cpp
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

@@ -8,8 +8,10 @@ private:
 	Texture itemTexture;
 	Sprite itemSprite;
 	IntRect itemIntRect, coinIntRect, flowerIntRect, mashroomIntRect, sparklsIntRect;
-	Clock timer;
-	int CurrentRect, maxRect;
+	Clock timer, textFloatTimer;
+	Text floatingText;
+	Font font;
+	int CurrentRect, maxRect, floatingSpeed;
 	bool display, faid;
 
 public:
@@ -24,8 +26,16 @@ public:
 	// Draw item on screen
 	void draw(RenderWindow& window);
 
+
+	// start animation of Floating text
+	void startTextFloat();
+
 private:
 	// handle animation for the item
 	void animation();
+
+
+	// Block moving up then down.
+	void TextFloat();
 };
 
