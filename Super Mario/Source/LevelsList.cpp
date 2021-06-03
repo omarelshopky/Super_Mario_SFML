@@ -54,6 +54,7 @@ void LevelsList::draw(RenderWindow& window) {
 			window.draw(levelsNameText[i]);
 		}
 	}
+	level1.draw(window);
 }
 
 
@@ -61,7 +62,7 @@ void LevelsList::catchEvents(Event event, player& newPlayer) {
 	if (display) {
 		switch (event.type)
 		{
-		case Event::KeyReleased:
+		case Event::KeyPressed:
 			switch (event.key.code)
 			{
 			case Keyboard::Up:
@@ -73,7 +74,12 @@ void LevelsList::catchEvents(Event event, player& newPlayer) {
 				changingOptionSound.play();
 				break;
 			case Keyboard::Enter:
-
+				switch (selectedLevel) {
+				case 0:
+					this->hide();
+					level1.start();
+					break;
+				}
 				break;
 			case Keyboard::Escape:
 				this->hide();

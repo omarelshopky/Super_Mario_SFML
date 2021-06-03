@@ -118,3 +118,11 @@ struct position {
 #define FLOATING_FONT "Resource/Fonts/Floating_font.otf"
 
 /**********************************************************/
+
+
+
+
+/***						Levels							***/
+#define LEVEL1_BACKGROUND "Resource/Textures/Backgrounds/Blue.jpg"
+
+/**********************************************************/

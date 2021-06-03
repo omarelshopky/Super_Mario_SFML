@@ -110,9 +110,6 @@
     <ClInclude Include="Header\Level1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Header\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>

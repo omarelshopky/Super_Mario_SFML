@@ -15,11 +15,11 @@ private:
 	Font font;
 	SoundBuffer takenSoundBuffer;
 	Sound takenSound;
+	item_t itemType;
 	int CurrentRect, maxRect, floatingSpeed;
 	bool display, faid, isTaken, resetTime;
 
 public:
-	item_t itemType;
 
 	/***			Constructor 			***/
 	Items(Mario& mario, item_t item, float x, float y);

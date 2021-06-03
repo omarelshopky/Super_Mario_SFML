@@ -1,6 +1,7 @@
 #pragma once
 #include "../Header/DEFINITION.h"
 #include "../Header/Menu.h"
+#include "../Header/Level1.h"
 
 #define NUMBER_OF_LEVELS 2
 
@@ -14,6 +15,7 @@ private:
 	int selectedLevel, maxLevel;
 	player currentPlayer;
 	fstream playersFile;
+	Level1 level1;
 
 public:
 	// Constructor

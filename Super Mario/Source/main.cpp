@@ -10,7 +10,7 @@
 int main()
 {
 	// Hide Console open when run the game
-	ShowWindow(GetConsoleWindow(), SW_SHOW);
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 	// Open Startup Game Window 
 	RenderWindow window(sf::VideoMode(1600, 900), "Super Mario");
@@ -22,7 +22,9 @@ int main()
 	// Create GameEnigne and Menu
 	GameEngine gameEngine = GameEngine(window);
 	MainMenu menu;
-	Items coin = Items(mario, MASHROOM, 400, 400);
+	Items coin = Items(mario, COIN, 400, 400);
+	Items mash = Items(mario, MASHROOM, 700, 500);
+	Items flow = Items(mario, FLOWER, 1000, 500);
 
 	bool omar = false;
 	Clock timer;
@@ -67,14 +69,14 @@ int main()
 		}
 
 		window.clear();
+        //menu.drawAll(window);
+
 		coin.draw(window);
+		mash.draw(window);
+		flow.draw(window);
  		window.draw(mario.marioSprite);                   
 		gameEngine.draw();
-        //menu.drawAll(window);
-  		/// Draw what you do in screen
 
-
-	  	           
 		window.display();
 	}
 	return 0;

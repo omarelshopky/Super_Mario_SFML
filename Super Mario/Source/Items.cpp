@@ -47,7 +47,7 @@ Items::Items(Mario& mario, item_t item, float x, float y) {
 	// Set Floating text properties
 	font.loadFromFile(FLOATING_FONT);
 	floatingText.setFont(font);
-	floatingText.setCharacterSize(18);
+	floatingText.setCharacterSize(20);
 	floatingText.setStyle(Text::Bold);
 	floatingText.setOrigin(9, 9);
 	floatingText.setPosition(x, y);
@@ -156,7 +156,7 @@ void Items::setTaken() {
 			faid = true;
 			break;
 		case FLOWER:
-			//mario->marioState = SUPER;
+			mario->marioState = SUPER;
 			faid = true;
 			break;
 		}

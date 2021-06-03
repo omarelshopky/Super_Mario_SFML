@@ -179,7 +179,6 @@
     <ClInclude Include="Header\Menu.h" />
     <ClInclude Include="Header\OptionsMenu.h" />
     <ClInclude Include="Header\PlayerNameMenu.h" />
-    <ClInclude Include="Level.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
