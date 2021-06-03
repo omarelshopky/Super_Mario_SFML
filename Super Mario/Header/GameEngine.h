@@ -7,17 +7,17 @@ class GameEngine
 private:
     Font headerFont;
     ostringstream scoreStr, timerStr, coinsStr;
-    Clock timer;
-    int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt;
+    Clock timer, convertTimer;
+    int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt, remainTime;
+    bool startTimeToScore;
     fstream playersFile;
     map<string, int> levelsMap;
 
 public:
     Text timerText, scoreText, coinsText, levelText;
-    RenderWindow *gameWindow;
 
     /*         Constractar          */
-    GameEngine(RenderWindow& window);
+    GameEngine();
 
     /*          Method         */
     

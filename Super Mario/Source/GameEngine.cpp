@@ -1,12 +1,11 @@
 #include "../Header/GameEngine.h"
 
 
-GameEngine::GameEngine(RenderWindow& window) {
-	gameWindow = &window;
-
+GameEngine::GameEngine() {
 	// Set initial values
+	startTimeToScore = false;
 	levelTime = 300;
-	scoreInt = 0, coinsInt = 0, currentTime = 0, counterTime = 0;
+	scoreInt = coinsInt = currentTime = remainTime = counterTime = 0;
 	scoreStr << "MARIO: 000000";
 	coinsStr << "x00";
 	fontSize = 45;
@@ -89,21 +88,22 @@ bool GameEngine::isTimerFinished() {
 
 
 void GameEngine::timeToScore() {
-	Clock clock;
-	int x = counterTime;
-	while (x >= 0) {
-		if (clock.getElapsedTime().asMilliseconds() >= 6) {
-			timer.restart();
-			clock.restart();
-			levelTime = x;
+	// Start convert Time to Score
+	if (!startTimeToScore) {
+		remainTime = counterTime;
+		startTimeToScore = true;
+	}
+	
+	if (remainTime >= 0) {
+		if (convertTimer.getElapsedTime().asMilliseconds() >= 6) {
+			levelTime = remainTime;
 			updateTimer();
 			updateScore(50);
 
-			gameWindow->clear();
-			draw();
-			gameWindow->display();
+			remainTime--;
 
-			x--;
+			timer.restart();
+			convertTimer.restart();
 		}
 	}
 }

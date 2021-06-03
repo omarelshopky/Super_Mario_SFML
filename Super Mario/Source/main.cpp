@@ -26,7 +26,7 @@ int main()
 	Items mash = Items(mario, MASHROOM, 700, 500);
 	Items flow = Items(mario, FLOWER, 1000, 500);
 
-	bool omar = false;
+	bool omar = true;
 	Clock timer;
 	
 	gameEngine.setLevelName("level 1");
@@ -52,8 +52,9 @@ int main()
 		// Mario movement
 		mario.move();
 		gameEngine.updateTimer();
+		gameEngine.timeToScore();
 		if (omar) {
-			int cnt = 0;
+			/*int cnt = 0;
 			while (cnt < 11) {
 				if (timer.getElapsedTime().asSeconds() > 0.2) {
 					if(cnt % 2 == 0) mario.smallState();
@@ -64,7 +65,7 @@ int main()
 					window.display();
 					timer.restart();
 				}
-			}
+			}*/
 			omar = false;
 		}
 
