@@ -22,6 +22,8 @@ MainMenu::MainMenu()
 	optionShadowSprite.setColor(Color(255, 255, 255, 100));
 	optionShadowSprite.setPosition(620, 295 + selectedOption * 70);
 
+	setChangeOptionSound();
+
 	// Helper varibles
 	float width = 628;
 	float hight = 225;
@@ -65,12 +67,15 @@ void MainMenu::catchEvents(Event event) {
 			{
 			case Keyboard::Up:
 				this->moveUp();
+				changingOptionSound.play();
 				break;
 			case Keyboard::Down:
 				this->moveDown();
+				changingOptionSound.play();
 				break;
 			case Keyboard::Enter:
 				mainMenuHandleSelection();
+				changingOptionSound.play();
 				break;
 			}
 			break;
@@ -106,8 +111,12 @@ void MainMenu::checkShow() {
 	if (newPlayer.name[0] != NULL) {
 		gameRunning = true;
 	}
+	else {
+		gameRunning = false;
+	}
 
-	bool allFormsClose = ((!playerName.display && !howToPlay.display) && (!highScore.display && !options.display)) && !credits.display;
+	bool allFormsClose = ((!playerName.display && !howToPlay.display) && (!highScore.display && !options.display))
+						&& (!credits.display && !playerName.levelsList.display);
 	if (allFormsClose && !gameRunning) show();
 }
 

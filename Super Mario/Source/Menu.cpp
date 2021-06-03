@@ -7,8 +7,15 @@ void Menu::setBackText() {
 
 	backText.setString("press esc to back");
 	backText.setFont(font);
-	backText.setCharacterSize(30);
+	backText.setCharacterSize(50);
 	backText.setPosition(1350.0, 855.0);
+}
+
+
+void Menu::setChangeOptionSound() {
+	if (!changingOptionBuffer.loadFromFile(CHANGING_OPTION_SOUND)) { std::cout << "Can't load CHANGING_OPTION_SOUND\n"; }
+	changingOptionSound.setBuffer(changingOptionBuffer);
+	changingOptionSound.setVolume(40);
 }
 
 
@@ -25,8 +32,8 @@ void Menu::catchEvents(Event event) {
 		// Handle event that make user return back to Main Menu
 		if (event.type == Event::KeyReleased && event.key.code == Keyboard::Escape) {
 			this->hide();
+			changingOptionSound.play();
 		}
-			
 	}
 }
 

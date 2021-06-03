@@ -11,7 +11,8 @@ protected:
 	Text backText;
 	Texture backGroundTexture;
 	Sprite backGroundSprite;
-
+	SoundBuffer changingOptionBuffer;
+	Sound changingOptionSound;
 
 public:
 	/***			Methods				***/
@@ -31,4 +32,7 @@ public:
 protected:
 	// Set Back Text Properties
 	virtual void setBackText();
+
+	// Set Changing Option Sound Properities
+	virtual void setChangeOptionSound();
 };

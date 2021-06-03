@@ -7,6 +7,8 @@ PlayerNameMenu::PlayerNameMenu() {
 	// Set Back Text Properties
 	setBackText();
 
+	setChangeOptionSound();
+
 	// Load background
 	if (!backGroundTexture.loadFromFile(PLAYER_NAME_BACKGROUND)) { std::cout << "Can't load PLAYER_NAME_BACKGROUND\n"; }
 	backGroundSprite.setTexture(backGroundTexture);
@@ -26,6 +28,7 @@ void PlayerNameMenu::draw(RenderWindow& window) {
 		window.draw(playerNameText);
 		window.draw(backText);
 	}
+	levelsList.draw(window);
 }
 
 
@@ -40,6 +43,7 @@ void PlayerNameMenu::catchEvents(Event event, player& newPlayer) {
 				// Erase last character form string
 				playerNameStr = playerNameStr.substring(0, playerNameStr.getSize() - 1);
 				playerNameText.setString(playerNameStr);
+				changingOptionSound.play();
 				break;
 			case sf::Keyboard::Enter:
 				if (!playerNameStr.isEmpty()) {
@@ -47,10 +51,17 @@ void PlayerNameMenu::catchEvents(Event event, player& newPlayer) {
 
 					// Convert sfml String to std String
 					newPlayer.name = std::string(playerNameStr);
+
+					playerNameStr = "";
+					playerNameText.setString(playerNameStr);
+
+					levelsList.show(newPlayer);
 				}
+				changingOptionSound.play();
 				break;
 			case Keyboard::Escape:
 				this->hide();
+				changingOptionSound.play();
 				break;
 			}
 			break;
@@ -64,6 +75,7 @@ void PlayerNameMenu::catchEvents(Event event, player& newPlayer) {
 			break;
 		}
 	}
+	levelsList.catchEvents(event, newPlayer);
 }
 
 

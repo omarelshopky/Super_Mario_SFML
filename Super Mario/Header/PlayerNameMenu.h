@@ -1,6 +1,7 @@
 #pragma once
 #include "../Header/DEFINITION.h"
 #include "../Header/Menu.h"
+#include "../Header/LevelsList.h"
 
 class PlayerNameMenu : public Menu
 {
@@ -10,6 +11,8 @@ private:
 	String playerNameStr;
 
 public:
+	LevelsList levelsList;
+
 	// Constructor
 	PlayerNameMenu();
 

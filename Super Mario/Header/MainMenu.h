@@ -22,6 +22,7 @@ private:
 	Sprite optionShadowSprite;
 	int selectedOption;
 	
+
 public:
 	player newPlayer;
 	bool gameRunning;

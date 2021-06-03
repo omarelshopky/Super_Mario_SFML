@@ -6,6 +6,8 @@ HighScoreMenu::HighScoreMenu() {
 	// Set Back Text Properties
 	setBackText();
 
+	setChangeOptionSound();
+
 	// Load background
 	if (!backGroundTexture.loadFromFile(HIGH_SCORE_BACKGROUND)) { std::cout << "Can't load PLAYER_NAME_BACKGROUND\n"; }
 	backGroundSprite.setTexture(backGroundTexture);

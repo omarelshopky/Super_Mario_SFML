@@ -152,6 +152,9 @@
     <ClCompile Include="Source\HighScoreMenu.cpp" />
     <ClCompile Include="Source\HowToPlayMenu.cpp" />
     <ClCompile Include="Source\Items.cpp" />
+    <ClCompile Include="Source\Level.cpp" />
+    <ClCompile Include="Source\Level1.cpp" />
+    <ClCompile Include="Source\LevelsList.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\MainMenu.cpp" />
     <ClCompile Include="Source\Mario.cpp" />
@@ -168,11 +171,15 @@
     <ClInclude Include="Header\HighScoreMenu.h" />
     <ClInclude Include="Header\HowToPlayMenu.h" />
     <ClInclude Include="Header\Items.h" />
+    <ClInclude Include="Header\Level.h" />
+    <ClInclude Include="Header\Level1.h" />
+    <ClInclude Include="Header\LevelsList.h" />
     <ClInclude Include="Header\MainMenu.h" />
     <ClInclude Include="Header\Mario.h" />
     <ClInclude Include="Header\Menu.h" />
     <ClInclude Include="Header\OptionsMenu.h" />
     <ClInclude Include="Header\PlayerNameMenu.h" />
+    <ClInclude Include="Level.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

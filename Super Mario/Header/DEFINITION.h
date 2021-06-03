@@ -49,6 +49,8 @@ struct position {
 
 #define MAIN_MENU_BACKGROUND "Resource/Textures/Menu/Menu.jpg"
 
+#define LEVELS_LIST_BACKGROUND "Resource/Textures/Menu/levelsList.jpg"
+
 #define PLAYER_NAME_BACKGROUND "Resource/Textures/Menu/playerName.jpg"
 
 #define MENU_SHADOW "Resource/Textures/MenuShadow.png"
@@ -68,6 +70,9 @@ struct position {
 #define CONTROL_BALL "Resource/Textures/Menu/controlBall.png"
 
 #define MENU_SOUND "Resource/Music/MenuMusic.ogg"
+
+#define CHANGING_OPTION_SOUND "Resource/Sounds/fireball.wav"
+
 /**********************************************************/
 
 

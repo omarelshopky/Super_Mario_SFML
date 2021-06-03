@@ -16,7 +16,10 @@ OptionsMenu::OptionsMenu() {
 	// Set Menu Sound Properties
 	if (!menuBuffer.loadFromFile(MENU_SOUND)) { std::cout << "Can't load MENU_SOUND\n"; }
 	menuSound.setBuffer(menuBuffer);
+	menuSound.setLoop(true);
 	menuSound.play();
+
+	setChangeOptionSound();
 
 	// Set shadow properties
 	if (!optionShadowTexture.loadFromFile(MENU_SHADOW)) { std::cout << "Can't load MENU_SHADOW\n"; }
@@ -63,22 +66,27 @@ void OptionsMenu::catchEvents(Event event, player& newPlayer) {
 			{
 			case Keyboard::Right:
 				moveRight();
+				changingOptionSound.play();
 				break;
 
 			case Keyboard::Left:
 				moveLeft();
+				changingOptionSound.play();
 				break;
 
 			case Keyboard::Up:
 				changeSettings(true, newPlayer);
+				changingOptionSound.play();
 				break;
 
 			case Keyboard::Down:
 				changeSettings(false, newPlayer);
+				changingOptionSound.play();
 				break;
 
 			case Keyboard::Escape:
 				this->hide();
+				changingOptionSound.play();
 				break;
 			}
 			break;
