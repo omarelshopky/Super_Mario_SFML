@@ -1,34 +1,34 @@
 #pragma once
 #include "../Header/DEFINITION.h"
+#include "../Header/Mario.h"
 
 class Items
 {
 private:
 	/***			Properties				***/
+	Mario *mario;
 	Texture itemTexture;
 	Sprite itemSprite;
 	IntRect itemIntRect, coinIntRect, flowerIntRect, mashroomIntRect, sparklsIntRect;
 	Clock timer, textFloatTimer;
 	Text floatingText;
 	Font font;
+	SoundBuffer takenSoundBuffer;
+	Sound takenSound;
 	int CurrentRect, maxRect, floatingSpeed;
-	bool display, faid;
+	bool display, faid, isTaken, resetTime;
 
 public:
 	item_t itemType;
 
 	/***			Constructor 			***/
-	Items(item_t item, float x, float y);
+	Items(Mario& mario, item_t item, float x, float y);
 
 
 	/***			Methods				***/
 
 	// Draw item on screen
 	void draw(RenderWindow& window);
-
-
-	// start animation of Floating text
-	void startTextFloat();
 
 private:
 	// handle animation for the item
@@ -37,5 +37,13 @@ private:
 
 	// Block moving up then down.
 	void TextFloat();
+
+
+	// Check If mario has taken this item or not
+	void checkTaken();
+
+
+	// Handle what will happend when item is taken
+	void setTaken();
 };
 

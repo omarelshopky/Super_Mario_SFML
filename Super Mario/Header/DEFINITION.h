@@ -99,6 +99,10 @@ struct position {
 /***						Items							***/
 #define ITEMS "Resource/Textures/Items.png"
 
+#define COIN_SOUND "Resource/Sounds/coin.wav"
+
+#define POWERUP_SOUND "Resource/Sounds/powerup.wav"
+
 /**********************************************************/
 
 

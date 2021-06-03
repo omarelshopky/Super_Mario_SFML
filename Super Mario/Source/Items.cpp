@@ -1,9 +1,10 @@
 #include "../Header/Items.h"
 
-Items::Items(item_t item, float x, float y) {
+Items::Items(Mario& mario, item_t item, float x, float y) {
 	// Set initial values
+	this->mario = &mario;
 	display = true;
-	faid = false;
+	faid = isTaken = resetTime = false;
 	CurrentRect = floatingSpeed =  0;
 	itemType = item;
 	coinIntRect = IntRect(0, 86, 33, 30);
@@ -19,21 +20,29 @@ Items::Items(item_t item, float x, float y) {
 
 	switch (itemType) {
 	case COIN:
-		itemIntRect = coinIntRect;
 		maxRect = 4;
+		itemIntRect = coinIntRect;
+		floatingText.setString("100");
+		takenSoundBuffer.loadFromFile(COIN_SOUND);
 		break;
 	case FLOWER:
-		itemIntRect = flowerIntRect;
 		maxRect = 3;
+		itemIntRect = flowerIntRect;
+		floatingText.setString("1500");
+		takenSoundBuffer.loadFromFile(POWERUP_SOUND);
 		break;
 	case MASHROOM:
-		itemIntRect = mashroomIntRect;
 		maxRect = 2;
+		itemIntRect = mashroomIntRect;
+		floatingText.setString("1000");
+		takenSoundBuffer.loadFromFile(POWERUP_SOUND);
 		break;
 	}
 
 	itemSprite.setTextureRect(itemIntRect);
 	itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
+
+	takenSound.setBuffer(takenSoundBuffer);
 
 	// Set Floating text properties
 	font.loadFromFile(FLOATING_FONT);
@@ -44,7 +53,6 @@ Items::Items(item_t item, float x, float y) {
 	floatingText.setPosition(x, y);
 	floatingText.setLetterSpacing(0.01);
 	floatingText.setFillColor(Color(218, 18, 29));
-	floatingText.setString("100");
 }
 
 
@@ -65,9 +73,11 @@ void Items::animation() {
 			break;
 		case FLOWER:
 			itemIntRect.left = flowerIntRect.left + CurrentRect * flowerIntRect.width;
+			if (faid) itemSprite.setColor(Color::Transparent);
 			break;
 		case MASHROOM:
 			itemIntRect.left = mashroomIntRect.left + CurrentRect * mashroomIntRect.width;
+			if (faid) itemSprite.setColor(Color::Transparent);
 			break;
 		case SPARKL:
 			if (!faid) {
@@ -78,7 +88,7 @@ void Items::animation() {
 			}
 			else {
 				itemIntRect.left = sparklsIntRect.left + CurrentRect * sparklsIntRect.width;
-				if (CurrentRect == maxRect - 1) display = false;
+				if (CurrentRect == maxRect - 1) itemSprite.setColor(Color::Transparent);
 			}
 		}
 		itemSprite.setTextureRect(itemIntRect);
@@ -88,24 +98,24 @@ void Items::animation() {
 
 		timer.restart();
 	}
+	checkTaken();
 	TextFloat();
-}
-
-
-void Items::startTextFloat() {
-	itemType = SPARKL;
-	textFloatTimer.restart();
 }
 
 
 void Items::TextFloat() {
 	if (faid) {
+		if (!resetTime) {
+			textFloatTimer.restart();
+			resetTime = true;
+		}
+
 		int currentTime = textFloatTimer.getElapsedTime().asMilliseconds();
-		if (currentTime < 130)//375
+		if (currentTime < 60)
 		{
 			floatingSpeed += -1;
 		}
-		else if (currentTime < 750)//750
+		else if (currentTime < 750)
 		{
 			floatingText.setFillColor(Color(219, 59, 78));
 			floatingSpeed += -0.1;
@@ -119,7 +129,36 @@ void Items::TextFloat() {
 		{
 			floatingText.setFillColor(Color::Transparent);
 			floatingSpeed = 0; //Reseting its value
+			display = false;
 		}
 		floatingText.move(0, floatingSpeed);
+	}
+}
+
+
+void Items::checkTaken() {
+	if (itemSprite.getGlobalBounds().intersects(mario->marioSprite.getGlobalBounds()) && !isTaken) {
+		isTaken = true;
+		takenSound.play();
+	}
+	setTaken();
+}
+
+
+void Items::setTaken() {
+	if (isTaken) {
+		switch (itemType) {
+		case COIN:
+			itemType = SPARKL;
+			break;
+		case MASHROOM:
+			mario->marioState = BIG;
+			faid = true;
+			break;
+		case FLOWER:
+			//mario->marioState = SUPER;
+			faid = true;
+			break;
+		}
 	}
 }

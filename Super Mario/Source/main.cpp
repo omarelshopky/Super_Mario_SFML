@@ -18,42 +18,32 @@ int main()
 
 	// Create New Mario
 	Mario mario;
-	mario.bigState();
 	
 	// Create GameEnigne and Menu
 	GameEngine gameEngine = GameEngine(window);
 	MainMenu menu;
-	Items coin = Items(COIN, 400, 400);
+	Items coin = Items(mario, MASHROOM, 400, 400);
 
 	bool omar = false;
 	Clock timer;
 	
-	gameEngine.setLevelName("level 1-1");
+	gameEngine.setLevelName("level 1");
 	
 	while (window.isOpen())
 	{
 		Event event;
 		while (window.pollEvent(event))
 		{
-			switch (event.type) {
-
+			switch (event.type) 
+			{
 			case Event::Closed:
-				// Close the game when Cross button right most the form clicked
-				window.close();
+				window.close(); // Close the game when Cross button right most the form clicked
 				break;
 
 		
 			}
-			mario.catchEvents(event);
-			
-			if (Keyboard::isKeyPressed(Keyboard::Z)) {
-				coin.startTextFloat();
-				//gameEngine.timeToScore();
-
-			}
-			
-			
             menu.handleAllEvents(event);
+			mario.catchEvents(event);
 		}
 
 		
@@ -77,10 +67,10 @@ int main()
 		}
 
 		window.clear();
+		coin.draw(window);
  		window.draw(mario.marioSprite);                   
 		gameEngine.draw();
-		coin.draw(window);
-        menu.drawAll(window);
+        //menu.drawAll(window);
   		/// Draw what you do in screen
 
 
