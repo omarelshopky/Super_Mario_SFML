@@ -7,7 +7,7 @@ void Menu::setBackText() {
 
 	backText.setString("press esc to back");
 	backText.setFont(font);
-	backText.setCharacterSize(50);
+	backText.setCharacterSize(30);
 	backText.setPosition(1350.0, 855.0);
 }
 
@@ -15,7 +15,7 @@ void Menu::setBackText() {
 void Menu::setChangeOptionSound() {
 	if (!changingOptionBuffer.loadFromFile(CHANGING_OPTION_SOUND)) { std::cout << "Can't load CHANGING_OPTION_SOUND\n"; }
 	changingOptionSound.setBuffer(changingOptionBuffer);
-	changingOptionSound.setVolume(40);
+	changingOptionSound.setVolume(50);
 }
 
 
