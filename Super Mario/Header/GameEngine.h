@@ -1,6 +1,5 @@
 #pragma once
 #include "../Header/DEFINITION.h"
-#include "../Header/Items.h"
 #include "../Header/Mario.h"
 
 class GameEngine
@@ -8,13 +7,15 @@ class GameEngine
     /*          Properties          */
 private:
     Mario mario;
-    Items counterCoin = Items(mario, COIN, 575, 38);
     Font headerFont;
     ostringstream scoreStr, timerStr, coinsStr;
-    Clock timer, convertTimer;
+    Clock timer, convertTimer, coinTimer;
     int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt, remainTime;
     fstream playersFile;
     map<string, int> levelsMap;
+    Texture coinTexture;
+    Sprite coinSprite;
+    IntRect coinRect;
 
 public:
     Text timerText, scoreText, coinsText, levelText;
@@ -62,5 +63,9 @@ public:
 
     // Start Converting time to Score
     void startTimeToScore();
+
+
+    // make coin spin during time
+    void coinAnimation();
 };
 

@@ -4,7 +4,8 @@
 GameEngine::GameEngine() {
 	// Set initial values
 	levelTime = 300;
-	scoreInt = coinsInt = currentTime = remainTime = counterTime = 0;
+	scoreInt = coinsInt = currentTime = counterTime = 0;
+	remainTime = -1;
 	scoreStr << "MARIO: 000000";
 	coinsStr << "x00";
 	fontSize = 45;
@@ -28,6 +29,15 @@ GameEngine::GameEngine() {
 	coinsText.setFont(headerFont);
 	coinsText.setCharacterSize(fontSize);
 	coinsText.setString(coinsStr.str());
+
+	// Set Coin Sprite Properties
+	coinRect = IntRect(0, 86, 33, 30);
+	coinTexture.loadFromFile(ITEMS);
+	coinSprite.setTexture(coinTexture);
+	coinSprite.setTextureRect(coinRect);
+	coinSprite.setPosition(575, 38);
+	coinSprite.setScale(1.5, 1.5);
+	coinSprite.setOrigin(coinRect.width / 2, coinRect.height / 2);
 
 	// Set Level name Text Properties
 	levelText.setPosition(1000, 5);
@@ -67,6 +77,8 @@ void GameEngine::updateTimer() {
 		timerText.setString(timerStr.str());
 	}
 	else{/* Do Nothing */ }
+
+	if (counterTime == 0 && remainTime == -1); //mario.die();///////////////////////////////////
 }
 
 
@@ -108,11 +120,14 @@ void GameEngine::startTimeToScore() {
 
 
 void GameEngine::draw(RenderWindow& window) {
+	coinAnimation();
+	updateTimer();
+
 	window.draw(scoreText);
 	window.draw(timerText);
 	window.draw(coinsText);
-	counterCoin.draw(window);
 	window.draw(levelText);
+	window.draw(coinSprite);
 }
 
 
@@ -129,5 +144,15 @@ void GameEngine::addPlayerInfo(string playerName) {
 }
 
 
+void GameEngine::coinAnimation() {
+	if (coinTimer.getElapsedTime().asSeconds() > 0.2f) {
+		coinRect.left += 33;
+		if (coinRect.left > 99) coinRect.left = 0;
+
+		coinSprite.setTextureRect(coinRect);
+		coinTimer.restart();
+	}
+
+}
 
 

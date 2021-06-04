@@ -56,7 +56,7 @@ int main()
 		}
 
 		window.clear();
-        //menu.drawAll(window);
+        menu.drawAll(window);
  		window.draw(mario.marioSprite);                   
 		window.display();
 	}

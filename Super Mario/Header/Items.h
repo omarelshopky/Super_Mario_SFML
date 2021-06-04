@@ -1,12 +1,14 @@
 #pragma once
 #include "../Header/DEFINITION.h"
 #include "../Header/Mario.h"
+#include "../Header/GameEngine.h"
 
 class Items
 {
 private:
 	/***			Properties				***/
 	Mario *mario;
+	GameEngine* gameEngine;
 	Texture itemTexture;
 	Sprite itemSprite;
 	IntRect itemIntRect, coinIntRect, flowerIntRect, mashroomIntRect, sparklsIntRect;
@@ -16,13 +18,13 @@ private:
 	SoundBuffer takenSoundBuffer;
 	Sound takenSound;
 	item_t itemType;
-	int CurrentRect, maxRect, floatingSpeed;
+	int CurrentRect, maxRect, floatingSpeed, takenScore;
 	bool display, faid, isTaken, resetTime;
 
 public:
 
 	/***			Constructor 			***/
-	Items(Mario& mario, item_t item, float x, float y);
+	Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y);
 
 
 	/***			Methods				***/

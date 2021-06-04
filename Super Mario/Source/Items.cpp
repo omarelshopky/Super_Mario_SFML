@@ -1,8 +1,9 @@
 #include "../Header/Items.h"
 
-Items::Items(Mario& mario, item_t item, float x, float y) {
+Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y) {
 	// Set initial values
 	this->mario = &mario;
+	this->gameEngine = &gameEngine;
 	display = true;
 	faid = isTaken = resetTime = false;
 	CurrentRect = floatingSpeed =  0;
@@ -22,19 +23,19 @@ Items::Items(Mario& mario, item_t item, float x, float y) {
 	case COIN:
 		maxRect = 4;
 		itemIntRect = coinIntRect;
-		floatingText.setString("100");
+		takenScore = 100;
 		takenSoundBuffer.loadFromFile(COIN_SOUND);
 		break;
 	case FLOWER:
 		maxRect = 3;
 		itemIntRect = flowerIntRect;
-		floatingText.setString("1500");
+		takenScore = 1500;
 		takenSoundBuffer.loadFromFile(POWERUP_SOUND);
 		break;
 	case MASHROOM:
 		maxRect = 2;
 		itemIntRect = mashroomIntRect;
-		floatingText.setString("1000");
+		takenScore = 1000;
 		takenSoundBuffer.loadFromFile(POWERUP_SOUND);
 		break;
 	}
@@ -53,6 +54,7 @@ Items::Items(Mario& mario, item_t item, float x, float y) {
 	floatingText.setPosition(x, y);
 	floatingText.setLetterSpacing(0.01);
 	floatingText.setFillColor(Color(218, 18, 29));
+	floatingText.setString(to_string(takenScore));
 }
 
 
@@ -150,13 +152,16 @@ void Items::setTaken() {
 		switch (itemType) {
 		case COIN:
 			itemType = SPARKL;
+			gameEngine->updateScore(takenScore);
 			break;
 		case MASHROOM:
 			mario->marioState = BIG;
+			gameEngine->updateScore(takenScore);
 			faid = true;
 			break;
 		case FLOWER:
 			mario->marioState = SUPER;
+			gameEngine->updateScore(takenScore);
 			faid = true;
 			break;
 		}
