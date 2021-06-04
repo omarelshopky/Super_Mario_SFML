@@ -8,6 +8,7 @@ Level1::Level1(GameEngine& gameEngine) {
 	coinPosition[0] = { 200,500 };
 	flowerPosition[0] = { 400,500 };
 	mashroomPosition[0] = { 600,500 };
+	gameEngine.setLevelName("Level 1");
 
 	// Call Constructer for all coins 
 	for (int i = 0; i < COINS_NUM; i++) {
@@ -26,13 +27,29 @@ Level1::Level1(GameEngine& gameEngine) {
 
 	// Set Level's Background Properties
 	backGroundTexture.loadFromFile(LEVEL1_BACKGROUND);
-	backGroundSprite.setTexture(backGroundTexture);
+	backGroundTexture.setRepeated(true);
+	backGroundShape.setTexture(&backGroundTexture);
+	backGroundShape.setSize(Vector2f(3000, 900));
+
+	// Set Level's Ground Properties
+	groundTexture.loadFromFile(LEVEL1_GROUND);
+	groundTexture.setRepeated(true);
+	groundShape.setTexture(&groundTexture);
+	groundShape.setSize(Vector2f(3000, 150));
+	groundShape.setPosition(0, 750);
+
+	// Set View Properites
+	camera.setSize(1600, 900);
+	camera.setCenter(800, 450);
 }
 
 
 void Level1::draw(RenderWindow& window) {
 	if (display) {
-		window.draw(backGroundSprite);
+		camera.setCenter(gameEngine->mario.marioSprite.getPosition().x, 450);
+		window.setView(camera);
+		window.draw(backGroundShape);
+		window.draw(groundShape);
 		gameEngine->draw(window);
 		gameEngine->mario.draw(window);
 		for (int i = 0; i < COINS_NUM; i++) 
@@ -50,11 +67,22 @@ void Level1::draw(RenderWindow& window) {
 void Level1::catchEvents(Event event) {
 	if (display) {
 		gameEngine->mario.catchEvents(event);
-
-		// Handle event that make user return back to Main Menu
-		if (event.type == Event::KeyReleased && event.key.code == Keyboard::Escape) {
-			// Pause the game
-			this->end();
+		switch (event.type)
+		{
+		case Event::KeyPressed:
+			switch (event.key.code)
+			{
+			/*case Keyboard::Right:
+				camera.move(15, 0);
+				break;
+			case Keyboard::Left:
+				camera.move(-15, 0);
+				break;*/
+			case Keyboard::Escape:
+				this->end();
+				break;
+			}
+			break;
 		}
 	}
 }

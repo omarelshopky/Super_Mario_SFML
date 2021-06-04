@@ -125,4 +125,6 @@ struct position {
 /***						Levels							***/
 #define LEVEL1_BACKGROUND "Resource/Textures/Backgrounds/Blue.jpg"
 
+#define LEVEL1_GROUND "Resource/Textures/blueGround.png"
+
 /**********************************************************/

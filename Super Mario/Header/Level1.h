@@ -17,8 +17,9 @@ private:
 	GameEngine* gameEngine;
 	position coinPosition[COINS_NUM], flowerPosition[FLOWERS_NUM], mashroomPosition[MASHROOMS_NUM];
 	bool display;
-	Texture backGroundTexture;
-	Sprite backGroundSprite;
+	Texture backGroundTexture, groundTexture;
+	RectangleShape backGroundShape, groundShape;
+	View camera;
 	
 public:
 	Level1(GameEngine& gameEngine);

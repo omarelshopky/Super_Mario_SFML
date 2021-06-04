@@ -3,9 +3,9 @@
 
 Mario::Mario(float x, float y) {
 	// Init Mario motion varible
-	marioAcceleration[0] = 25;
-	marioAcceleration[1] = 75;
-	marioSpeed[0] = marioSpeed[1] = 0;
+	acceleration[0] = 25;
+	acceleration[1] = 75;
+	speed[0] = speed[1] = 0;
 	startJumpPosition = 500;
 	goRight = goUp = goLeft = goDown = jumping = false;
 
@@ -98,7 +98,7 @@ void Mario::move() {
 			marioSprite.setTextureRect(marioRect);
 			if (jumping == false) {
 				startJumpPosition = marioSprite.getPosition().y;
-				marioSpeed[1] = -60;
+				speed[1] = -60;
 				jumping = true;
 			}
 			goUp = false;
@@ -117,12 +117,12 @@ void Mario::move() {
 			}
 			else {
 				// acceleration movement when release keyboard
-				if (marioSpeed[0] >= 1 || marioSpeed[0] <= -1) {
+				if (speed[0] >= 1 || speed[0] <= -1) {
 					setMarioRectForWalk(marioRect);
 					if(!jumping) marioSprite.setTextureRect(marioRect);
 
 					// Calculate Mario Speed - X axis
-					marioSpeed[0] = marioSpeed[0] + marioAcceleration[0] * waitingTime;
+					speed[0] = speed[0] + acceleration[0] * waitingTime;
 				}
 			}
 
@@ -135,12 +135,12 @@ void Mario::move() {
 			timer2.restart();
 		}
 		
-		marioSprite.move(marioSpeed[0], marioSpeed[1]);
+		marioSprite.move(speed[0], speed[1]);
 
 		timer1.restart();
 	}
 
-	if (marioSpeed[0] < 1 && marioSpeed[0] > -1 && (marioSpeed[1] == 0 && !jumping)) {
+	if (speed[0] < 1 && speed[0] > -1 && (speed[1] == 0 && !jumping)) {
 		standStill();
 	}
 }
@@ -174,7 +174,7 @@ void Mario::setMarioRectForWalk(IntRect& intRect) {
 }
 
 void Mario::standStill() {
-	marioSpeed[0] = 0;
+	speed[0] = 0;
 	switch (marioState)
 	{
 	case SMALL:
@@ -194,15 +194,15 @@ void Mario::standStill() {
 
 void Mario::jump(IntRect& intRect, int RectPosition, float waiting) {
 	if (jumping) {
-		if (marioSprite.getPosition().y == startJumpPosition && marioSpeed[1] > -1) {
+		if (marioSprite.getPosition().y == startJumpPosition && speed[1] > -1) {
 			jumping = false;
-			marioSpeed[1] = 0;
+			speed[1] = 0;
 		}
 		else {
 			intRect.left = RectPosition;
 			marioSprite.setTextureRect(intRect);
 			// Calculate Mario Speed - Y axis
-			marioSpeed[1] = marioSpeed[1] + marioAcceleration[1] * waiting;
+			speed[1] = speed[1] + acceleration[1] * waiting;
 		}
 	}
 }
@@ -210,7 +210,7 @@ void Mario::jump(IntRect& intRect, int RectPosition, float waiting) {
 
 void Mario::moveRight(IntRect& intRect) {
 	// check turnAround
-	if (marioSpeed[0] <= -1) {
+	if (speed[0] <= -1) {
 		intRect.left = 129; // Big and Super position
 		if (marioState == SMALL) intRect.left = 132; // Small Position	
 	}
@@ -221,16 +221,16 @@ void Mario::moveRight(IntRect& intRect) {
 	marioSprite.setTextureRect(intRect);
 	marioSprite.setScale(2, 2);
 
-	marioSpeed[0] = 21;
+	speed[0] = 21;
 
 	// Make acceleration work in the opposite side
-	if (marioAcceleration[0] > 0) marioAcceleration[0] *= -1;
+	if (acceleration[0] > 0) acceleration[0] *= -1;
 }
 
 
 void Mario::moveLeft(IntRect& intRect) {
 	// check turnAround
-	if (marioSpeed[0] >= 1) {
+	if (speed[0] >= 1) {
 		intRect.left = 129; // Big and Super position
 		if (marioState == SMALL) intRect.left = 132; // Small Position	
 	}
@@ -241,8 +241,8 @@ void Mario::moveLeft(IntRect& intRect) {
 	marioSprite.setTextureRect(intRect);
 	marioSprite.setScale(-2, 2);
 
-	marioSpeed[0] = -21;
+	speed[0] = -21;
 
 	// Make acceleration work in the oppsite side
-	if (marioAcceleration[0] < 0) marioAcceleration[0] *= -1;
+	if (acceleration[0] < 0) acceleration[0] *= -1;
 }
