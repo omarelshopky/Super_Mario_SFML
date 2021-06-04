@@ -6,12 +6,14 @@ class Mario
 	// Mario properties
 private:
 	Clock timer1, timer2;
-	bool goRight, goUp, goLeft, goDown, jumping;
-	float acceleration[2], speed[2], startJumpPosition;
+	bool goRight, goUp, goLeft, goDown;
+	float acceleration[2], startJumpPosition;
 	area marioArea;
 	Texture marioTexture;
 
 public:
+	bool jumping;
+	float speed[2];
 	Sprite marioSprite;
 	marioState_t marioState;
 	

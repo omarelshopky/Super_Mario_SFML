@@ -8,6 +8,9 @@ Level1::Level1(GameEngine& gameEngine) {
 	coinPosition[0] = { 200,500 };
 	flowerPosition[0] = { 400,500 };
 	mashroomPosition[0] = { 600,500 };
+	stonePostition[0] = { 800, 500 };
+	questionPosition[0] = { 1000, 500 };
+
 	gameEngine.setLevelName("Level 1");
 
 	// Call Constructer for all coins 
@@ -23,6 +26,16 @@ Level1::Level1(GameEngine& gameEngine) {
 	// Call Constructer for all mashrooms
 	for (int i = 0; i < MASHROOMS_NUM; i++) {
 		mashroom.push_back(*new Items(gameEngine.mario, gameEngine, MASHROOM, mashroomPosition[i].x, mashroomPosition[i].y));
+	}
+
+	// Call Constructer for all Stone Blocks
+	for (int i = 0; i < STONE_NUM; i++) {
+		stone.push_back(*new Blocks(gameEngine.mario, STONE, stonePostition[0].x, stonePostition[0].y));
+	}
+
+	// Call Constructer for all Question Blocks
+	for (int i = 0; i < STONE_NUM; i++) {
+		question.push_back(*new Blocks(gameEngine.mario, QUESTION, questionPosition[0].x, questionPosition[0].y));
 	}
 
 	// Set Level's Background Properties
@@ -46,6 +59,7 @@ Level1::Level1(GameEngine& gameEngine) {
 
 void Level1::draw(RenderWindow& window) {
 	if (display) {
+		checkGround();
 		camera.setCenter(gameEngine->mario.marioSprite.getPosition().x, 450);
 		window.setView(camera);
 		window.draw(backGroundShape);
@@ -60,6 +74,12 @@ void Level1::draw(RenderWindow& window) {
 
 		for (int i = 0; i < MASHROOMS_NUM; i++) 
 			mashroom[i].draw(window);
+
+		for (int i = 0; i < STONE_NUM; i++)
+			stone[i].draw(window);
+
+		for (int i = 0; i < QUESTION_NUM; i++)
+			question[i].draw(window);
 	}
 }
 
@@ -96,4 +116,14 @@ void Level1::start() {
 
 void Level1::end() {
 	display = false;
+}
+
+
+void Level1::checkGround(){
+	if (groundShape.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds())) {
+		gameEngine->mario.speed[1] = 0;
+		gameEngine->mario.marioSprite.setPosition(gameEngine->mario.marioSprite.getPosition().x, groundShape.getGlobalBounds().top);
+		gameEngine->mario.jumping = false;
+	}
+
 }

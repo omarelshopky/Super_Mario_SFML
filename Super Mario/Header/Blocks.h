@@ -1,5 +1,6 @@
 #pragma once
 #include "../Header/DEFINITION.h"
+#include "../Header/Mario.h"
 
 
 class Blocks{
@@ -13,11 +14,12 @@ private:
 	bool display, faid, isPopUp;
 	position startPos;
 	block_t blockType;
+	Mario *mario;
 
 public:
 
 
-	Blocks(block_t type, float x, float y); // Constructer
+	Blocks(Mario& mario, block_t type, float x, float y); // Constructer
 
 
 	/***			Methods				***/
@@ -40,5 +42,9 @@ private:
 
 	// Block moving up then down.
 	void popUp();
+
+
+	// Check if mario hit this block
+	void checkIntersection();
 };
 

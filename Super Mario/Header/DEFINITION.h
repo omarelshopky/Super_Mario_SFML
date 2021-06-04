@@ -42,6 +42,13 @@ struct position {
 	float y;
 };
 
+struct bounds {
+	float top;
+	float bottom;
+	float right;
+	float left;
+};
+
 /***						Menu						***/
 #define MAIN_MENU_FONT "Resource/Fonts/Barkentina_font.ttf"
 

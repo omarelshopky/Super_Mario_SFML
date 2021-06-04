@@ -30,7 +30,7 @@ void Mario::smallState() {
 	marioArea.width = 28;
 	marioArea.height = 32;
 	marioSprite.setTextureRect(IntRect(0, 96, marioArea.width, marioArea.height));
-	marioSprite.setOrigin(marioArea.width / 2, marioArea.height / 2);
+	marioSprite.setOrigin(marioArea.width / 2, marioArea.height);
 }
 
 
@@ -39,7 +39,7 @@ void Mario::bigState() {
 	marioArea.width = 31;
 	marioArea.height = 60;
 	marioSprite.setTextureRect(IntRect(0, 36, marioArea.width, marioArea.height));
-	marioSprite.setOrigin(marioArea.width / 2, marioArea.height / 2);
+	marioSprite.setOrigin(marioArea.width / 2, marioArea.height);
 }
 
 
@@ -194,16 +194,16 @@ void Mario::standStill() {
 
 void Mario::jump(IntRect& intRect, int RectPosition, float waiting) {
 	if (jumping) {
-		if (marioSprite.getPosition().y == startJumpPosition && speed[1] > -1) {
+		/*if (marioSprite.getPosition().y == startJumpPosition && speed[1] > -1) {
 			jumping = false;
 			speed[1] = 0;
-		}
-		else {
+		}*/
+		//else {
 			intRect.left = RectPosition;
 			marioSprite.setTextureRect(intRect);
 			// Calculate Mario Speed - Y axis
 			speed[1] = speed[1] + acceleration[1] * waiting;
-		}
+		//}
 	}
 }
 

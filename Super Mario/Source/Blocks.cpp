@@ -1,7 +1,8 @@
 #include "../Header/Blocks.h"
 
-Blocks::Blocks(block_t type, float x, float y) {
+Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 	// Set initial values
+	this->mario = &mario;
 	questionRect = IntRect(0, 0, 32, 32);
 	stoneRect = IntRect(32, 0, 32, 32);
 	bronzeRect = IntRect(0, 32, 32, 32);
@@ -44,7 +45,7 @@ Blocks::Blocks(block_t type, float x, float y) {
 	blockSprite.setOrigin(16, 16);
 	blockSprite.setTextureRect(blockRect);
 	blockSprite.setPosition(x, y);
-	blockSprite.setScale(1.5, 1.5);
+	blockSprite.setScale(1.8, 1.8);
 }
 
 
@@ -53,7 +54,6 @@ void Blocks::draw(RenderWindow& window) {
 	if (display) {
 		window.draw(blockSprite);
 	}
-
 }
 
 
@@ -93,6 +93,7 @@ void Blocks::animation() {
 		timer.restart();
 	}
 	popUp();
+	checkIntersection();
 }
 
 void Blocks::smash() {
@@ -129,5 +130,39 @@ void Blocks::popUp() {
 			popUpTimer.restart();
 		}
 		blockSprite.move(0, movingSpeed);
+	}
+}
+
+
+void Blocks::checkIntersection() {
+	bounds marioBounds, blockBounds;
+	marioBounds.top = mario->marioSprite.getGlobalBounds().top;
+	marioBounds.bottom = marioBounds.top + mario->marioSprite.getGlobalBounds().height;
+	marioBounds.left = mario->marioSprite.getGlobalBounds().left;
+	marioBounds.right = marioBounds.left + mario->marioSprite.getGlobalBounds().width;
+
+	blockBounds.top = blockSprite.getGlobalBounds().top;
+	blockBounds.bottom = blockBounds.top + blockSprite.getGlobalBounds().height;
+	blockBounds.left = blockSprite.getGlobalBounds().left;
+	blockBounds.right = blockBounds.left + blockSprite.getGlobalBounds().width;
+
+	if (marioBounds.right >= blockBounds.left && marioBounds.right < blockBounds.right || marioBounds.left <= blockBounds.right && marioBounds.left > blockBounds.left) {
+		if (marioBounds.bottom >= blockBounds.top && marioBounds.bottom < blockBounds.bottom) {
+			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.top);
+			mario->speed[1] = 0;
+			mario->jumping = false;
+		}
+		else if (marioBounds.top <= blockBounds.bottom && marioBounds.bottom > blockBounds.bottom) {
+			startPopUp();
+		}
+		else if (marioBounds.top > blockBounds.top && marioBounds.top < blockBounds.bottom){
+			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, mario->marioSprite.getPosition().y);
+			mario->speed[0] = 0;
+			
+		}
+
+
+
+
 	}
 }
