@@ -20,6 +20,11 @@ public:
 	// Constractor
 	Mario(float x, float y);
 
+
+	// Draw mario on screen 
+	void draw(RenderWindow& window);
+
+
 	// set Mario to small state
 	void smallState();
 

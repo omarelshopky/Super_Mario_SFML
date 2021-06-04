@@ -1,6 +1,6 @@
 #include "../Header/LevelsList.h"
 
-LevelsList::LevelsList() {
+LevelsList::LevelsList() : level1(gameEngine) {
 	// Set intial values
 	display = false;
 	selectedLevel = 0;
@@ -90,6 +90,8 @@ void LevelsList::catchEvents(Event event, player& newPlayer) {
 			break;
 		}
 	}
+
+	level1.catchEvents(event);
 }
 
 

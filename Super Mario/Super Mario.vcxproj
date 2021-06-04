@@ -152,7 +152,6 @@
     <ClCompile Include="Source\HighScoreMenu.cpp" />
     <ClCompile Include="Source\HowToPlayMenu.cpp" />
     <ClCompile Include="Source\Items.cpp" />
-    <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\LevelsList.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -171,7 +170,6 @@
     <ClInclude Include="Header\HighScoreMenu.h" />
     <ClInclude Include="Header\HowToPlayMenu.h" />
     <ClInclude Include="Header\Items.h" />
-    <ClInclude Include="Header\Level.h" />
     <ClInclude Include="Header\Level1.h" />
     <ClInclude Include="Header\LevelsList.h" />
     <ClInclude Include="Header\MainMenu.h" />

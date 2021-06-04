@@ -19,7 +19,7 @@ int main()
 	MainMenu menu;  // Create Menu 
 
 	// Create New Mario
-	Mario mario(700, 700);
+	//Mario mario(700, 700);
 	bool omar = true;
 	Clock timer;
 	/***			Game Loop			***/
@@ -34,11 +34,11 @@ int main()
 			}
 
             menu.handleAllEvents(event);
-			mario.catchEvents(event);
+			//mario.catchEvents(event);
 		}
 
 		// Mario movement
-		mario.move();
+		//mario.move();
 		if (omar) {
 			/*int cnt = 0;
 			while (cnt < 11) {
@@ -57,7 +57,7 @@ int main()
 
 		window.clear();
         menu.drawAll(window);
- 		window.draw(mario.marioSprite);                   
+ 		//window.draw(mario.marioSprite);                   
 		window.display();
 	}
 	return 0;

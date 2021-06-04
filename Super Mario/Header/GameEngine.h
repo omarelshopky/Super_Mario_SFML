@@ -6,7 +6,6 @@ class GameEngine
 {
     /*          Properties          */
 private:
-    Mario mario;
     Font headerFont;
     ostringstream scoreStr, timerStr, coinsStr;
     Clock timer, convertTimer, coinTimer;
@@ -18,6 +17,7 @@ private:
     IntRect coinRect;
 
 public:
+    Mario mario;
     Text timerText, scoreText, coinsText, levelText;
 
     /*         Constractar          */

@@ -18,6 +18,13 @@ Mario::Mario(float x, float y) {
 }
 
 
+void Mario::draw(RenderWindow& window) {
+	window.draw(marioSprite);
+
+	move();
+}
+
+
 void Mario::smallState() {
 	marioState = SMALL;
 	marioArea.width = 28;
