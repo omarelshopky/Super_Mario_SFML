@@ -37,8 +37,6 @@ int main()
 			//mario.catchEvents(event);
 		}
 
-		// Mario movement
-		//mario.move();
 		if (omar) {
 			/*int cnt = 0;
 			while (cnt < 11) {
@@ -57,7 +55,7 @@ int main()
 
 		window.clear();
         menu.drawAll(window);
- 		//window.draw(mario.marioSprite);                   
+		//mario.draw(window);
 		window.display();
 	}
 	return 0;

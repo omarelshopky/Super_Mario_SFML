@@ -82,16 +82,8 @@ void Items::animation() {
 			if (faid) itemSprite.setColor(Color::Transparent);
 			break;
 		case SPARKL:
-			if (!faid) {
-				maxRect = 6;
-				CurrentRect = 0;
-				itemIntRect = sparklsIntRect;
-				faid = true;
-			}
-			else {
-				itemIntRect.left = sparklsIntRect.left + CurrentRect * sparklsIntRect.width;
-				if (CurrentRect == maxRect - 1) itemSprite.setColor(Color::Transparent);
-			}
+			itemIntRect.left = sparklsIntRect.left + CurrentRect * sparklsIntRect.width;
+			if (CurrentRect == maxRect - 1) itemSprite.setColor(Color::Transparent);
 		}
 		itemSprite.setTextureRect(itemIntRect);
 		CurrentRect++;
@@ -139,7 +131,7 @@ void Items::TextFloat() {
 
 
 void Items::checkTaken() {
-	if (itemSprite.getGlobalBounds().intersects(mario->marioSprite.getGlobalBounds()) && !isTaken) {
+	if (itemSprite.getGlobalBounds().intersects(mario->marioSprite.getGlobalBounds()) && !faid) {
 		isTaken = true;
 		takenSound.play();
 	}
@@ -151,19 +143,22 @@ void Items::setTaken() {
 	if (isTaken) {
 		switch (itemType) {
 		case COIN:
-			itemType = SPARKL;
-			gameEngine->updateScore(takenScore);
+			gameEngine->updateCoins(); // increase coin counter by one
+			itemType = SPARKL; 
+			itemIntRect = sparklsIntRect;
+			CurrentRect = 0;
+			maxRect = 6;
 			break;
 		case MASHROOM:
 			mario->marioState = BIG;
-			gameEngine->updateScore(takenScore);
-			faid = true;
 			break;
 		case FLOWER:
 			mario->marioState = SUPER;
-			gameEngine->updateScore(takenScore);
-			faid = true;
 			break;
 		}
+		faid = true;
+		isTaken = false;
+		gameEngine->updateScore(takenScore);
+		
 	}
 }

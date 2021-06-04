@@ -8,21 +8,20 @@ Level1::Level1(GameEngine& gameEngine) {
 	coinPosition[0] = { 200,500 };
 	flowerPosition[0] = { 400,500 };
 	mashroomPosition[0] = { 600,500 };
-	
 
 	// Call Constructer for all coins 
 	for (int i = 0; i < COINS_NUM; i++) {
-		coin.push_back(Items(gameEngine.mario, gameEngine, COIN, coinPosition[i].x, coinPosition[i].y));
+		coin.push_back(*new Items(gameEngine.mario, gameEngine, COIN, coinPosition[i].x, coinPosition[i].y));
 	}
 
 	// Call Constructer for all flowers
 	for (int i = 0; i < FLOWERS_NUM; i++) {
-		flower.push_back(Items(gameEngine.mario, gameEngine, FLOWER, flowerPosition[i].x, flowerPosition[i].y));
+		flower.push_back(*new Items(gameEngine.mario, gameEngine, FLOWER, flowerPosition[i].x, flowerPosition[i].y));
 	}
 
 	// Call Constructer for all mashrooms
 	for (int i = 0; i < MASHROOMS_NUM; i++) {
-		mashroom.push_back(Items(gameEngine.mario, gameEngine, MASHROOM, mashroomPosition[i].x, mashroomPosition[i].y));
+		mashroom.push_back(*new Items(gameEngine.mario, gameEngine, MASHROOM, mashroomPosition[i].x, mashroomPosition[i].y));
 	}
 
 	// Set Level's Background Properties
