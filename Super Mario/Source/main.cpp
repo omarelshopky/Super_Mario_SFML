@@ -19,7 +19,7 @@ int main()
 	MainMenu menu;  // Create Menu 
 
 	// Create New Mario
-	Mario mario;
+	Mario mario(700, 700);
 	bool omar = true;
 	Clock timer;
 	/***			Game Loop			***/

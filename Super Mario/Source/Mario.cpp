@@ -1,7 +1,7 @@
 #include "../Header/Mario.h"
 
 
-Mario::Mario() {
+Mario::Mario(float x, float y) {
 	// Init Mario motion varible
 	marioAcceleration[0] = 25;
 	marioAcceleration[1] = 75;
@@ -12,7 +12,7 @@ Mario::Mario() {
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
 	marioTexture.setSmooth(true);
 	marioSprite.setTexture(marioTexture); 	
-	marioSprite.setPosition(300, 500);
+	marioSprite.setPosition(x, y);
 	marioSprite.setScale(2, 2);
 	smallState();
 }

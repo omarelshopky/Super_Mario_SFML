@@ -1,5 +1,2 @@
-﻿  GameEngine.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(39,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(39,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(71,48): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+﻿  main.cpp
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

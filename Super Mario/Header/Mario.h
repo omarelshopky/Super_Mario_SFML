@@ -18,7 +18,7 @@ public:
 	
 	
 	// Constractor
-	Mario();
+	Mario(float x, float y);
 
 	// set Mario to small state
 	void smallState();
