@@ -1,15 +1,18 @@
 #pragma once
 #include "../Header/DEFINITION.h"
+#include "../Header/Items.h"
+#include "../Header/Mario.h"
 
 class GameEngine
 {
     /*          Properties          */
 private:
+    Mario mario;
+    Items counterCoin = Items(mario, COIN, 575, 38);
     Font headerFont;
     ostringstream scoreStr, timerStr, coinsStr;
     Clock timer, convertTimer;
     int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt, remainTime;
-    bool startTimeToScore;
     fstream playersFile;
     map<string, int> levelsMap;
 
@@ -42,7 +45,7 @@ public:
 
 
     // draw GameEngine objects into screen
-    void draw();
+    void draw(RenderWindow& window);
 
 
     // Increase coins counter by one
@@ -55,5 +58,9 @@ public:
 
     // Set level Name text
     void setLevelName(std::string levelName);
+
+
+    // Start Converting time to Score
+    void startTimeToScore();
 };
 

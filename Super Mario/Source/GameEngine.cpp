@@ -3,7 +3,6 @@
 
 GameEngine::GameEngine() {
 	// Set initial values
-	startTimeToScore = false;
 	levelTime = 300;
 	scoreInt = coinsInt = currentTime = remainTime = counterTime = 0;
 	scoreStr << "MARIO: 000000";
@@ -88,19 +87,13 @@ bool GameEngine::isTimerFinished() {
 
 
 void GameEngine::timeToScore() {
-	// Start convert Time to Score
-	if (!startTimeToScore) {
-		remainTime = counterTime;
-		startTimeToScore = true;
-	}
-	
-	if (remainTime >= 0) {
+	if (remainTime > 0) {
 		if (convertTimer.getElapsedTime().asMilliseconds() >= 6) {
+			remainTime--;
 			levelTime = remainTime;
+
 			updateTimer();
 			updateScore(50);
-
-			remainTime--;
 
 			timer.restart();
 			convertTimer.restart();
@@ -109,11 +102,17 @@ void GameEngine::timeToScore() {
 }
 
 
-void GameEngine::draw() {
-	gameWindow->draw(scoreText);
-	gameWindow->draw(timerText);
-	gameWindow->draw(coinsText);
-	gameWindow->draw(levelText);
+void GameEngine::startTimeToScore() {
+	remainTime = counterTime;
+}
+
+
+void GameEngine::draw(RenderWindow& window) {
+	window.draw(scoreText);
+	window.draw(timerText);
+	window.draw(coinsText);
+	counterCoin.draw(window);
+	window.draw(levelText);
 }
 
 

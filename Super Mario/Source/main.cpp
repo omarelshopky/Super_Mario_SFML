@@ -9,50 +9,36 @@
 
 int main()
 {
-	// Hide Console open when run the game
+	/***		Hide Console open when run the game			***/
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
 
-	// Open Startup Game Window 
+	/***			Open Startup Game Window			***/
 	RenderWindow window(sf::VideoMode(1600, 900), "Super Mario");
-	window.setFramerateLimit(60); //Limit the framerate to a maximum fixed frequency.
+	window.setFramerateLimit(60); // Limit the framerate to a maximum fixed frequency.
+
+	MainMenu menu;  // Create Menu 
 
 	// Create New Mario
 	Mario mario;
-	
-	// Create GameEnigne and Menu
-	GameEngine gameEngine = GameEngine(window);
-	MainMenu menu;
-	Items coin = Items(mario, COIN, 400, 400);
-	Items mash = Items(mario, MASHROOM, 700, 500);
-	Items flow = Items(mario, FLOWER, 1000, 500);
-
 	bool omar = true;
 	Clock timer;
-	
-	gameEngine.setLevelName("level 1");
-	
+	/***			Game Loop			***/
 	while (window.isOpen())
 	{
 		Event event;
+		/***			Events Loop				***/
 		while (window.pollEvent(event))
 		{
-			switch (event.type) 
-			{
-			case Event::Closed:
-				window.close(); // Close the game when Cross button right most the form clicked
-				break;
-
-		
+			if (event.type == Event::Closed) { // Close the game when Cross button right most the form clicked
+				window.close(); 
 			}
+
             menu.handleAllEvents(event);
 			mario.catchEvents(event);
 		}
 
-		
 		// Mario movement
 		mario.move();
-		gameEngine.updateTimer();
-		gameEngine.timeToScore();
 		if (omar) {
 			/*int cnt = 0;
 			while (cnt < 11) {
@@ -71,16 +57,8 @@ int main()
 
 		window.clear();
         //menu.drawAll(window);
-
-		coin.draw(window);
-		mash.draw(window);
-		flow.draw(window);
  		window.draw(mario.marioSprite);                   
-		gameEngine.draw();
-
 		window.display();
 	}
 	return 0;
 }
-
-

@@ -9,13 +9,14 @@ class LevelsList : public Menu
 {
 private:
 	/***			Properties				***/
+	GameEngine gameEngine;
+	Level1 level1;
 	Text levelsNameText[NUMBER_OF_LEVELS];
 	Texture optionShadowTexture;
 	Sprite optionShadowSprite;
 	int selectedLevel, maxLevel;
 	player currentPlayer;
 	fstream playersFile;
-	Level1 level1;
 
 public:
 	// Constructor
