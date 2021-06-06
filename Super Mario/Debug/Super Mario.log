@@ -1,66 +1,25 @@
-﻿  Blocks.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(46,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(46,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(147,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  CreditsMenu.cpp
-  GameEngine.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(40,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(40,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(72,48): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(81,43): warning C4390: ';': empty controlled statement found; is this the intent?
-  HighScoreMenu.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\HighScoreMenu.cpp(73,20): warning C4018: '<': signed/unsigned mismatch
-  HowToPlayMenu.cpp
-  Items.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(13,38): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+﻿  Mario.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(55,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(44,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(44,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(55,36): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(115,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(120,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(128,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Level1.cpp
-  LevelsList.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(22,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(23,36): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(30,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(40,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(157,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(173,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  MainMenu.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\MainMenu.cpp(23,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Mario.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(49,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(55,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(49,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(65,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(59,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(65,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
           with
           [
               T=int
           ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(59,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(116,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(121,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(137,22): warning C4305: '+=': truncation from 'double' to 'float'
-  Menu.cpp
-  OptionsMenu.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\OptionsMenu.cpp(34,36): warning C4305: 'argument': truncation from 'double' to 'float'
-  PlayerNameMenu.cpp
-  main.cpp
-  Generating Code...
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(125,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(130,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(146,22): warning C4305: '+=': truncation from 'double' to 'float'
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

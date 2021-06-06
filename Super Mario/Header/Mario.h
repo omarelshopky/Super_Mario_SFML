@@ -5,14 +5,14 @@ class Mario
 {	
 	/***		Mario properties		***/
 private:
-	int powerUpCounter;
-	Clock timer1, timer2, powerUpTimer;
-	bool goRight, goUp, goLeft, goDown;
+	int changeStateCounter;
+	Clock timer1, timer2, changeStateTimer;
+	bool goRight, goUp, goLeft, goDown, damaging;
 	float acceleration[2], startJumpPosition;
 	area marioArea;
 	Texture marioTexture, marioSuperTexture;
-	SoundBuffer jumpBuffer;
-	Sound jumpSound;
+	SoundBuffer jumpBuffer, damageBuffer;
+	Sound jumpSound, damageSound;
 
 public:
 	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper;
@@ -31,6 +31,10 @@ public:
 
 	// Handle events for mario movement
 	void catchEvents(Event& event);
+
+
+	// Start Damage animation
+	void startDamage();
 
 private:
 	// set Mario to small state
@@ -79,5 +83,9 @@ private:
 
 	// make animation for Power up to Super state
 	void changeToSuper();
+
+
+	// Animation of converting mario from big or super state to small 
+	void damage();
 };
 

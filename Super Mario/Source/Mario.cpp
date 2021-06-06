@@ -8,9 +8,9 @@ Mario::Mario(float x, float y) {
 	speed[0] = 0;
 	speed[1] = 70;
 	startJumpPosition = 500;
-	powerUpCounter = 0;
+	changeStateCounter = 0;
 	goRight = goUp = goLeft = goDown = jumping = onGround = false;
-	PoweringUpToSuper = PoweringUpToBig = false;
+	PoweringUpToSuper = PoweringUpToBig = damaging = false;
 
 	// Set Mario Sprite Properties
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
@@ -21,9 +21,12 @@ Mario::Mario(float x, float y) {
 	marioSprite.setScale(2, 2);
 	smallState();
 
-	//Set Jumping Sound effect Properties
+	//Set Sound effect Properties
 	jumpBuffer.loadFromFile(JUMP_SOUND);
 	jumpSound.setBuffer(jumpBuffer);
+
+	damageBuffer.loadFromFile(DAMAGE_SOUND);
+	damageSound.setBuffer(damageBuffer);
 }
 
 
@@ -35,9 +38,12 @@ void Mario::draw(RenderWindow& window) {
 
 
 void Mario::animation() {
-	move();
+	if((!PoweringUpToBig && !PoweringUpToSuper) && !damaging)
+		move();
+
 	changeToBig();
 	changeToSuper();
+	damage();
 }
 
 
@@ -87,6 +93,9 @@ void Mario::catchEvents(Event& event) {
 
 		case Keyboard::Key::Down:
 			goDown = true;
+			break;
+		case Keyboard::Key::Z:
+			startDamage();
 			break;
 		}
 		break;
@@ -279,19 +288,19 @@ void Mario::moveLeft(IntRect& intRect) {
 
 void Mario::changeToBig() {
 	if (PoweringUpToBig) {
-		if (powerUpCounter < 12) { // The last one will be 11 (odd)
-			if (powerUpTimer.getElapsedTime().asSeconds() > 0.18) {
-				if (powerUpCounter % 2 == 0)
+		if (changeStateCounter < 8) { // The last one will be 7 (odd)
+			if (changeStateTimer.getElapsedTime().asSeconds() > 0.18) {
+				if (changeStateCounter % 2 == 0)
 					smallState();
 				else 
 					bigState();
 
-				powerUpCounter++;
-				powerUpTimer.restart();
+				changeStateCounter++;
+				changeStateTimer.restart();
 			}
 		}
 		else {
-			powerUpCounter = 0;
+			changeStateCounter = 0;
 			PoweringUpToBig = false;
 		}
 	}
@@ -300,22 +309,52 @@ void Mario::changeToBig() {
 
 void Mario::changeToSuper() {
 	if (PoweringUpToSuper) {
-		if (powerUpCounter < 12) { // The last one will be 11 (odd)
-			if (powerUpTimer.getElapsedTime().asSeconds() > 0.18) {
-				if (powerUpCounter % 2 == 0)
+		if (changeStateCounter < 8) { // The last one will be 7 (odd)
+			if (changeStateTimer.getElapsedTime().asSeconds() > 0.18) {
+				if (changeStateCounter % 2 == 0)
 					smallState();
 				else
 					superState();
 
-				powerUpCounter++;
-				powerUpTimer.restart();
+				changeStateCounter++;
+				changeStateTimer.restart();
 			}
 		}
 		else {
-			powerUpCounter = 0;
+			changeStateCounter = 0;
 			PoweringUpToSuper = false;
 		}
 	}
 }
 
 
+void Mario::damage() {
+	if (damaging) {
+		if (changeStateCounter < 8) { // The last one will be 7 (odd)
+			if (changeStateTimer.getElapsedTime().asSeconds() > 0.18) {
+				if (changeStateCounter % 2 == 0) {
+					marioSprite.setTextureRect(IntRect(400, 36, 40, 60));
+				}
+				else {
+					marioSprite.setTextureRect(IntRect(286, 96, 30, 32));
+				}
+
+				changeStateCounter++;
+				changeStateTimer.restart();
+			}
+		}
+		else {
+			smallState();
+			changeStateCounter = 0;
+			damaging = false;
+		}
+	}
+}
+
+
+void Mario::startDamage() {
+	damaging = true;
+	onGround = false; // to fall after animation finished
+	damageSound.play(); // play damage sound effect
+	marioSprite.move(-50, -130);
+}
