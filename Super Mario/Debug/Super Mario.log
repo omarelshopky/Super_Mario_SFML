@@ -1,8 +1,25 @@
-﻿  Blocks.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(39,47): warning C4309: 'argument': truncation of constant value
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(39,50): warning C4305: 'argument': truncation from 'int' to 'sf::Uint8'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(39,37): warning C4309: 'argument': truncation of constant value
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(46,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(46,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(147,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Mario.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(45,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(45,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(55,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(55,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(112,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(117,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(132,22): warning C4305: '+=': truncation from 'double' to 'float'
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

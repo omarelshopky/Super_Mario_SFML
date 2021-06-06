@@ -12,7 +12,9 @@ Mario::Mario(float x, float y) {
 	goRight = goUp = goLeft = goDown = jumping = onGround = false;
 	PoweringUpToSuper = PoweringUpToBig = false;
 
+	// Set Mario Sprite Properties
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
+	if (!marioSuperTexture.loadFromFile(MARIO_SUPER_CHARACTER)) { std::cout << "Can't load MARIO_SUPER_CHARACTER\n"; }
 	marioTexture.setSmooth(true);
 	marioSprite.setTexture(marioTexture); 	
 	marioSprite.setPosition(x, y);
@@ -28,7 +30,15 @@ void Mario::draw(RenderWindow& window) {
 }
 
 
+void Mario::animation() {
+	move();
+	changeToBig();
+	changeToSuper();
+}
+
+
 void Mario::smallState() {
+	marioSprite.setTexture(marioTexture);
 	marioState = SMALL;
 	marioArea.width = 28;
 	marioArea.height = 32;
@@ -38,6 +48,7 @@ void Mario::smallState() {
 
 
 void Mario::bigState() {
+	marioSprite.setTexture(marioTexture);
 	marioState = BIG;
 	marioArea.width = 31;
 	marioArea.height = 60;
@@ -48,7 +59,8 @@ void Mario::bigState() {
 
 void Mario::superState() {
 	bigState();
-	// filter
+	marioState = SUPER;
+	marioSprite.setTexture(marioSuperTexture);
 }
 
 
@@ -196,7 +208,7 @@ void Mario::standStill() {
 		bigState();
 		break;
 	case SUPER:
-
+		superState();
 		break;
 	default:
 		break;
@@ -302,7 +314,3 @@ void Mario::changeToSuper() {
 }
 
 
-void Mario::animation() {
-	move();
-	changeToBig();
-}

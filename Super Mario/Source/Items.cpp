@@ -150,10 +150,10 @@ void Items::setTaken() {
 			maxRect = 6;
 			break;
 		case MASHROOM:
-			mario->marioState = BIG;
+			mario->PoweringUpToBig = true;
 			break;
 		case FLOWER:
-			mario->marioState = SUPER;
+			mario->PoweringUpToSuper = true;
 			break;
 		}
 		faid = true;

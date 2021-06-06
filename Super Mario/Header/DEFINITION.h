@@ -81,6 +81,8 @@ struct position {
 /***						Mario						***/
 #define MARIO_CHARACTER "Resource/Textures/Mario.png"
 
+#define MARIO_SUPER_CHARACTER "Resource/Textures/MarioSuper.png"
+
 /**********************************************************/
 
 

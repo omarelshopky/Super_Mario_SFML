@@ -10,7 +10,7 @@ private:
 	bool goRight, goUp, goLeft, goDown;
 	float acceleration[2], startJumpPosition;
 	area marioArea;
-	Texture marioTexture;
+	Texture marioTexture, marioSuperTexture;
 
 public:
 	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper;
