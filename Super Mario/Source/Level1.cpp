@@ -8,8 +8,8 @@ Level1::Level1(GameEngine& gameEngine) {
 	coinPosition[0] = { 200,500 };
 	flowerPosition[0] = { 400,500 };
 	mashroomPosition[0] = { 600,500 };
-	stonePostition[0] = { 800, 500 };
-	questionPosition[0] = { 1000, 500 };
+	stonePostition[0] = { 800, 550 };
+	questionPosition[0] = { 1000, 450 };
 
 	gameEngine.setLevelName("Level 1");
 
@@ -121,9 +121,14 @@ void Level1::end() {
 
 void Level1::checkGround(){
 	if (groundShape.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds())) {
-		gameEngine->mario.speed[1] = 0;
 		gameEngine->mario.marioSprite.setPosition(gameEngine->mario.marioSprite.getPosition().x, groundShape.getGlobalBounds().top);
-		gameEngine->mario.jumping = false;
+		gameEngine->mario.onGround = true;
 	}
-
+	else {
+		if (marioOnGround && gameEngine->mario.onGround) {
+			marioOnGround = false;
+			gameEngine->mario.onGround = false;
+			gameEngine->mario.speed[1] = 12;
+		}
+	}
 }

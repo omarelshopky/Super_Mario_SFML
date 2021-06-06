@@ -3,11 +3,12 @@
 
 Mario::Mario(float x, float y) {
 	// Init Mario motion varible
-	acceleration[0] = 25;
-	acceleration[1] = 75;
-	speed[0] = speed[1] = 0;
+	acceleration[0] = 57;
+	acceleration[1] = 120;
+	speed[0] = 0;
+	speed[1] = 70;
 	startJumpPosition = 500;
-	goRight = goUp = goLeft = goDown = jumping = false;
+	goRight = goUp = goLeft = goDown = jumping = onGround = false;
 
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
 	marioTexture.setSmooth(true);
@@ -83,10 +84,12 @@ void Mario::catchEvents(Event& event) {
 
 
 void Mario::move() {
+
+	if (onGround) jumping = false;
 	IntRect marioRect = marioSprite.getTextureRect();
 
 	// used timer to make motion slower
-	float waitingTime = 0.08; // 0.12s to make whole round
+	float waitingTime = 0.05; // 0.12s to make whole round
 	if (timer1.getElapsedTime().asSeconds() > waitingTime)
 	{
 		// Jump when press arrow up
@@ -102,10 +105,11 @@ void Mario::move() {
 				jumping = true;
 			}
 			goUp = false;
+			onGround = false;
 		}
 		jump(marioRect, jumpRectPosition, waitingTime);
 
-		waitingTime += 0.04;
+		waitingTime += 0.07;
 		if (timer2.getElapsedTime().asSeconds() > waitingTime) {
 			
 			if (goRight) { // Move to right
@@ -140,7 +144,7 @@ void Mario::move() {
 		timer1.restart();
 	}
 
-	if (speed[0] < 1 && speed[0] > -1 && (speed[1] == 0 && !jumping)) {
+	if (speed[0] < 1 && speed[0] > -1 && onGround) {
 		standStill();
 	}
 }
@@ -193,17 +197,14 @@ void Mario::standStill() {
 
 
 void Mario::jump(IntRect& intRect, int RectPosition, float waiting) {
-	if (jumping) {
-		/*if (marioSprite.getPosition().y == startJumpPosition && speed[1] > -1) {
-			jumping = false;
-			speed[1] = 0;
-		}*/
-		//else {
-			intRect.left = RectPosition;
-			marioSprite.setTextureRect(intRect);
-			// Calculate Mario Speed - Y axis
-			speed[1] = speed[1] + acceleration[1] * waiting;
-		//}
+	if (onGround) {
+		speed[1] = 0;
+		jumping = false;
+	} else {
+		//if (!jumping) speed[1] = 220;
+
+		// Calculate Mario Speed - Y axis
+		speed[1] = speed[1] + acceleration[1] * waiting;
 	}
 }
 
@@ -215,10 +216,10 @@ void Mario::moveRight(IntRect& intRect) {
 		if (marioState == SMALL) intRect.left = 132; // Small Position	
 	}
 	else {
-		if (!jumping) setMarioRectForWalk(intRect);
+		setMarioRectForWalk(intRect);
 	}
 
-	marioSprite.setTextureRect(intRect);
+	if (!jumping) marioSprite.setTextureRect(intRect);
 	marioSprite.setScale(2, 2);
 
 	speed[0] = 21;
@@ -235,10 +236,10 @@ void Mario::moveLeft(IntRect& intRect) {
 		if (marioState == SMALL) intRect.left = 132; // Small Position	
 	}
 	else {
-		if (!jumping) setMarioRectForWalk(intRect);
+		setMarioRectForWalk(intRect);
 	}
 
-	marioSprite.setTextureRect(intRect);
+	if(!jumping) marioSprite.setTextureRect(intRect);
 	marioSprite.setScale(-2, 2);
 
 	speed[0] = -21;

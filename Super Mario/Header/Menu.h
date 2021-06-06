@@ -6,7 +6,6 @@ class Menu
 	/***			Properties				***/
 public:
 	bool display;
-protected:
 	Font font;
 	Text backText;
 	Texture backGroundTexture;
@@ -14,7 +13,6 @@ protected:
 	SoundBuffer changingOptionBuffer;
 	Sound changingOptionSound;
 
-public:
 	/***			Methods				***/
 	// Draw Menu Options
 	virtual void draw(RenderWindow& window);

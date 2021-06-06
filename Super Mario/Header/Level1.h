@@ -18,7 +18,7 @@ private:
 	GameEngine* gameEngine;
 	position coinPosition[COINS_NUM], flowerPosition[FLOWERS_NUM], mashroomPosition[MASHROOMS_NUM],
 		stonePostition[STONE_NUM], questionPosition[QUESTION_NUM];
-	bool display;
+	bool display, marioOnGround;
 	Texture backGroundTexture, groundTexture;
 	RectangleShape backGroundShape, groundShape;
 	View camera;

@@ -130,6 +130,8 @@ struct bounds {
 
 
 /***						Levels							***/
+#define LEVEL_MUSIC "Resource/Music/Levels.ogg"
+
 #define LEVEL1_BACKGROUND "Resource/Textures/Backgrounds/Blue.jpg"
 
 #define LEVEL1_GROUND "Resource/Textures/blueGround.png"

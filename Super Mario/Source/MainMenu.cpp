@@ -96,6 +96,7 @@ void MainMenu::drawAll(RenderWindow& window) {
 
 void MainMenu::draw(RenderWindow& window) {
 	checkShow();
+	controlMusic();
 	if (display) {
 		window.draw(backGroundSprite);
 		window.draw(optionShadowSprite);
@@ -108,13 +109,8 @@ void MainMenu::draw(RenderWindow& window) {
 
 
 void MainMenu::checkShow() {
-	if (newPlayer.name[0] != NULL) {
-		gameRunning = true;
-	}
-	else {
-		gameRunning = false;
-	}
-
+	gameRunning = playerName.levelsList.levelStarted;
+	
 	bool allFormsClose = ((!playerName.display && !howToPlay.display) && (!highScore.display && !options.display))
 						&& (!credits.display && !playerName.levelsList.display);
 	if (allFormsClose && !gameRunning) show();
@@ -179,6 +175,15 @@ void MainMenu::mainMenuHandleSelection() {
 }
 
 
+void MainMenu::controlMusic() {
+	if (gameRunning) {
+		if (options.levelSound.getStatus() == options.levelSound.Stopped)
+			options.levelSound.play();
+
+		if (options.menuSound.getStatus() == options.menuSound.Playing)
+			options.menuSound.stop();
+	}
+}
 
 
 

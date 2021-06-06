@@ -12,7 +12,7 @@ private:
 	Texture marioTexture;
 
 public:
-	bool jumping;
+	bool jumping, onGround;
 	float speed[2];
 	Sprite marioSprite;
 	marioState_t marioState;

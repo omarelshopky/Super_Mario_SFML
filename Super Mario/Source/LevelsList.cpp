@@ -2,7 +2,7 @@
 
 LevelsList::LevelsList() : level1(gameEngine) {
 	// Set intial values
-	display = false;
+	display = levelStarted = false;
 	selectedLevel = 0;
 	maxLevel = 1;
 
@@ -29,7 +29,6 @@ LevelsList::LevelsList() : level1(gameEngine) {
 		levelsNameText[i].setString("Level " + to_string(i + 1));
 		levelsNameText[i].setPosition(720, 350 + i * 200);
 	}
-
 }
 
 
@@ -78,6 +77,7 @@ void LevelsList::catchEvents(Event event, player& newPlayer) {
 				case 0:
 					this->hide();
 					level1.start();
+					levelStarted = true;
 					break;
 				}
 				break;

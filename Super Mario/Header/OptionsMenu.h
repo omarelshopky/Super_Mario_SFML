@@ -8,11 +8,11 @@ private:
 	/***			Properties				***/
 	Texture optionShadowTexture, musicBallTexture, difficultyBallTexture, controlBallTexture;
 	Sprite optionShadowSprite, musicBallSprite, difficultyBallSprite, controlBallSprite;
-	SoundBuffer menuBuffer;
-	Sound menuSound;
+	SoundBuffer menuBuffer, levelBuffer;
 	int activeSlide, selectedDifficulty;
 
 public:
+	Sound menuSound, levelSound;
 	bool muteMusic, handControlled;
 
 	// Constructor

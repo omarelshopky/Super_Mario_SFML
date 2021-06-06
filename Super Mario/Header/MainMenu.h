@@ -62,5 +62,7 @@ private:
 	void mainMenuHandleSelection();
 
 	
+	// Control which music will be started
+	void controlMusic();
 };
 

@@ -1,7 +1,7 @@
 #include "../Header/GameEngine.h"
 
 
-GameEngine::GameEngine() : mario(500, 0){
+GameEngine::GameEngine() : mario(500, 200){
 	// Set initial values
 	levelTime = 300;
 	scoreInt = coinsInt = currentTime = counterTime = 0;

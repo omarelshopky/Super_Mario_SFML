@@ -20,6 +20,8 @@ private:
 	fstream playersFile;
 
 public:
+	bool levelStarted;
+
 	// Constructor
 	LevelsList();
 

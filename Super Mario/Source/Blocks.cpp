@@ -10,7 +10,7 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 
 	currentRect = movingSpeed = 0;
 	display = true;
-	faid = isPopUp = false;
+	faid = isPopUp = marioOn = false;
 	blockType = type;
 	startPos.x = x;
 	startPos.y = y;
@@ -146,23 +146,25 @@ void Blocks::checkIntersection() {
 	blockBounds.left = blockSprite.getGlobalBounds().left;
 	blockBounds.right = blockBounds.left + blockSprite.getGlobalBounds().width;
 
-	if (marioBounds.right >= blockBounds.left && marioBounds.right < blockBounds.right || marioBounds.left <= blockBounds.right && marioBounds.left > blockBounds.left) {
-		if (marioBounds.bottom >= blockBounds.top && marioBounds.bottom < blockBounds.bottom) {
-			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.top);
-			mario->speed[1] = 0;
-			mario->jumping = false;
-		}
-		else if (marioBounds.top <= blockBounds.bottom && marioBounds.bottom > blockBounds.bottom) {
-			startPopUp();
-		}
-		else if (marioBounds.top > blockBounds.top && marioBounds.top < blockBounds.bottom){
-			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, mario->marioSprite.getPosition().y);
+
+	// In the block bounds
+	if (marioBounds.right >= blockBounds.left && marioBounds.right <= blockBounds.right || marioBounds.left <= blockBounds.right && marioBounds.left >= blockBounds.left) {
+		if (marioBounds.top <= blockBounds.bottom && marioBounds.bottom > blockBounds.bottom) { // Hit it from the bottom
+			/*mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.bottom + 20);
 			mario->speed[0] = 0;
-			
+			startPopUp();*/
 		}
-
-
-
-
+		else if (marioBounds.bottom >= blockBounds.top && marioBounds.bottom <= blockBounds.bottom) { // Jump on the block
+			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.top);
+			mario->onGround = true;
+			marioOn = true;
+		}
+	}
+	else {
+		if (marioOn && mario->onGround) {
+			marioOn = false;
+			mario->onGround = false;
+			mario->speed[1] = 12;
+		}
 	}
 }
