@@ -117,6 +117,9 @@ struct position {
 
 #define FLOATING_FONT "Resource/Fonts/Floating_font.otf"
 
+#define POPUP_SOUND "Resource/Sounds/pop_up.wav"
+
+#define SMASH_SOUND "Resource/Sounds/smash.wav"
 /**********************************************************/
 
 

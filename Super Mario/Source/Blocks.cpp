@@ -47,6 +47,11 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 	blockSprite.setTextureRect(blockRect);
 	blockSprite.setPosition(x, y);
 	blockSprite.setScale(2, 2);
+
+	// Set Hit Sound Properties
+	popUpBuffer.loadFromFile(POPUP_SOUND);
+	smashBuffer.loadFromFile(SMASH_SOUND);
+	hitSound.setBuffer(popUpBuffer);
 }
 
 
@@ -101,12 +106,15 @@ void Blocks::animation() {
 
 void Blocks::smash() {
 	blockType = SMASH;
+	hitSound.setBuffer(smashBuffer);
+	hitSound.play();
 }
 
 void Blocks::startPopUp() {
 	if (!isPopUp) {
 		isPopUp = true;
 		popUpTimer.restart();
+		hitSound.play();
 	}
 }
 

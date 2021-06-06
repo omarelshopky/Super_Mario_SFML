@@ -15,9 +15,10 @@ private:
 	position startPos;
 	block_t blockType;
 	Mario *mario;
+	SoundBuffer popUpBuffer, smashBuffer;
+	Sound hitSound;
 
 public:
-
 
 	Blocks(Mario& mario, block_t type, float x, float y); // Constructer
 
