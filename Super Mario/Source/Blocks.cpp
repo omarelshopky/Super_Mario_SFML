@@ -96,7 +96,7 @@ void Blocks::animation() {
 		timer.restart();
 	}
 	popUp();
-	checkIntersection();
+	if(!faid) checkIntersection();
 }
 
 void Blocks::smash() {
@@ -142,31 +142,31 @@ void Blocks::popUp() {
 
 
 void Blocks::checkIntersection() {
-	bounds marioBounds, blockBounds;
-	marioBounds.top = mario->marioSprite.getGlobalBounds().top;
-	marioBounds.bottom = marioBounds.top + mario->marioSprite.getGlobalBounds().height;
-	marioBounds.left = mario->marioSprite.getGlobalBounds().left;
-	marioBounds.right = marioBounds.left + mario->marioSprite.getGlobalBounds().width;
-
-	blockBounds.top = blockSprite.getGlobalBounds().top;
-	blockBounds.bottom = blockBounds.top + blockSprite.getGlobalBounds().height;
-	blockBounds.left = blockSprite.getGlobalBounds().left;
-	blockBounds.right = blockBounds.left + blockSprite.getGlobalBounds().width;
-
-	// Handle large size of smash sprite
-	if (blockType == SMASH) blockBounds.bottom = (blockBounds.top + blockBounds.bottom) / 2; 
+	FloatRect marioBounds = mario->marioSprite.getGlobalBounds(),
+		blockBounds = blockSprite.getGlobalBounds();
+	Vector2f marioPos = mario->marioSprite.getPosition();
 
 	// In the block bounds
-	if (marioBounds.right >= blockBounds.left && marioBounds.right <= blockBounds.right || marioBounds.left <= blockBounds.right && marioBounds.left >= blockBounds.left) {
-		if (marioBounds.top <= blockBounds.bottom && marioBounds.bottom > blockBounds.bottom) { // Hit it from the bottom
-			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.bottom + mario->marioSprite.getGlobalBounds().height);
-			mario->speed[1] = 2;
-			handleHitBlock();
-		}
-		else if (marioBounds.bottom >= blockBounds.top && marioBounds.bottom <= blockBounds.bottom) { // Jump on the block
-			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.top);
+	if (blockBounds.intersects(marioBounds)) {
+		/*if (marioBounds.center > blockBounds.top && marioBounds.center < blockBounds.bottom) {
+			float blockRight = blockBounds.left + blockBounds.width;
+			mario->marioSprite.setPosition(blockRight + marioBounds.width, mario->marioSprite.getPosition().y);
+			mario->speed[0] = 0;
+		}*/
+		if (mario->speed[1] > 0 && blockType != SMASH) {
+			mario->marioSprite.setPosition(marioPos.x, blockBounds.top);
 			mario->onGround = true;
 			marioOn = true;
+		}
+		else if (mario->speed[1] < 0) {
+			float blockBottom = blockBounds.top + blockBounds.height;
+
+			// Handle large size of smash sprite
+			if (blockType == SMASH) blockBottom = (blockBounds.top + blockBottom) / 2;
+
+			mario->marioSprite.setPosition(marioPos.x, blockBottom + marioBounds.height);
+			mario->speed[1] = 2;
+			handleHitBlock();
 		}
 	}
 	else {
