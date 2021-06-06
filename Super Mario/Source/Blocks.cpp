@@ -164,7 +164,7 @@ void Blocks::checkIntersection() {
 		if (marioOn && mario->onGround) {
 			marioOn = false;
 			mario->onGround = false;
-			mario->speed[1] = 12;
+			mario->speed[1] = -5;
 		}
 	}
 }

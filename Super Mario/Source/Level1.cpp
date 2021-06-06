@@ -128,7 +128,7 @@ void Level1::checkGround(){
 		if (marioOnGround && gameEngine->mario.onGround) {
 			marioOnGround = false;
 			gameEngine->mario.onGround = false;
-			gameEngine->mario.speed[1] = 12;
+			gameEngine->mario.speed[1] = -5;
 		}
 	}
 }
