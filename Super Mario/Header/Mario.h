@@ -3,7 +3,7 @@
 
 class Mario
 {	
-	// Mario properties
+	/***		Mario properties		***/
 private:
 	int powerUpCounter;
 	Clock timer1, timer2, powerUpTimer;
@@ -11,6 +11,8 @@ private:
 	float acceleration[2], startJumpPosition;
 	area marioArea;
 	Texture marioTexture, marioSuperTexture;
+	SoundBuffer jumpBuffer;
+	Sound jumpSound;
 
 public:
 	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper;
@@ -19,14 +21,18 @@ public:
 	marioState_t marioState;
 	
 	
-	// Constractor
-	Mario(float x, float y);
+	Mario(float x, float y); // Constractor
 
+	/***			Methods			***/
 
 	// Draw mario on screen 
 	void draw(RenderWindow& window);
 
 
+	// Handle events for mario movement
+	void catchEvents(Event& event);
+
+private:
 	// set Mario to small state
 	void smallState();
 
@@ -39,18 +45,13 @@ public:
 	void superState();
 
 
-	// Move mario
+	// Mario movement animation
 	void move();
 
 
-	// Handle events for mario movement
-	void catchEvents(Event& event);
-
-
-
-private:
 	// Make animation for mario while walking
 	void setMarioRectForWalk(IntRect& intRect);
+
 
 	// Make mario animation stand still 
 	void standStill();

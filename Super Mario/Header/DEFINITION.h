@@ -83,6 +83,8 @@ struct position {
 
 #define MARIO_SUPER_CHARACTER "Resource/Textures/MarioSuper.png"
 
+#define JUMP_SOUND "Resource/Sounds/jump.wav"
+
 /**********************************************************/
 
 

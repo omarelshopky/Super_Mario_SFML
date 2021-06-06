@@ -20,6 +20,10 @@ Mario::Mario(float x, float y) {
 	marioSprite.setPosition(x, y);
 	marioSprite.setScale(2, 2);
 	smallState();
+
+	//Set Jumping Sound effect Properties
+	jumpBuffer.loadFromFile(JUMP_SOUND);
+	jumpSound.setBuffer(jumpBuffer);
 }
 
 
@@ -120,6 +124,7 @@ void Mario::move() {
 			marioRect.left = jumpRectPosition;
 			marioSprite.setTextureRect(marioRect);
 			if (jumping == false) {
+				jumpSound.play(); // jumping sound
 				startJumpPosition = marioSprite.getPosition().y;
 				speed[1] = -60;
 				jumping = true;
