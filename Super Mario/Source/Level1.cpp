@@ -8,7 +8,7 @@ Level1::Level1(GameEngine& gameEngine) {
 	coinPosition[0] = { 200,500 };
 	flowerPosition[0] = { 400,500 };
 	mashroomPosition[0] = { 600,500 };
-	stonePostition[0] = { 800, 550 };
+	stonePostition[0] = { 800, 450 };
 	questionPosition[0] = { 1000, 450 };
 
 	gameEngine.setLevelName("Level 1");

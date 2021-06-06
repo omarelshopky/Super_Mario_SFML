@@ -46,5 +46,9 @@ private:
 
 	// Check if mario hit this block
 	void checkIntersection();
+
+
+	// Handle what will done when mario hit the block with his head
+	void handleHitBlock();
 };
 

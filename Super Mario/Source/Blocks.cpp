@@ -3,9 +3,9 @@
 Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 	// Set initial values
 	this->mario = &mario;
-	questionRect = IntRect(0, 0, 32, 32);
-	stoneRect = IntRect(32, 0, 32, 32);
-	bronzeRect = IntRect(0, 32, 32, 32);
+	questionRect = IntRect(0, 0, 32, 31);
+	stoneRect = IntRect(32, 0, 32, 31);
+	bronzeRect = IntRect(0, 32, 32, 31);
 	smashRect = IntRect(0, 0, 800, 800);
 
 	currentRect = movingSpeed = 0;
@@ -36,13 +36,14 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 		break;
 	case STONE:
 		blockSprite.setTexture(stoneTexture);
+		blockSprite.setColor(Color::Color(30, 30, 180));
 		blockRect = stoneRect;
 		maxRect = 1;
 		break;
 	}
 
 	// Set sprite properties
-	blockSprite.setOrigin(16, 16);
+	blockSprite.setOrigin(blockRect.width / 2, blockRect.height / 2);
 	blockSprite.setTextureRect(blockRect);
 	blockSprite.setPosition(x, y);
 	blockSprite.setScale(1.8, 1.8);
@@ -50,8 +51,8 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 
 
 void Blocks::draw(RenderWindow& window) {
-	animation();
 	if (display) {
+		animation();
 		window.draw(blockSprite);
 	}
 }
@@ -64,6 +65,7 @@ void Blocks::animation() {
 			blockRect.left = questionRect.left + currentRect * questionRect.width;
 			break;
 		case BRONZE:
+			blockSprite.setTexture(stoneTexture);
 			blockRect = bronzeRect;
 			maxRect = 1;
 			break;
@@ -77,6 +79,7 @@ void Blocks::animation() {
 				blockRect = smashRect;
 				blockSprite.setOrigin(400, 400);
 				blockSprite.setTexture(smashTextures[currentRect]);
+				blockSprite.setScale(1, 1);
 				faid = true;
 			}
 			else {
@@ -101,8 +104,10 @@ void Blocks::smash() {
 }
 
 void Blocks::startPopUp() {
-	isPopUp = true;
-	popUpTimer.restart();
+	if (!isPopUp) {
+		isPopUp = true;
+		popUpTimer.restart();
+	}
 }
 
 
@@ -124,6 +129,8 @@ void Blocks::popUp() {
 		}
 		else 
 		{
+			if (blockType == QUESTION) blockType = BRONZE;
+
 			movingSpeed = 0;
 			isPopUp = false;
 			blockSprite.setPosition(startPos.x, startPos.y);
@@ -146,13 +153,15 @@ void Blocks::checkIntersection() {
 	blockBounds.left = blockSprite.getGlobalBounds().left;
 	blockBounds.right = blockBounds.left + blockSprite.getGlobalBounds().width;
 
+	// Handle large size of smash sprite
+	if (blockType == SMASH) blockBounds.bottom = (blockBounds.top + blockBounds.bottom) / 2; 
 
 	// In the block bounds
 	if (marioBounds.right >= blockBounds.left && marioBounds.right <= blockBounds.right || marioBounds.left <= blockBounds.right && marioBounds.left >= blockBounds.left) {
 		if (marioBounds.top <= blockBounds.bottom && marioBounds.bottom > blockBounds.bottom) { // Hit it from the bottom
-			/*mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.bottom + 20);
-			mario->speed[0] = 0;
-			startPopUp();*/
+			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.bottom + mario->marioSprite.getGlobalBounds().height);
+			mario->speed[1] = 2;
+			handleHitBlock();
 		}
 		else if (marioBounds.bottom >= blockBounds.top && marioBounds.bottom <= blockBounds.bottom) { // Jump on the block
 			mario->marioSprite.setPosition(mario->marioSprite.getPosition().x, blockBounds.top);
@@ -166,5 +175,28 @@ void Blocks::checkIntersection() {
 			mario->onGround = false;
 			mario->speed[1] = -5;
 		}
+	}
+}
+
+
+void Blocks::handleHitBlock() {
+	switch (blockType)
+	{
+	case STONE:
+		switch (mario->marioState) {
+		case SMALL:
+			startPopUp();
+			break;
+		case BIG:
+		case SUPER:
+			smash();
+			break;
+		}
+		break;
+	case QUESTION:
+		startPopUp();
+		break;
+	default:
+		break;
 	}
 }
