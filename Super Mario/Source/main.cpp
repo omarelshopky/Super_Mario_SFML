@@ -1,4 +1,5 @@
 /***		Include Header			***/
+#include "../Header/DEFINITION.h"
 #include "../Header/MainMenu.h"
 
 int main()
@@ -7,7 +8,7 @@ int main()
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 	/***			Open Startup Game Window			***/
-	RenderWindow window(sf::VideoMode(1600, 900), "Super Mario");
+	RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Super Mario");
 	window.setFramerateLimit(60); // Limit the framerate to a maximum fixed frequency.
 
 	MainMenu menu;  // Create Menu 

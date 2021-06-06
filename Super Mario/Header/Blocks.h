@@ -11,6 +11,7 @@ private:
 	Sprite blockSprite;
 	Clock timer, popUpTimer;
 	int currentRect, maxRect, movingSpeed;
+	float stuckRange;
 	bool display, faid, isPopUp, marioOn;
 	position startPos;
 	block_t blockType;

@@ -7,7 +7,7 @@
 #define FLOWERS_NUM 1
 #define MASHROOMS_NUM 1
 #define STONE_NUM 1
-#define QUESTION_NUM 2
+#define QUESTION_NUM 1
 
 class Level1
 {
@@ -19,6 +19,7 @@ private:
 	position coinPosition[COINS_NUM], flowerPosition[FLOWERS_NUM], mashroomPosition[MASHROOMS_NUM],
 		stonePostition[STONE_NUM], questionPosition[QUESTION_NUM];
 	bool display, marioOnGround;
+	float levelWidth;
 	Texture backGroundTexture, groundTexture;
 	RectangleShape backGroundShape, groundShape;
 	View camera;
@@ -43,7 +44,16 @@ public:
 	// Close Level
 	void end();
 
+
 	// Check weather mario in ground or not
 	void checkGround();
+
+
+	// Set Camera View with mario movement
+	void handleView(RenderWindow& window);
+
+
+	// Check end of the level
+	void checkEnd();
 };
 

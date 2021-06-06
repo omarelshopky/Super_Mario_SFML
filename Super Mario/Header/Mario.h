@@ -15,7 +15,7 @@ private:
 	Sound jumpSound, damageSound, dieSound;
 
 public:
-	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper, dying;
+	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper, dying, stuck;
 	float speed[2];
 	Sprite marioSprite;
 	marioState_t marioState;

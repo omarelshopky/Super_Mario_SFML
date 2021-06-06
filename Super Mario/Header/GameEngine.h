@@ -67,5 +67,9 @@ public:
 
     // make coin spin during time
     void coinAnimation();
+
+
+    // Set header position to move with Camera
+    void setHeaderPosition(position screenCenter);
 };
 

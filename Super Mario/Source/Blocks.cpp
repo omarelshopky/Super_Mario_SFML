@@ -8,7 +8,7 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 	bronzeRect = IntRect(0, 32, 32, 31);
 	smashRect = IntRect(0, 0, 800, 800);
 
-	currentRect = movingSpeed = 0;
+	currentRect = movingSpeed = stuckRange = 0;
 	display = true;
 	faid = isPopUp = marioOn = false;
 	blockType = type;
@@ -191,6 +191,7 @@ void Blocks::checkIntersection() {
 				else
 					mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
 				mario->speed[0] = 0;
+				mario->stuck = true;
 			}
 		}
 	}
@@ -200,7 +201,18 @@ void Blocks::checkIntersection() {
 			mario->onGround = false;
 			mario->speed[1] = -5;
 		}
+
+		// Fix Screen vibration when mario touch block side
+		if (!mario->onGround) mario->stuck = false; 
+		if (mario->stuck) {
+			stuckRange = (marioPos.x > blockRightPoint) ? 230 : 100;
+			if (abs(mario->marioSprite.getPosition().x - blockRightPoint) > stuckRange) {
+				mario->stuck = false; // not touching the side anymore
+			}
+		}
 	}
+
+	
 }
 
 

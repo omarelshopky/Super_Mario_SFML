@@ -156,3 +156,11 @@ void GameEngine::coinAnimation() {
 }
 
 
+void GameEngine::setHeaderPosition(position screenCenter) {
+	float topLeft = screenCenter.x - (WINDOW_WIDTH / 2);
+	scoreText.setPosition(topLeft + 20, 5); //Score
+	timerText.setPosition(topLeft + 1395, 5); // Timer
+	coinsText.setPosition(topLeft + 600, 5); // Coins Counter
+	coinSprite.setPosition(topLeft + 575, 38); // Coin sprite
+	levelText.setPosition(topLeft + 1000, 5); // Level Name
+}

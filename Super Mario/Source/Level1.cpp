@@ -5,12 +5,12 @@ Level1::Level1(GameEngine& gameEngine) {
 	// Set initial values
 	this->gameEngine = &gameEngine;
 	display = marioOnGround = false;
+	levelWidth = 3000;
 	coinPosition[0] = { 200,500 };
 	flowerPosition[0] = { 400,500 };
 	mashroomPosition[0] = { 600,500 };
 	stonePostition[0] = { 800, 500 };
 	questionPosition[0] = { 1000, 720 };
-	questionPosition[1] = { 1000, 300 };
 
 	gameEngine.setLevelName("Level 1");
 
@@ -43,7 +43,7 @@ Level1::Level1(GameEngine& gameEngine) {
 	backGroundTexture.loadFromFile(LEVEL1_BACKGROUND);
 	backGroundTexture.setRepeated(true);
 	backGroundShape.setTexture(&backGroundTexture);
-	backGroundShape.setSize(Vector2f(3000, 900));
+	backGroundShape.setSize(Vector2f(levelWidth, WINDOW_HEIGHT));
 
 	// Set Level's Ground Properties
 	groundTexture.loadFromFile(LEVEL1_GROUND);
@@ -53,16 +53,16 @@ Level1::Level1(GameEngine& gameEngine) {
 	groundShape.setPosition(0, 750);
 
 	// Set View Properites
-	camera.setSize(1600, 900);
-	camera.setCenter(800, 450);
+	camera.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	camera.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 }
 
 
 void Level1::draw(RenderWindow& window) {
 	if (display) {
 		checkGround();
-		camera.setCenter(gameEngine->mario.marioSprite.getPosition().x, 450);
-		window.setView(camera);
+		checkEnd();
+		handleView(window);
 		window.draw(backGroundShape);
 		window.draw(groundShape);
 		gameEngine->draw(window);
@@ -89,22 +89,9 @@ void Level1::draw(RenderWindow& window) {
 void Level1::catchEvents(Event event) {
 	if (display) {
 		gameEngine->mario.catchEvents(event);
-		switch (event.type)
-		{
-		case Event::KeyPressed:
-			switch (event.key.code)
-			{
-			/*case Keyboard::Right:
-				camera.move(15, 0);
-				break;
-			case Keyboard::Left:
-				camera.move(-15, 0);
-				break;*/
-			case Keyboard::Escape:
-				this->end();
-				break;
-			}
-			break;
+		
+		if (event.type == Event::KeyReleased && event.key.code == Keyboard::Escape) {
+			this->end();
 		}
 	}
 }
@@ -134,5 +121,33 @@ void Level1::checkGround(){
 				gameEngine->mario.speed[1] = -5;
 			}
 		}
+	}
+}
+
+
+void Level1::handleView(RenderWindow& window) {
+	if (!gameEngine->mario.stuck) { 
+		position screenCenter = { gameEngine->mario.marioSprite.getPosition().x, 450 };
+
+		if (screenCenter.x > WINDOW_WIDTH / 2 && screenCenter.x < levelWidth - (WINDOW_WIDTH / 2)) {
+			camera.setCenter(screenCenter.x, screenCenter.y);
+			gameEngine->setHeaderPosition(screenCenter);
+		}
+		window.setView(camera);
+	}
+	
+}
+
+
+void Level1::checkEnd() {
+	Vector2f marioPos = gameEngine->mario.marioSprite.getPosition();
+	int space = 70;
+	if (marioPos.x < space){
+		gameEngine->mario.marioSprite.setPosition(space, marioPos.y);
+		gameEngine->mario.speed[0] = 0;
+	}
+	else if (marioPos.x > levelWidth - space) {
+		gameEngine->mario.marioSprite.setPosition(levelWidth - space, marioPos.y);
+		gameEngine->mario.speed[0] = 0;
 	}
 }

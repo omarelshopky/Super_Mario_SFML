@@ -10,7 +10,7 @@ Mario::Mario(float x, float y) {
 	startJumpPosition = 500;
 	changeStateCounter = 0;
 	goRight = goUp = goLeft = goDown = jumping = onGround = false;
-	PoweringUpToSuper = PoweringUpToBig = damaging = dying = false;
+	PoweringUpToSuper = PoweringUpToBig = damaging = dying = stuck = false;
 
 	// Set Mario Sprite Properties
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }

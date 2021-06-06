@@ -42,6 +42,11 @@ struct position {
 	float y;
 };
 
+
+#define WINDOW_WIDTH 1600
+#define WINDOW_HEIGHT 900
+
+
 /***						Menu						***/
 #define MAIN_MENU_FONT "Resource/Fonts/Barkentina_font.ttf"
 
@@ -134,7 +139,7 @@ struct position {
 
 
 /***						Levels							***/
-#define LEVEL_MUSIC "Resource/Music/Levels.ogg"
+#define LEVEL_MUSIC "Resource/Music/Levels.wav"
 
 #define LEVEL1_BACKGROUND "Resource/Textures/Backgrounds/Blue.jpg"
 
