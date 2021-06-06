@@ -36,7 +36,7 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 		break;
 	case STONE:
 		blockSprite.setTexture(stoneTexture);
-		blockSprite.setColor(Color::Color(30, 30, 180));
+		blockSprite.setColor(Color::Color(70, 50, 180));
 		blockRect = stoneRect;
 		maxRect = 1;
 		break;

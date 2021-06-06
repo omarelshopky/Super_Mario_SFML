@@ -5,14 +5,15 @@ class Mario
 {	
 	// Mario properties
 private:
-	Clock timer1, timer2;
+	int powerUpCounter;
+	Clock timer1, timer2, powerUpTimer;
 	bool goRight, goUp, goLeft, goDown;
 	float acceleration[2], startJumpPosition;
 	area marioArea;
 	Texture marioTexture;
 
 public:
-	bool jumping, onGround;
+	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper;
 	float speed[2];
 	Sprite marioSprite;
 	marioState_t marioState;
@@ -29,13 +30,23 @@ public:
 	// set Mario to small state
 	void smallState();
 
+
 	// set Mario to Big state
 	void bigState();
+
+
+	// set Mario to Super state
+	void superState();
+
 
 	// Move mario
 	void move();
 
+
+	// Handle events for mario movement
 	void catchEvents(Event& event);
+
+
 
 private:
 	// Make animation for mario while walking
@@ -44,13 +55,28 @@ private:
 	// Make mario animation stand still 
 	void standStill();
 
+
 	// make mario jump
 	void jump(IntRect& intRect, int RectPosition, float waiting);
+
 
 	// make mario walk to the right
 	void moveRight(IntRect& intRect);
 
+
 	// make mario walk to the left
 	void moveLeft(IntRect& intRect);
+
+
+	// Make animation for Mario changing
+	void animation();
+
+
+	// make animation for Power up to Big state
+	void changeToBig();
+
+
+	// make animation for Power up to Super state
+	void changeToSuper();
 };
 

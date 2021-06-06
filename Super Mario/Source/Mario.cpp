@@ -8,7 +8,9 @@ Mario::Mario(float x, float y) {
 	speed[0] = 0;
 	speed[1] = 70;
 	startJumpPosition = 500;
+	powerUpCounter = 0;
 	goRight = goUp = goLeft = goDown = jumping = onGround = false;
+	PoweringUpToSuper = PoweringUpToBig = false;
 
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
 	marioTexture.setSmooth(true);
@@ -22,7 +24,7 @@ Mario::Mario(float x, float y) {
 void Mario::draw(RenderWindow& window) {
 	window.draw(marioSprite);
 
-	move();
+	animation();
 }
 
 
@@ -41,6 +43,12 @@ void Mario::bigState() {
 	marioArea.height = 60;
 	marioSprite.setTextureRect(IntRect(0, 36, marioArea.width, marioArea.height));
 	marioSprite.setOrigin(marioArea.width / 2, marioArea.height);
+}
+
+
+void Mario::superState() {
+	bigState();
+	// filter
 }
 
 
@@ -249,4 +257,52 @@ void Mario::moveLeft(IntRect& intRect) {
 
 	// Make acceleration work in the oppsite side
 	if (acceleration[0] < 0) acceleration[0] *= -1;
+}
+
+
+void Mario::changeToBig() {
+	if (PoweringUpToBig) {
+		if (powerUpCounter < 12) { // The last one will be 11 (odd)
+			if (powerUpTimer.getElapsedTime().asSeconds() > 0.18) {
+				if (powerUpCounter % 2 == 0)
+					smallState();
+				else 
+					bigState();
+
+				powerUpCounter++;
+				powerUpTimer.restart();
+			}
+		}
+		else {
+			powerUpCounter = 0;
+			PoweringUpToBig = false;
+		}
+	}
+}
+
+
+void Mario::changeToSuper() {
+	if (PoweringUpToSuper) {
+		if (powerUpCounter < 12) { // The last one will be 11 (odd)
+			if (powerUpTimer.getElapsedTime().asSeconds() > 0.18) {
+				if (powerUpCounter % 2 == 0)
+					smallState();
+				else
+					superState();
+
+				powerUpCounter++;
+				powerUpTimer.restart();
+			}
+		}
+		else {
+			powerUpCounter = 0;
+			PoweringUpToSuper = false;
+		}
+	}
+}
+
+
+void Mario::animation() {
+	move();
+	changeToBig();
 }
