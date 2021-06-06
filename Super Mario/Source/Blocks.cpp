@@ -46,7 +46,7 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 	blockSprite.setOrigin(blockRect.width / 2, blockRect.height / 2);
 	blockSprite.setTextureRect(blockRect);
 	blockSprite.setPosition(x, y);
-	blockSprite.setScale(1.8, 1.8);
+	blockSprite.setScale(2, 2);
 }
 
 
@@ -142,35 +142,52 @@ void Blocks::popUp() {
 
 
 void Blocks::checkIntersection() {
+	// Calculate Mario and Block bounds
 	FloatRect marioBounds = mario->marioSprite.getGlobalBounds(),
 		blockBounds = blockSprite.getGlobalBounds();
-	Vector2f marioPos = mario->marioSprite.getPosition();
+	Vector2f marioPos = mario->marioSprite.getPosition(), blockPos = blockSprite.getPosition();
+
+	float marioCenterPointY = marioPos.y - (marioBounds.height / 2),
+		blockTopPoint = blockPos.y - (blockBounds.height / 2),
+		blockBottomPoint = blockPos.y + (blockBounds.height / 2),
+		blockRightPoint = blockPos.x + (blockBounds.width / 2),
+		blockLeftPoint = blockPos.x - (blockBounds.width / 2);
+	
+	// Handle large size of mario
+	if (mario->marioState != SMALL) marioCenterPointY += 28;
 
 	// In the block bounds
 	if (blockBounds.intersects(marioBounds)) {
-		/*if (marioBounds.center > blockBounds.top && marioBounds.center < blockBounds.bottom) {
-			float blockRight = blockBounds.left + blockBounds.width;
-			mario->marioSprite.setPosition(blockRight + marioBounds.width, mario->marioSprite.getPosition().y);
-			mario->speed[0] = 0;
-		}*/
-		if (mario->speed[1] > 0 && blockType != SMASH) {
-			mario->marioSprite.setPosition(marioPos.x, blockBounds.top);
-			mario->onGround = true;
-			marioOn = true;
+		if (marioPos.x >= blockLeftPoint && marioPos.x <= blockRightPoint) {
+			if (mario->speed[1] > 0 && blockType != SMASH) { // jump on the block
+				mario->marioSprite.setPosition(marioPos.x, blockBounds.top);
+				mario->onGround = true;
+				marioOn = true;
+			}
+			else if (mario->speed[1] < 0) { // Hit the block with head
+				float blockBottom = blockBounds.top + blockBounds.height;
+
+				// Handle large size of smash sprite
+				if (blockType == SMASH) blockBottom = (blockBounds.top + blockBottom) / 2;
+
+				mario->marioSprite.setPosition(marioPos.x, blockBottom + marioBounds.height);
+				mario->speed[1] = 2;
+				handleHitBlock();
+			}
 		}
-		else if (mario->speed[1] < 0) {
-			float blockBottom = blockBounds.top + blockBounds.height;
-
-			// Handle large size of smash sprite
-			if (blockType == SMASH) blockBottom = (blockBounds.top + blockBottom) / 2;
-
-			mario->marioSprite.setPosition(marioPos.x, blockBottom + marioBounds.height);
-			mario->speed[1] = 2;
-			handleHitBlock();
+		else { // touch from side
+			if (marioCenterPointY > blockTopPoint + 8 && marioCenterPointY < blockBottomPoint - 8) { 
+				float blockRight = blockBounds.left + blockBounds.width;
+				if (marioPos.x > blockPos.x)
+					mario->marioSprite.setPosition(blockRight + (marioBounds.width / 2), marioPos.y);
+				else
+					mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
+				mario->speed[0] = 0;
+			}
 		}
 	}
 	else {
-		if (marioOn && mario->onGround) {
+		if (marioOn && mario->onGround) { // Fall when mario left the block
 			marioOn = false;
 			mario->onGround = false;
 			mario->speed[1] = -5;

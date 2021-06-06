@@ -4,12 +4,13 @@
 Level1::Level1(GameEngine& gameEngine) {
 	// Set initial values
 	this->gameEngine = &gameEngine;
-	display = false;
+	display = marioOnGround = false;
 	coinPosition[0] = { 200,500 };
 	flowerPosition[0] = { 400,500 };
 	mashroomPosition[0] = { 600,500 };
 	stonePostition[0] = { 800, 500 };
-	questionPosition[0] = { 1000, 500 };
+	questionPosition[0] = { 1000, 720 };
+	questionPosition[1] = { 1000, 300 };
 
 	gameEngine.setLevelName("Level 1");
 
@@ -30,12 +31,12 @@ Level1::Level1(GameEngine& gameEngine) {
 
 	// Call Constructer for all Stone Blocks
 	for (int i = 0; i < STONE_NUM; i++) {
-		stone.push_back(*new Blocks(gameEngine.mario, STONE, stonePostition[0].x, stonePostition[0].y));
+		stone.push_back(*new Blocks(gameEngine.mario, STONE, stonePostition[i].x, stonePostition[i].y));
 	}
 
 	// Call Constructer for all Question Blocks
-	for (int i = 0; i < STONE_NUM; i++) {
-		question.push_back(*new Blocks(gameEngine.mario, QUESTION, questionPosition[0].x, questionPosition[0].y));
+	for (int i = 0; i < QUESTION_NUM; i++) {
+		question.push_back(*new Blocks(gameEngine.mario, QUESTION, questionPosition[i].x, questionPosition[i].y));
 	}
 
 	// Set Level's Background Properties

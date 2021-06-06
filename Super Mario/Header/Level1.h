@@ -7,7 +7,7 @@
 #define FLOWERS_NUM 1
 #define MASHROOMS_NUM 1
 #define STONE_NUM 1
-#define QUESTION_NUM 1
+#define QUESTION_NUM 2
 
 class Level1
 {
