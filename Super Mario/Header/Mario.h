@@ -11,11 +11,11 @@ private:
 	float acceleration[2], startJumpPosition;
 	area marioArea;
 	Texture marioTexture, marioSuperTexture;
-	SoundBuffer jumpBuffer, damageBuffer;
-	Sound jumpSound, damageSound;
+	SoundBuffer jumpBuffer, damageBuffer, dieBuffer;
+	Sound jumpSound, damageSound, dieSound;
 
 public:
-	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper;
+	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper, dying;
 	float speed[2];
 	Sprite marioSprite;
 	marioState_t marioState;
@@ -35,6 +35,10 @@ public:
 
 	// Start Damage animation
 	void startDamage();
+
+
+	// Start Die Animation
+	void startDie();
 
 private:
 	// set Mario to small state
@@ -87,5 +91,9 @@ private:
 
 	// Animation of converting mario from big or super state to small 
 	void damage();
+
+
+	// Animation of Dying
+	void die();
 };
 

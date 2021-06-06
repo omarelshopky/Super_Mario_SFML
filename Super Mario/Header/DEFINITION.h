@@ -86,6 +86,9 @@ struct position {
 #define JUMP_SOUND "Resource/Sounds/jump.wav"
 
 #define DAMAGE_SOUND "Resource/Sounds/damage.wav"
+
+#define DIE_SOUND "Resource/Sounds/mario_die.wav"
+
 /**********************************************************/
 
 

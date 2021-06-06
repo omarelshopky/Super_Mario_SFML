@@ -66,7 +66,6 @@ void Level1::draw(RenderWindow& window) {
 		window.draw(backGroundShape);
 		window.draw(groundShape);
 		gameEngine->draw(window);
-		gameEngine->mario.draw(window);
 		for (int i = 0; i < COINS_NUM; i++) 
 			coin[i].draw(window);
 
@@ -81,6 +80,8 @@ void Level1::draw(RenderWindow& window) {
 
 		for (int i = 0; i < QUESTION_NUM; i++)
 			question[i].draw(window);
+
+		gameEngine->mario.draw(window);
 	}
 }
 
@@ -121,15 +122,17 @@ void Level1::end() {
 
 
 void Level1::checkGround(){
-	if (groundShape.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds())) {
-		gameEngine->mario.marioSprite.setPosition(gameEngine->mario.marioSprite.getPosition().x, groundShape.getGlobalBounds().top);
-		gameEngine->mario.onGround = true;
-	}
-	else {
-		if (marioOnGround && gameEngine->mario.onGround) {
-			marioOnGround = false;
-			gameEngine->mario.onGround = false;
-			gameEngine->mario.speed[1] = -5;
+	if (!gameEngine->mario.dying) {
+		if (groundShape.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds())) {
+			gameEngine->mario.marioSprite.setPosition(gameEngine->mario.marioSprite.getPosition().x, groundShape.getGlobalBounds().top);
+			gameEngine->mario.onGround = true;
+		}
+		else {
+			if (marioOnGround && gameEngine->mario.onGround) {
+				marioOnGround = false;
+				gameEngine->mario.onGround = false;
+				gameEngine->mario.speed[1] = -5;
+			}
 		}
 	}
 }

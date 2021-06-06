@@ -10,7 +10,7 @@ Mario::Mario(float x, float y) {
 	startJumpPosition = 500;
 	changeStateCounter = 0;
 	goRight = goUp = goLeft = goDown = jumping = onGround = false;
-	PoweringUpToSuper = PoweringUpToBig = damaging = false;
+	PoweringUpToSuper = PoweringUpToBig = damaging = dying = false;
 
 	// Set Mario Sprite Properties
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
@@ -27,6 +27,9 @@ Mario::Mario(float x, float y) {
 
 	damageBuffer.loadFromFile(DAMAGE_SOUND);
 	damageSound.setBuffer(damageBuffer);
+
+	dieBuffer.loadFromFile(DIE_SOUND);
+	dieSound.setBuffer(dieBuffer);
 }
 
 
@@ -44,6 +47,7 @@ void Mario::animation() {
 	changeToBig();
 	changeToSuper();
 	damage();
+	die();
 }
 
 
@@ -95,7 +99,7 @@ void Mario::catchEvents(Event& event) {
 			goDown = true;
 			break;
 		case Keyboard::Key::Z:
-			startDamage();
+			startDie();
 			break;
 		}
 		break;
@@ -357,4 +361,25 @@ void Mario::startDamage() {
 	onGround = false; // to fall after animation finished
 	damageSound.play(); // play damage sound effect
 	marioSprite.move(-50, -130);
+}
+
+
+void Mario::die(){
+	if (dying) {
+		onGround = false; // to leave the ground 
+
+		marioSprite.setTextureRect(IntRect(192, 96, 30, 32));
+		if (changeStateCounter == 1) { // Execute only for the first time
+			speed[1] = -60;
+			marioSprite.move(-75, 0);
+			changeStateCounter = 0;
+		}
+	}
+}
+
+
+void Mario::startDie() {
+	dying = true;
+	dieSound.play();
+	changeStateCounter = 1;
 }

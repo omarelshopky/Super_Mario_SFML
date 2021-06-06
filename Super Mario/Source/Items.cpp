@@ -131,11 +131,13 @@ void Items::TextFloat() {
 
 
 void Items::checkTaken() {
-	if (itemSprite.getGlobalBounds().intersects(mario->marioSprite.getGlobalBounds()) && !faid) {
-		isTaken = true;
-		takenSound.play();
+	if (!mario->dying) {
+		if (itemSprite.getGlobalBounds().intersects(mario->marioSprite.getGlobalBounds()) && !faid) {
+			isTaken = true;
+			takenSound.play();
+		}
+		setTaken();
 	}
-	setTaken();
 }
 
 
