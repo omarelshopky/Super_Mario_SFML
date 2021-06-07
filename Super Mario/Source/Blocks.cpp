@@ -11,9 +11,9 @@ Blocks::Blocks(Mario& mario, GameEngine& gameEngine, block_t type, float x, floa
 	rockRect = IntRect(96, 0, 32, 31);
 	smashRect = IntRect(0, 0, 800, 800);
 
-	currentRect = movingSpeed = stuckRange = 0;
+	currentRect = movingSpeed = 0;
 	display = true;
-	faid = isPopUp = marioOn = false;
+	faid = isPopUp = marioOn = stuckOn = false;
 	blockType = type;
 	startPos.x = x;
 	startPos.y = y;
@@ -172,7 +172,6 @@ void Blocks::checkIntersection() {
 			}
 		}
 		else { // touch from side
-			cout << mario->speed[1] << ' ' << mario->onGround << '\n';
 			if (mario->speed[1] > 1 && !mario->onGround || mario->speed[1] < 1) {
 				float blockRight = blockBounds.left + blockBounds.width;
 				if (marioPos.x > blockPos.x)
@@ -181,6 +180,7 @@ void Blocks::checkIntersection() {
 					mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
 				mario->speed[0] = 0;
 				mario->stuck = true;
+				stuckOn = true;
 			}
 		}
 	}
@@ -192,11 +192,10 @@ void Blocks::checkIntersection() {
 		}
 
 		// Fix Screen vibration when mario touch block side
-		if (!mario->onGround) mario->stuck = false; 
-		if (mario->stuck) {
-			stuckRange = (marioPos.x > blockRightPoint) ? 230 : 100;
-			if (abs(mario->marioSprite.getPosition().x - blockRightPoint) > stuckRange) {
+		if (mario->stuck && stuckOn) {
+			if (abs(marioPos.x - blockPos.x) > 60 || abs(marioPos.y - blockPos.y) > 100) {
 				mario->stuck = false; // not touching the side anymore
+				stuckOn = false;
 			}
 		}
 	}

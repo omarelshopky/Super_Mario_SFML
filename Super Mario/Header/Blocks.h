@@ -9,8 +9,7 @@ private:
 	IntRect blockRect, stoneRect, questionRect, bronzeRect, smashRect, rockRect;
 	Clock timer, popUpTimer;
 	int currentRect, maxRect, movingSpeed;
-	float stuckRange;
-	bool display, faid, isPopUp, marioOn;
+	bool display, faid, isPopUp, marioOn, stuckOn;
 	position startPos;
 	block_t blockType;
 	Mario *mario;

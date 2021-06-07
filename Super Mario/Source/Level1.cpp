@@ -141,7 +141,6 @@ void Level1::handleView(RenderWindow& window) {
 		}
 		window.setView(camera);
 	}
-	
 }
 
 
