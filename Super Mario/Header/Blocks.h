@@ -7,8 +7,7 @@ class Blocks{
 private:
 	/***			Properties				***/
 	Texture stoneTexture, questionTexture, smashTextures[6];
-	IntRect blockRect, stoneRect, questionRect, bronzeRect, smashRect;
-	Sprite blockSprite;
+	IntRect blockRect, stoneRect, questionRect, bronzeRect, smashRect, rockRect;
 	Clock timer, popUpTimer;
 	int currentRect, maxRect, movingSpeed;
 	float stuckRange;
@@ -20,6 +19,7 @@ private:
 	Sound hitSound;
 
 public:
+	Sprite blockSprite;
 
 	Blocks(Mario& mario, block_t type, float x, float y); // Constructer
 

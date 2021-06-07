@@ -6,6 +6,7 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 	questionRect = IntRect(0, 0, 32, 31);
 	stoneRect = IntRect(32, 0, 32, 31);
 	bronzeRect = IntRect(0, 32, 32, 31);
+	rockRect = IntRect(96, 0, 32, 31);
 	smashRect = IntRect(0, 0, 800, 800);
 
 	currentRect = movingSpeed = stuckRange = 0;
@@ -36,8 +37,12 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 		break;
 	case STONE:
 		blockSprite.setTexture(stoneTexture);
-		blockSprite.setColor(Color::Color(70, 50, 180));
 		blockRect = stoneRect;
+		maxRect = 1;
+		break;
+	case ROCK:
+		blockSprite.setTexture(stoneTexture);
+		blockRect = rockRect;
 		maxRect = 1;
 		break;
 	}
@@ -76,6 +81,9 @@ void Blocks::animation() {
 			break;
 		case STONE:
 			blockRect = stoneRect;
+			break;
+		case ROCK:
+			blockRect = rockRect;
 			break;
 		case SMASH:
 			if (!faid) {
@@ -155,24 +163,20 @@ void Blocks::checkIntersection() {
 		blockBounds = blockSprite.getGlobalBounds();
 	Vector2f marioPos = mario->marioSprite.getPosition(), blockPos = blockSprite.getPosition();
 
-	float marioCenterPointY = marioPos.y - (marioBounds.height / 2),
-		blockTopPoint = blockPos.y - (blockBounds.height / 2),
+	float blockTopPoint = blockPos.y - (blockBounds.height / 2),
 		blockBottomPoint = blockPos.y + (blockBounds.height / 2),
 		blockRightPoint = blockPos.x + (blockBounds.width / 2),
 		blockLeftPoint = blockPos.x - (blockBounds.width / 2);
 	
-	// Handle large size of mario
-	if (mario->marioState != SMALL) marioCenterPointY += 28;
-
 	// In the block bounds
 	if (blockBounds.intersects(marioBounds)) {
 		if (marioPos.x >= blockLeftPoint && marioPos.x <= blockRightPoint) {
-			if (mario->speed[1] > 0 && blockType != SMASH) { // jump on the block
+			if (mario->speed[1] >= 0 && blockType != SMASH) { // jump on the block
 				mario->marioSprite.setPosition(marioPos.x, blockBounds.top);
 				mario->onGround = true;
 				marioOn = true;
 			}
-			else if (mario->speed[1] < 0) { // Hit the block with head
+			else if (marioPos.y - (marioBounds.height/2) >= blockBottomPoint) { // Hit the block with head
 				float blockBottom = blockBounds.top + blockBounds.height;
 
 				// Handle large size of smash sprite
@@ -184,15 +188,13 @@ void Blocks::checkIntersection() {
 			}
 		}
 		else { // touch from side
-			if (marioCenterPointY > blockTopPoint + 8 && marioCenterPointY < blockBottomPoint - 8) { 
-				float blockRight = blockBounds.left + blockBounds.width;
-				if (marioPos.x > blockPos.x)
-					mario->marioSprite.setPosition(blockRight + (marioBounds.width / 2), marioPos.y);
-				else
-					mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
-				mario->speed[0] = 0;
-				mario->stuck = true;
-			}
+			float blockRight = blockBounds.left + blockBounds.width;
+			if (marioPos.x > blockPos.x)
+				mario->marioSprite.setPosition(blockRight + (marioBounds.width / 2), marioPos.y);
+			else
+				mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
+			mario->speed[0] = 0;
+			mario->stuck = true;
 		}
 	}
 	else {

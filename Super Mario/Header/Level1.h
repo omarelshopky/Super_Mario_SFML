@@ -3,21 +3,19 @@
 #include "../Header/Items.h"
 #include "../Header/Blocks.h"	
 
-#define COINS_NUM 1
-#define FLOWERS_NUM 1
-#define MASHROOMS_NUM 1
-#define STONE_NUM 1
+#define COINS_NUM 16
+#define STONE_NUM 232
+#define ROCK_NUM 1
 #define QUESTION_NUM 1
 
 class Level1
 {
 	/***			Properties				***/
 private:
-	vector<Items> coin, flower, mashroom;
-	vector<Blocks> stone, question;
+	vector<Items> coin;
+	vector<Blocks> stone, question, rock;
 	GameEngine* gameEngine;
-	position coinPosition[COINS_NUM], flowerPosition[FLOWERS_NUM], mashroomPosition[MASHROOMS_NUM],
-		stonePostition[STONE_NUM], questionPosition[QUESTION_NUM];
+	position coinPosition[COINS_NUM], stonePosition[STONE_NUM], questionPosition[QUESTION_NUM], rockPosition[ROCK_NUM];
 	bool display, marioOnGround;
 	float levelWidth;
 	Texture backGroundTexture, groundTexture;
@@ -55,5 +53,11 @@ public:
 
 	// Check end of the level
 	void checkEnd();
+
+private:
+	// Arrange Array for Stone Blocks position on screen
+	void setStonesPosition();
+
+	void fillSequence(position arr[], int numOfThings, int firstIndex, float startingPos, float yPosition);
 };
 

@@ -5,7 +5,7 @@
 int main()
 {
 	/***		Hide Console open when run the game			***/
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
 
 	/***			Open Startup Game Window			***/
 	RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Super Mario");
