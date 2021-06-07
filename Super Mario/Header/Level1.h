@@ -60,6 +60,22 @@ private:
 	void setStonesPosition();
 	
 
+	// Arrange Array for Rock Blocks position on screen
+	void setRocksPosition();
+
+
+	// Arrange Array for Question Blocks position on screen
+	void setQuestionPosition();
+
+
+	// Arrange Array for Coins position on screen
+	void setCoinPosition();
+
+
+	// Arrange Array for Grounds Properties on screen
+	void setGroundProperties();
+
+
 	// Fill positions for a sequence of things
 	void fillSequence(position arr[], int numOfThings, int firstIndex, float startingPos, float yPosition);
 };

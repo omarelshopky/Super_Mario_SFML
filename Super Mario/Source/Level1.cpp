@@ -10,45 +10,12 @@ Level1::Level1(GameEngine& gameEngine) {
 	row[0] = 31, row[1] = 93, row[2] = 155, row[3] = 217, row[4] = 279, row[5] = 341, row[6] = 403,
 		row[7] = 465, row[8] = 527, row[9] = 589, row[10] = 651, row[11] = 713, row[12] = 775;
 
-	// Coins Position
-	coinPosition[0] = { 1280,288 }, coinPosition[1] = { 1322, 192 }, coinPosition[2] = { 1364, 192 },
-		coinPosition[3] = { 1406, 192 }, coinPosition[4] = { 1448, 288 }, coinPosition[5] = { 1408, 192 },
-		coinPosition[6] = { 1856, 256 }, coinPosition[7] = { 1888, 256 }, coinPosition[8] = { 1920, 256 },
-		coinPosition[9] = { 1952, 256 }, coinPosition[10] = { 2688, 160 }, coinPosition[11] = { 2720, 160 },
-		coinPosition[12] = { 2752, 160 }, coinPosition[13] = { 2784, 160 }, coinPosition[14] = { 2816, 160 },
-		coinPosition[15] = { 2284, 160 };
-
-	// Stones Position
+	// Set Positions
 	setStonesPosition();
-
-	// Rock Position
-	rockPosition[0] = { 1457, row[8] }, rockPosition[1] = { 1581, row[8] };
-	fillSequence(rockPosition, 2, 2, 8463, row[8]);
-	rockPosition[4] = { 1333, row[9] }, rockPosition[5] = { 1457, row[9] }, rockPosition[6] = { 1581, row[9] },
-		rockPosition[7] = { 1705, row[9] }, rockPosition[8] = { 1953, row[9] };
-	fillSequence(rockPosition, 3, 9, 8401, row[9]);
-	rockPosition[12] = { 1209, row[10] }, rockPosition[13] = { 1333, row[10] }, rockPosition[14] = { 1457, row[10] },
-		rockPosition[15] = { 1581, row[10] }, rockPosition[16] = { 1705, row[10] }, rockPosition[17] = { 1953, row[10] },
-		rockPosition[18] = { 2077, row[10] };
-	fillSequence(rockPosition, 4, 19, 8339, row[10]);
-	rockPosition[23] = { 1085, row[11] }, rockPosition[24] = { 1209, row[11] }, rockPosition[25] = { 1333, row[11] },
-		rockPosition[26] = { 1457, row[11] }, rockPosition[27] = { 1581, row[11] }, rockPosition[28] = { 1705, row[11] },
-		rockPosition[29] = { 1953, row[11] }, rockPosition[30] = { 2077, row[11] };
-	rockPosition[31] = { 1085, row[12] }, rockPosition[32] = { 1209, row[12] }, rockPosition[33] = { 1333, row[12] };
-	fillSequence(rockPosition, 3, 34, 1457, row[12]);
-	rockPosition[37] = { 1705, row[12] }, rockPosition[38] = { 1953, row[12] }, rockPosition[39] = { 2077, row[12] };
-
-	// Question Position
-	fillSequence(questionPosition, 5, 0, 651, row[8]);
-	fillSequence(questionPosition, 2, 5, 6789, row[9]);
-	fillSequence(questionPosition, 2, 7, 12555, row[9]);
-	fillSequence(questionPosition, 2, 9, 12803, row[9]);
-	fillSequence(questionPosition, 2, 11, 13051, row[9]);
-	fillSequence(questionPosition, 2, 13, 6417, row[10]);
-	questionPosition[15] = { 6727, row[10] }, questionPosition[16] = { 6913, row[10] };
-	fillSequence(questionPosition, 2, 17, 7161, row[10]);
-
-
+	setRocksPosition();
+	setQuestionPosition();
+	setCoinPosition();
+	
 	gameEngine.setLevelName("Level 1");
 
 	// Call Constructer for all coins 
@@ -81,26 +48,7 @@ Level1::Level1(GameEngine& gameEngine) {
 
 	// Set Level's Ground Properties
 	groundTexture.loadFromFile(LEVEL1_GROUND);
-	//groundTexture.setRepeated(true);
-	
-	for(int i = 0; i < GROUNDS_NUM; i++) groundShape[i].setTexture(&groundTexture);
-	groundShape[0].setSize(Vector2f(5022, 140));
-	groundShape[0].setPosition(0, 806);
-
-	groundShape[1].setSize(Vector2f(2232, 140));
-	groundShape[1].setPosition(5208, 806);
-
-	groundShape[2].setSize(Vector2f(124, 140));
-	groundShape[2].setPosition(7564, 806);
-
-	groundShape[3].setSize(Vector2f(744, 140));
-	groundShape[3].setPosition(7812, 806);
-
-	groundShape[4].setSize(Vector2f(496, 140));
-	groundShape[4].setPosition(8990, 806);
-
-	groundShape[5].setSize(Vector2f(3472, 140));
-	groundShape[5].setPosition(9920, 806);
+	setGroundProperties();
 
 	// Set View Properites
 	camera.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -306,4 +254,74 @@ void Level1::setStonesPosition() {
 	stonePosition[757] = { 31, row[11] }; // Row 12
 
 	stonePosition[758] = { 31, row[12] }; // Row 13
+}
+
+
+void Level1::setRocksPosition() {
+	// Row 9
+	rockPosition[0] = { 1457, row[8] }, rockPosition[1] = { 1581, row[8] };
+	fillSequence(rockPosition, 2, 2, 8463, row[8]);
+	// Row 10
+	rockPosition[4] = { 1333, row[9] }, rockPosition[5] = { 1457, row[9] }, rockPosition[6] = { 1581, row[9] },
+		rockPosition[7] = { 1705, row[9] }, rockPosition[8] = { 1953, row[9] };
+	fillSequence(rockPosition, 3, 9, 8401, row[9]);
+	// Row 11
+	rockPosition[12] = { 1209, row[10] }, rockPosition[13] = { 1333, row[10] }, rockPosition[14] = { 1457, row[10] },
+		rockPosition[15] = { 1581, row[10] }, rockPosition[16] = { 1705, row[10] }, rockPosition[17] = { 1953, row[10] },
+		rockPosition[18] = { 2077, row[10] };
+	fillSequence(rockPosition, 4, 19, 8339, row[10]);
+	// Row 12
+	rockPosition[23] = { 1085, row[11] }, rockPosition[24] = { 1209, row[11] }, rockPosition[25] = { 1333, row[11] },
+		rockPosition[26] = { 1457, row[11] }, rockPosition[27] = { 1581, row[11] }, rockPosition[28] = { 1705, row[11] },
+		rockPosition[29] = { 1953, row[11] }, rockPosition[30] = { 2077, row[11] };
+	// Row 13
+	rockPosition[31] = { 1085, row[12] }, rockPosition[32] = { 1209, row[12] }, rockPosition[33] = { 1333, row[12] };
+	fillSequence(rockPosition, 3, 34, 1457, row[12]);
+	rockPosition[37] = { 1705, row[12] }, rockPosition[38] = { 1953, row[12] }, rockPosition[39] = { 2077, row[12] };
+}
+
+
+void Level1::setQuestionPosition() {
+	// Row 9
+	fillSequence(questionPosition, 5, 0, 651, row[8]);
+	// Row 10
+	fillSequence(questionPosition, 2, 5, 6789, row[9]);
+	fillSequence(questionPosition, 2, 7, 12555, row[9]);
+	fillSequence(questionPosition, 2, 9, 12803, row[9]);
+	fillSequence(questionPosition, 2, 11, 13051, row[9]);
+	// Row 11
+	fillSequence(questionPosition, 2, 13, 6417, row[10]);
+	questionPosition[15] = { 6727, row[10] }, questionPosition[16] = { 6913, row[10] };
+	fillSequence(questionPosition, 2, 17, 7161, row[10]);
+}
+
+void Level1::setCoinPosition() {
+	coinPosition[0] = { 1280,288 }, coinPosition[1] = { 1322, 192 }, coinPosition[2] = { 1364, 192 },
+		coinPosition[3] = { 1406, 192 }, coinPosition[4] = { 1448, 288 }, coinPosition[5] = { 1408, 192 },
+		coinPosition[6] = { 1856, 256 }, coinPosition[7] = { 1888, 256 }, coinPosition[8] = { 1920, 256 },
+		coinPosition[9] = { 1952, 256 }, coinPosition[10] = { 2688, 160 }, coinPosition[11] = { 2720, 160 },
+		coinPosition[12] = { 2752, 160 }, coinPosition[13] = { 2784, 160 }, coinPosition[14] = { 2816, 160 },
+		coinPosition[15] = { 2284, 160 };
+}
+
+void Level1::setGroundProperties() {
+	for (int i = 0; i < GROUNDS_NUM; i++) groundShape[i].setTexture(&groundTexture);
+
+	groundShape[0].setSize(Vector2f(5022, 140));
+	groundShape[0].setPosition(0, 806);
+
+	groundShape[1].setSize(Vector2f(2232, 140));
+	groundShape[1].setPosition(5208, 806);
+
+	groundShape[2].setSize(Vector2f(124, 140));
+	groundShape[2].setPosition(7564, 806);
+
+	groundShape[3].setSize(Vector2f(744, 140));
+	groundShape[3].setPosition(7812, 806);
+
+	groundShape[4].setSize(Vector2f(496, 140));
+	groundShape[4].setPosition(8990, 806);
+
+	groundShape[5].setSize(Vector2f(3472, 140));
+	groundShape[5].setPosition(9920, 806);
 }
