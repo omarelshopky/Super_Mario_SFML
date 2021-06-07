@@ -160,7 +160,7 @@ void Blocks::checkIntersection() {
 				mario->onGround = true;
 				marioOn = true;
 			}
-			else if (marioPos.y - (marioBounds.height/2) >= blockBottomPoint) { // Hit the block with head
+			else if (mario->speed[1] < 0/*marioPos.y - (marioBounds.height/2) >= blockBottomPoint*/) { // Hit the block with head
 				float blockBottom = blockBounds.top + blockBounds.height;
 
 				// Handle large size of smash sprite

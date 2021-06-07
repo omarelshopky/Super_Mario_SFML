@@ -4,7 +4,7 @@
 Mario::Mario(float x, float y) {
 	// Init Mario motion varible
 	acceleration[0] = 57;
-	acceleration[1] = 120;
+	acceleration[1] = 80;
 	speed[0] = 0;
 	speed[1] = 70;
 	startJumpPosition = 500;
@@ -240,9 +240,9 @@ void Mario::jump(IntRect& intRect, int RectPosition, float waiting) {
 		jumping = false;
 	} else {
 		if (speed[1] > 0)
-			acceleration[1] = 200;
+			acceleration[1] = 200;//200
 		else
-			acceleration[1] = 120;
+			acceleration[1] = 120;//120
 
 		// Calculate Mario Speed - Y axis
 		speed[1] = speed[1] + acceleration[1] * waiting;

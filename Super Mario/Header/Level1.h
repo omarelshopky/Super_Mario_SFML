@@ -5,7 +5,7 @@
 
 #define COINS_NUM 16
 #define STONE_NUM 759
-#define ROCK_NUM 40
+#define ROCK_NUM 47
 #define QUESTION_NUM 20
 #define GROUNDS_NUM 6
 

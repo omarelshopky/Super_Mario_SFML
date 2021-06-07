@@ -218,7 +218,7 @@ void Level1::setStonesPosition() {
 	fillSequence(stonePosition, 2, 544, 13299, row[6]);
 
 	// Row 8
-	stonePosition[546] = { 31, row[7] }, stonePosition[547] = { 1829, row[7] }, stonePosition[548] = { 2449, row[7] },
+	stonePosition[546] = { 31, row[7] }, stonePosition[547] = { 2201, row[7] }, stonePosition[548] = { 2449, row[7] },
 		stonePosition[549] = { 2573, row[7] }, stonePosition[550] = { 2759, row[7] }, stonePosition[551] = { 2883, row[7] };
 	fillSequence(stonePosition, 4, 552, 3255, row[7]);
 	fillSequence(stonePosition, 6, 556, 3627, row[7]);
@@ -258,6 +258,10 @@ void Level1::setStonesPosition() {
 
 
 void Level1::setRocksPosition() {
+	fillSequence(rockPosition, 3, 44, 9765, 929);
+	// Row 8
+	fillSequence(rockPosition, 4, 40, 8525, row[7]);
+
 	// Row 9
 	rockPosition[0] = { 1457, row[8] }, rockPosition[1] = { 1581, row[8] };
 	fillSequence(rockPosition, 2, 2, 8463, row[8]);
