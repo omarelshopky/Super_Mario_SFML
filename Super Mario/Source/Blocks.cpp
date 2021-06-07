@@ -199,8 +199,6 @@ void Blocks::checkIntersection() {
 			}
 		}
 	}
-
-	
 }
 
 

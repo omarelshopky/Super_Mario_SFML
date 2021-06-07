@@ -4,8 +4,11 @@
 Level1::Level1(GameEngine& gameEngine) {
 	// Set initial values
 	this->gameEngine = &gameEngine;
-	display = marioOnGround = false;
+	display = false;
+	memset(marioOnGround, false, sizeof marioOnGround);
 	levelWidth = 13397;
+	row[0] = 31, row[1] = 93, row[2] = 155, row[3] = 217, row[4] = 279, row[5] = 341, row[6] = 403,
+		row[7] = 465, row[8] = 527, row[9] = 589, row[10] = 651, row[11] = 713, row[12] = 775;
 
 	// Coins Position
 	coinPosition[0] = { 1280,288 }, coinPosition[1] = { 1322, 192 }, coinPosition[2] = { 1364, 192 },
@@ -19,10 +22,32 @@ Level1::Level1(GameEngine& gameEngine) {
 	setStonesPosition();
 
 	// Rock Position
-	rockPosition[0] = { 500, 550 };
+	rockPosition[0] = { 1457, row[8] }, rockPosition[1] = { 1581, row[8] };
+	fillSequence(rockPosition, 2, 2, 8463, row[8]);
+	rockPosition[4] = { 1333, row[9] }, rockPosition[5] = { 1457, row[9] }, rockPosition[6] = { 1581, row[9] },
+		rockPosition[7] = { 1705, row[9] }, rockPosition[8] = { 1953, row[9] };
+	fillSequence(rockPosition, 3, 9, 8401, row[9]);
+	rockPosition[12] = { 1209, row[10] }, rockPosition[13] = { 1333, row[10] }, rockPosition[14] = { 1457, row[10] },
+		rockPosition[15] = { 1581, row[10] }, rockPosition[16] = { 1705, row[10] }, rockPosition[17] = { 1953, row[10] },
+		rockPosition[18] = { 2077, row[10] };
+	fillSequence(rockPosition, 4, 19, 8339, row[10]);
+	rockPosition[23] = { 1085, row[11] }, rockPosition[24] = { 1209, row[11] }, rockPosition[25] = { 1333, row[11] },
+		rockPosition[26] = { 1457, row[11] }, rockPosition[27] = { 1581, row[11] }, rockPosition[28] = { 1705, row[11] },
+		rockPosition[29] = { 1953, row[11] }, rockPosition[30] = { 2077, row[11] };
+	rockPosition[31] = { 1085, row[12] }, rockPosition[32] = { 1209, row[12] }, rockPosition[33] = { 1333, row[12] };
+	fillSequence(rockPosition, 3, 34, 1457, row[12]);
+	rockPosition[37] = { 1705, row[12] }, rockPosition[38] = { 1953, row[12] }, rockPosition[39] = { 2077, row[12] };
 
 	// Question Position
-	questionPosition[0] = { 589, 527 };
+	fillSequence(questionPosition, 5, 0, 651, row[8]);
+	fillSequence(questionPosition, 2, 5, 6789, row[9]);
+	fillSequence(questionPosition, 2, 7, 12555, row[9]);
+	fillSequence(questionPosition, 2, 9, 12803, row[9]);
+	fillSequence(questionPosition, 2, 11, 13051, row[9]);
+	fillSequence(questionPosition, 2, 13, 6417, row[10]);
+	questionPosition[15] = { 6727, row[10] }, questionPosition[16] = { 6913, row[10] };
+	fillSequence(questionPosition, 2, 17, 7161, row[10]);
+
 
 	gameEngine.setLevelName("Level 1");
 
@@ -56,10 +81,26 @@ Level1::Level1(GameEngine& gameEngine) {
 
 	// Set Level's Ground Properties
 	groundTexture.loadFromFile(LEVEL1_GROUND);
-	groundTexture.setRepeated(true);
-	groundShape.setTexture(&groundTexture);
-	groundShape.setSize(Vector2f(levelWidth, 156));
-	groundShape.setPosition(0, 744);
+	//groundTexture.setRepeated(true);
+	
+	for(int i = 0; i < GROUNDS_NUM; i++) groundShape[i].setTexture(&groundTexture);
+	groundShape[0].setSize(Vector2f(5022, 140));
+	groundShape[0].setPosition(0, 806);
+
+	groundShape[1].setSize(Vector2f(2232, 140));
+	groundShape[1].setPosition(5208, 806);
+
+	groundShape[2].setSize(Vector2f(124, 140));
+	groundShape[2].setPosition(7564, 806);
+
+	groundShape[3].setSize(Vector2f(744, 140));
+	groundShape[3].setPosition(7812, 806);
+
+	groundShape[4].setSize(Vector2f(496, 140));
+	groundShape[4].setPosition(8990, 806);
+
+	groundShape[5].setSize(Vector2f(3472, 140));
+	groundShape[5].setPosition(9920, 806);
 
 	// Set View Properites
 	camera.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -69,11 +110,15 @@ Level1::Level1(GameEngine& gameEngine) {
 
 void Level1::draw(RenderWindow& window) {
 	if (display) {
-		checkGround();
+		window.draw(backGroundShape);
+
+		for (int i = 0; i < GROUNDS_NUM; i++) {
+			checkGround(i);
+			window.draw(groundShape[i]);
+		}
+		
 		checkEnd();
 		handleView(window);
-		window.draw(backGroundShape);
-		window.draw(groundShape);
 		for (int i = 0; i < COINS_NUM; i++) 
 			coin[i].draw(window);
 
@@ -114,15 +159,16 @@ void Level1::end() {
 }
 
 
-void Level1::checkGround(){
+void Level1::checkGround(int num){
 	if (!gameEngine->mario.dying) {
-		if (groundShape.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds())) {
-			gameEngine->mario.marioSprite.setPosition(gameEngine->mario.marioSprite.getPosition().x, groundShape.getGlobalBounds().top);
+		if (groundShape[num].getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds())) {
+			gameEngine->mario.marioSprite.setPosition(gameEngine->mario.marioSprite.getPosition().x, groundShape[num].getGlobalBounds().top);
 			gameEngine->mario.onGround = true;
+			marioOnGround[num] = true;
 		}
 		else {
-			if (marioOnGround && gameEngine->mario.onGround) {
-				marioOnGround = false;
+			if (marioOnGround[num] && gameEngine->mario.onGround) {
+				marioOnGround[num] = false;
 				gameEngine->mario.onGround = false;
 				gameEngine->mario.speed[1] = -5;
 			}
@@ -163,85 +209,101 @@ void Level1::fillSequence(position arr[], int numOfThings, int firstIndex, float
 
 
 void Level1::setStonesPosition() {
-	float y1 = 31; // Row 1
-	stonePosition[0] = { 31, y1 }, stonePosition[1] = { 13299, y1 }, stonePosition[2] = { 13361,y1 };
+	// Row 1
+	stonePosition[0] = { 31, row[0] }, stonePosition[1] = { 13299, row[0] }, stonePosition[2] = { 13361,row[0] };
 	
-	float y2 = 93; // Row 2
-	stonePosition[3] = { 31, y2 };
-	fillSequence(stonePosition, 131, 4, 465, y2);
-	fillSequence(stonePosition, 50, 135, 10013, y2);
-	stonePosition[185] = { 13299, y2 }, stonePosition[186] = { 13361,y2 };
+	// Row 2
+	stonePosition[187] = { 31, row[1] }, stonePosition[188] = { 3379,row[1] }, stonePosition[189] = { 3441,row[1] };
+	fillSequence(stonePosition, 6, 190, 3627, row[1]);
+	fillSequence(stonePosition, 4, 196, 4123, row[1]);
+	fillSequence(stonePosition, 5, 200, 4743, row[1]);
+	fillSequence(stonePosition, 33, 205, 10447, row[1]);
+	fillSequence(stonePosition, 2, 238, 13299, row[1]);
 	
-	float y3 = 155; // Row 3
-	stonePosition[187] = { 31, y3 }, stonePosition[188] = { 3379,y3 }, stonePosition[189] = { 3441,y3 };
-	fillSequence(stonePosition, 6, 190, 3627, y3);
-	fillSequence(stonePosition, 4, 196, 4123, y3);
-	fillSequence(stonePosition, 5, 200, 4743, y3);
-	fillSequence(stonePosition, 33, 205, 10447, y3);
-	fillSequence(stonePosition, 2, 238, 13299, y3);
+	// Row 3
+	stonePosition[240] = { 31, row[2] };
+	fillSequence(stonePosition, 2, 241, 3379, row[2]);
+	fillSequence(stonePosition, 6, 243, 3627, row[2]);
+	fillSequence(stonePosition, 4, 249, 4123, row[2]);
+	fillSequence(stonePosition, 5, 253, 4743, row[2]);
+	fillSequence(stonePosition, 33, 258, 10447, row[2]);
+	fillSequence(stonePosition, 2, 291, 13299, row[2]);
 
-	float y4 = 217; // Row 4
-	stonePosition[240] = { 31, y4 };
-	fillSequence(stonePosition, 2, 241, 3379, y4);
-	fillSequence(stonePosition, 6, 243, 3627, y4);
-	fillSequence(stonePosition, 4, 249, 4123, y4);
-	fillSequence(stonePosition, 5, 253, 4743, y4);
-	fillSequence(stonePosition, 33, 258, 10447, y4);
-	fillSequence(stonePosition, 2, 291, 13299, y4);
+	// Row 4
+	stonePosition[293] = { 31, row[3] };
+	fillSequence(stonePosition, 2, 294, 3255, row[3]);
+	fillSequence(stonePosition, 2, 296, 3875, row[3]);
+	stonePosition[298] = { 4185, row[3] };
+	fillSequence(stonePosition, 2, 299, 4495, row[3]);
+	fillSequence(stonePosition, 33, 301, 10447, row[3]);
+	fillSequence(stonePosition, 2, 334, 13299, row[3]);
 
-	float y5 = 279; // Row 5
-	stonePosition[293] = { 31, y5 };
-	fillSequence(stonePosition, 2, 294, 3255, y5);
-	fillSequence(stonePosition, 2, 296, 3875, y5);
-	stonePosition[298] = { 4185, y5 };
-	fillSequence(stonePosition, 2, 299, 4495, y5);
-	fillSequence(stonePosition, 33, 301, 10447, y5);
-	fillSequence(stonePosition, 2, 334, 13299, y5);
+	// Row 5
+	stonePosition[336] = { 31, row[4] };
+	fillSequence(stonePosition, 2, 337, 3255, row[4]);
+	fillSequence(stonePosition, 2, 339, 3875, row[4]);
+	stonePosition[401] = { 4185, row[4] };
+	fillSequence(stonePosition, 2, 402, 4495, row[4]);
+	fillSequence(stonePosition, 33, 404, 10447, row[4]);
+	fillSequence(stonePosition, 2, 437, 13299, row[4]);
 
-	float y6 = 341; // Row 6
-	stonePosition[336] = { 31, y6 };
-	fillSequence(stonePosition, 2, 337, 3255, y6);
-	fillSequence(stonePosition, 2, 339, 3875, y6);
-	stonePosition[401] = { 4185, y6 };
-	fillSequence(stonePosition, 2, 402, 4495, y6);
-	fillSequence(stonePosition, 33, 404, 10447, y6);
-	fillSequence(stonePosition, 2, 437, 13299, y6);
+	// Row 6
+	stonePosition[439] = { 31, row[5] };
+	fillSequence(stonePosition, 2, 440, 3255, row[5]);
+	fillSequence(stonePosition, 2, 442, 3875, row[5]);
+	stonePosition[446] = { 4185, row[5] };
+	fillSequence(stonePosition, 2, 447, 4495, row[5]);
+	fillSequence(stonePosition, 6, 449, 5239, row[5]);
+	fillSequence(stonePosition, 33, 455, 10447, row[5]);
+	fillSequence(stonePosition, 2, 488, 13299, row[5]);
 
-	float y7 = 403; // Row 7
-	stonePosition[439] = { 31, 403 };
-	fillSequence(stonePosition, 2, 440, 3255, y7);
-	fillSequence(stonePosition, 2, 442, 3875, y7);
-	stonePosition[446] = { 4185, y7 };
-	fillSequence(stonePosition, 2, 447, 4495, y7);
-	fillSequence(stonePosition, 6, 449, 5239, y7);
-	fillSequence(stonePosition, 33, 455, 10447, y7);
-	fillSequence(stonePosition, 2, 488, 13299, y7);
+	// Row 7
+	stonePosition[490] = { 31, row[6] }, stonePosition[491] = { 2449, row[6] };
+	fillSequence(stonePosition, 4, 492, 2573, row[6]);
+	stonePosition[496] = { 2883, row[6] };
+	fillSequence(stonePosition, 2, 497, 3255, row[6]);
+	fillSequence(stonePosition, 2, 499, 3875, row[6]);
+	stonePosition[501] = { 4185, row[6] }, stonePosition[502] = { 4309, row[6] };
+	fillSequence(stonePosition, 2, 503, 4495, row[6]);
+	fillSequence(stonePosition, 6, 505, 5239, row[6]);
+	fillSequence(stonePosition, 33, 511, 10447, row[6]);
+	fillSequence(stonePosition, 2, 544, 13299, row[6]);
 
-	float y8 = 465; // Row 8
-	stonePosition[490] = { 31, y8 }, stonePosition[491] = { 2449, y8 };
-	fillSequence(stonePosition, 4, 492, 2573, y8);
-	stonePosition[496] = { 2883, y8 };
-	fillSequence(stonePosition, 2, 497, 3255, y8);
-	fillSequence(stonePosition, 2, 499, 3875, y8);
-	stonePosition[501] = { 4185, y8 }, stonePosition[502] = { 4309, y8 };
-	fillSequence(stonePosition, 2, 503, 4495, y8);
-	fillSequence(stonePosition, 6, 505, 5239, y8);
-	fillSequence(stonePosition, 33, 511, 10447, y8);
-	fillSequence(stonePosition, 2, 544, 13299, y8);
+	// Row 8
+	stonePosition[546] = { 31, row[7] }, stonePosition[547] = { 1829, row[7] }, stonePosition[548] = { 2449, row[7] },
+		stonePosition[549] = { 2573, row[7] }, stonePosition[550] = { 2759, row[7] }, stonePosition[551] = { 2883, row[7] };
+	fillSequence(stonePosition, 4, 552, 3255, row[7]);
+	fillSequence(stonePosition, 6, 556, 3627, row[7]);
+	fillSequence(stonePosition, 3, 562, 4185, row[7]);
+	fillSequence(stonePosition, 2, 565, 4495, row[7]);
+	fillSequence(stonePosition, 5, 567, 4743, row[7]);
+	fillSequence(stonePosition, 6, 572, 9021, row[7]);
+	fillSequence(stonePosition, 35, 578, 10323, row[7]);
+	fillSequence(stonePosition, 2, 613, 13299, row[7]);
 
-	float y9 = 527; // Row 9
-	stonePosition[546] = { 31, y9 }, stonePosition[547] = { 1829, y9 }, stonePosition[548] = { 2449, y9 },
-		stonePosition[549] = { 2573, y9 }, stonePosition[550] = { 2759, y9 }, stonePosition[551] = { 2883, y9 };
-	fillSequence(stonePosition, 4, 552, 3255, y9);
-	fillSequence(stonePosition, 6, 556, 3627, y9);
-	fillSequence(stonePosition, 3, 562, 4185, y9);
-	fillSequence(stonePosition, 2, 565, 4495, y9);
-	fillSequence(stonePosition, 5, 567, 4743, y9);
-	fillSequence(stonePosition, 6, 572, 9021, y9);
-	fillSequence(stonePosition, 35, 578, 10323, y9);
-	fillSequence(stonePosition, 2, 613, 13299, y9);
+	// Row 9
+	stonePosition[615] = { 31 , row[8] };
+	fillSequence(stonePosition, 3, 616, 2449, row[8]);
+	fillSequence(stonePosition, 3, 619, 2759, row[8]);
+	fillSequence(stonePosition, 2, 622, 3379, row[8]);
+	fillSequence(stonePosition, 35, 624, 10323, row[8]);
+	fillSequence(stonePosition, 2, 659, 13299, row[8]);
 
-	/*   stonePosition[9] = { 31,589 }, stonePosition[10] = { 31, 651 }, stonePosition[11] = { 31, 713 },
-	stonePosition[12] = { 465, 93 }, stonePosition[13] = { 527,93 }, stonePosition[14] = { 589,93 },
-	stonePosition[15] = { 651,93 };*/
+	// Row 10
+	stonePosition[661] = { 31, row[9] };
+	fillSequence(stonePosition, 2, 662, 3379, row[9]);
+	fillSequence(stonePosition, 2, 664, 7595, row[9]);
+	fillSequence(stonePosition, 41, 666, 9951, row[9]);
+	fillSequence(stonePosition, 2, 707, 13299, row[9]);
+
+	// Row 11
+	stonePosition[709] = { 31, row[10] };
+	fillSequence(stonePosition, 2, 710, 3379, row[10]);
+	fillSequence(stonePosition, 2, 712, 7595, row[10]);
+	fillSequence(stonePosition, 41, 714, 9951, row[10]);
+	fillSequence(stonePosition, 2, 755, 13299, row[10]);
+
+	stonePosition[757] = { 31, row[11] }; // Row 12
+
+	stonePosition[758] = { 31, row[12] }; // Row 13
 }
