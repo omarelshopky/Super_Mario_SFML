@@ -16,7 +16,8 @@ Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y
 	// Set item Sprite properties
 	itemSprite.setTexture(gameEngine.itemTexture);
 	itemSprite.setPosition(x, y);
-	itemSprite.setScale(1.5, 1.5);
+	itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
+	itemSprite.setScale(1.8, 1.8);
 
 	switch (itemType) {
 	case COIN:
@@ -37,7 +38,6 @@ Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y
 	}
 
 	itemSprite.setTextureRect(itemIntRect);
-	itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
 
 	// Set Floating text properties
 	font.loadFromFile(FLOATING_FONT);

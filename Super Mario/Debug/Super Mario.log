@@ -3,36 +3,5 @@ E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(14,41): warning 
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(41,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(41,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(139,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(194,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  GameEngine.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(40,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(40,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(94,48): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\GameEngine.cpp(103,43): warning C4390: ';': empty controlled statement found; is this the intent?
-  Items.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(13,38): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(40,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(40,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(49,36): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(109,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(114,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Items.cpp(122,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Level1.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Level1.cpp(152,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  LevelsList.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(22,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(23,36): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(30,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(40,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(157,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\LevelsList.cpp(173,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  MainMenu.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\MainMenu.cpp(23,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  PlayerNameMenu.cpp
-  main.cpp
-  Generating Code...
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(197,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

@@ -155,7 +155,7 @@ void Blocks::checkIntersection() {
 	// In the block bounds
 	if (blockBounds.intersects(marioBounds)) {
 		if (marioPos.x >= blockLeftPoint && marioPos.x <= blockRightPoint) {
-			if (mario->speed[1] >= 0 && blockType != SMASH) { // jump on the block
+			if (mario->speed[1] > 0 && blockType != SMASH) { // jump on the block
 				mario->marioSprite.setPosition(marioPos.x, blockBounds.top);
 				mario->onGround = true;
 				marioOn = true;
@@ -172,13 +172,16 @@ void Blocks::checkIntersection() {
 			}
 		}
 		else { // touch from side
-			float blockRight = blockBounds.left + blockBounds.width;
-			if (marioPos.x > blockPos.x)
-				mario->marioSprite.setPosition(blockRight + (marioBounds.width / 2), marioPos.y);
-			else
-				mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
-			mario->speed[0] = 0;
-			mario->stuck = true;
+			cout << mario->speed[1] << ' ' << mario->onGround << '\n';
+			if (mario->speed[1] > 1 && !mario->onGround || mario->speed[1] < 1) {
+				float blockRight = blockBounds.left + blockBounds.width;
+				if (marioPos.x > blockPos.x)
+					mario->marioSprite.setPosition(blockRight + (marioBounds.width / 2), marioPos.y);
+				else
+					mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
+				mario->speed[0] = 0;
+				mario->stuck = true;
+			}
 		}
 	}
 	else {

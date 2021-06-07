@@ -4,7 +4,7 @@
 #include "../Header/Blocks.h"	
 
 #define COINS_NUM 16
-#define STONE_NUM 232
+#define STONE_NUM 616
 #define ROCK_NUM 1
 #define QUESTION_NUM 1
 
