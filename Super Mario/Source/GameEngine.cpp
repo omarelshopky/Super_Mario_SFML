@@ -48,6 +48,28 @@ GameEngine::GameEngine() : mario(500, 200){
 	// Set levels Map values
 	levelsMap["level 1"] = 1;
 	levelsMap["level 2"] = 2;
+
+	// Load Game Sound Effects
+	popUpBuffer.loadFromFile(POPUP_SOUND);
+	popUpSound.setBuffer(popUpBuffer);
+
+	smashBuffer.loadFromFile(SMASH_SOUND);
+	smashSound.setBuffer(smashBuffer);
+
+	coinBuffer.loadFromFile(COIN_SOUND);
+	coinSound.setBuffer(coinBuffer);
+
+	powerUpBuffer.loadFromFile(POWERUP_SOUND);
+	powerUpSound.setBuffer(powerUpBuffer);
+
+	// Load Game Textures
+	questionTexture.loadFromFile(QUESTION_BLOCK);
+	stoneTexture.loadFromFile(STONE_BLOCK);
+	itemTexture.loadFromFile(ITEMS);
+
+	for (int i = 0; i < 6; i++) {
+		smashTextures[i].loadFromFile(SMASH_STONE_BLOCK + to_string(i) + ".png");
+	}
 }
 
 

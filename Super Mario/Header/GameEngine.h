@@ -14,11 +14,14 @@ private:
     map<string, int> levelsMap;
     Texture coinTexture;
     Sprite coinSprite;
+    SoundBuffer popUpBuffer, smashBuffer, coinBuffer, powerUpBuffer;
     IntRect coinRect;
 
 public:
     Mario mario;
     Text timerText, scoreText, coinsText, levelText;
+    Texture stoneTexture, questionTexture, smashTextures[6], itemTexture;
+    Sound popUpSound, smashSound, coinSound, powerUpSound;
 
     /*         Constractar          */
     GameEngine();

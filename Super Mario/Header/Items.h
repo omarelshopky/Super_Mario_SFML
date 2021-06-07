@@ -9,14 +9,11 @@ private:
 	/***			Properties				***/
 	Mario *mario;
 	GameEngine* gameEngine;
-	Texture itemTexture;
 	Sprite itemSprite;
 	IntRect itemIntRect, coinIntRect, flowerIntRect, mashroomIntRect, sparklsIntRect;
 	Clock timer, textFloatTimer;
 	Text floatingText;
 	Font font;
-	SoundBuffer takenSoundBuffer;
-	Sound takenSound;
 	item_t itemType;
 	int CurrentRect, maxRect, floatingSpeed, takenScore;
 	bool display, faid, isTaken, resetTime;

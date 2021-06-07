@@ -33,19 +33,19 @@ Level1::Level1(GameEngine& gameEngine) {
 
 	// Call Constructer for all Stone Blocks
 	for (int i = 0; i < STONE_NUM; i++) {
-		stone.push_back(*new Blocks(gameEngine.mario, STONE, stonePosition[i].x, stonePosition[i].y));
+		stone.push_back(*new Blocks(gameEngine.mario, gameEngine, STONE, stonePosition[i].x, stonePosition[i].y));
 		stone[i].blockSprite.setColor(Color::Color(70, 50, 180)); // Blue filter
 	}
 
 	// Call Constructer for all Rock Blocks
 	for (int i = 0; i < ROCK_NUM; i++) {
-		rock.push_back(*new Blocks(gameEngine.mario, ROCK, rockPosition[i].x, rockPosition[i].y));
+		rock.push_back(*new Blocks(gameEngine.mario, gameEngine, ROCK, rockPosition[i].x, rockPosition[i].y));
 		rock[i].blockSprite.setColor(Color::Color(70, 50, 180)); // blue filter
 	}
 
 	// Call Constructer for all Question Blocks
 	for (int i = 0; i < QUESTION_NUM; i++) {
-		question.push_back(*new Blocks(gameEngine.mario, QUESTION, questionPosition[i].x, questionPosition[i].y));
+		question.push_back(*new Blocks(gameEngine.mario, gameEngine, QUESTION, questionPosition[i].x, questionPosition[i].y));
 	}
 
 	// Set Level's Background Properties
@@ -159,7 +159,7 @@ void Level1::checkEnd() {
 }
 
 void Level1::fillSequence(position arr[], int numOfThings, int firstIndex, float startingPos, float yPosition) {
-	for (int i = 0; i < numOfThings; i++) arr[firstIndex + i] = { float(startingPos + i * 62) , yPosition };
+	for (int i = 0; i < numOfThings; i++) stonePosition[firstIndex + i] = { float(startingPos + i * 62) , yPosition };
 }
 
 

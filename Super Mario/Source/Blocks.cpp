@@ -1,8 +1,10 @@
 #include "../Header/Blocks.h"
 
-Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
+Blocks::Blocks(Mario& mario, GameEngine& gameEngine, block_t type, float x, float y) {
 	// Set initial values
 	this->mario = &mario;
+	this->gameEngine = &gameEngine;
+
 	questionRect = IntRect(0, 0, 32, 31);
 	stoneRect = IntRect(32, 0, 32, 31);
 	bronzeRect = IntRect(0, 32, 32, 31);
@@ -16,47 +18,30 @@ Blocks::Blocks(Mario& mario, block_t type, float x, float y) {
 	startPos.x = x;
 	startPos.y = y;
 
-	// Load Textures form files
-	questionTexture.loadFromFile(QUESTION_BLOCK);
-	questionTexture.setSmooth(true);
-
-	stoneTexture.loadFromFile(STONE_BLOCK);
-	stoneTexture.setSmooth(true);
-
-	for (int i = 0; i < 6; i++) {
-		smashTextures[i].loadFromFile(SMASH_STONE_BLOCK + to_string(i) + ".png");
-		smashTextures[i].setSmooth(true);
-	}
-
+	// Set Sprite Properties
 	switch (type)
 	{
 	case QUESTION:
-		blockSprite.setTexture(questionTexture);
+		blockSprite.setTexture(gameEngine.questionTexture);
 		blockRect = questionRect;
 		maxRect = 4;
 		break;
 	case STONE:
-		blockSprite.setTexture(stoneTexture);
+		blockSprite.setTexture(gameEngine.stoneTexture);
 		blockRect = stoneRect;
 		maxRect = 1;
 		break;
 	case ROCK:
-		blockSprite.setTexture(stoneTexture);
+		blockSprite.setTexture(gameEngine.stoneTexture);
 		blockRect = rockRect;
 		maxRect = 1;
 		break;
 	}
 
-	// Set sprite properties
 	blockSprite.setOrigin(blockRect.width / 2, blockRect.height / 2);
 	blockSprite.setTextureRect(blockRect);
 	blockSprite.setPosition(x, y);
 	blockSprite.setScale(2, 2);
-
-	// Set Hit Sound Properties
-	popUpBuffer.loadFromFile(POPUP_SOUND);
-	smashBuffer.loadFromFile(SMASH_SOUND);
-	hitSound.setBuffer(popUpBuffer);
 }
 
 
@@ -75,7 +60,7 @@ void Blocks::animation() {
 			blockRect.left = questionRect.left + currentRect * questionRect.width;
 			break;
 		case BRONZE:
-			blockSprite.setTexture(stoneTexture);
+			blockSprite.setTexture(gameEngine->stoneTexture);
 			blockRect = bronzeRect;
 			maxRect = 1;
 			break;
@@ -91,12 +76,12 @@ void Blocks::animation() {
 				currentRect = 0;
 				blockRect = smashRect;
 				blockSprite.setOrigin(400, 400);
-				blockSprite.setTexture(smashTextures[currentRect]);
+				blockSprite.setTexture(gameEngine->smashTextures[currentRect]);
 				blockSprite.setScale(1, 1);
 				faid = true;
 			}
 			else {
-				blockSprite.setTexture(smashTextures[currentRect]);
+				blockSprite.setTexture(gameEngine->smashTextures[currentRect]);
 				if (currentRect == maxRect - 1) display = false;
 			}
 		}
@@ -114,15 +99,14 @@ void Blocks::animation() {
 
 void Blocks::smash() {
 	blockType = SMASH;
-	hitSound.setBuffer(smashBuffer);
-	hitSound.play();
+	gameEngine->smashSound.play();
 }
 
 void Blocks::startPopUp() {
 	if (!isPopUp) {
 		isPopUp = true;
 		popUpTimer.restart();
-		hitSound.play();
+		gameEngine->popUpSound.play();
 	}
 }
 

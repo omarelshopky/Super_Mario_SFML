@@ -6,7 +6,7 @@ Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y
 	this->gameEngine = &gameEngine;
 	display = true;
 	faid = isTaken = resetTime = false;
-	CurrentRect = floatingSpeed =  0;
+	CurrentRect = floatingSpeed = 0;
 	itemType = item;
 	coinIntRect = IntRect(0, 86, 33, 30);
 	flowerIntRect = IntRect(32, 213, 32, 30);
@@ -14,8 +14,7 @@ Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y
 	sparklsIntRect = IntRect(0, 116, 40, 32);
 
 	// Set item Sprite properties
-	itemTexture.loadFromFile(ITEMS);
-	itemSprite.setTexture(itemTexture);
+	itemSprite.setTexture(gameEngine.itemTexture);
 	itemSprite.setPosition(x, y);
 	itemSprite.setScale(1.5, 1.5);
 
@@ -24,26 +23,21 @@ Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y
 		maxRect = 4;
 		itemIntRect = coinIntRect;
 		takenScore = 100;
-		takenSoundBuffer.loadFromFile(COIN_SOUND);
 		break;
 	case FLOWER:
 		maxRect = 3;
 		itemIntRect = flowerIntRect;
 		takenScore = 1500;
-		takenSoundBuffer.loadFromFile(POWERUP_SOUND);
 		break;
 	case MASHROOM:
 		maxRect = 2;
 		itemIntRect = mashroomIntRect;
 		takenScore = 1000;
-		takenSoundBuffer.loadFromFile(POWERUP_SOUND);
 		break;
 	}
 
 	itemSprite.setTextureRect(itemIntRect);
 	itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
-
-	takenSound.setBuffer(takenSoundBuffer);
 
 	// Set Floating text properties
 	font.loadFromFile(FLOATING_FONT);
@@ -134,7 +128,18 @@ void Items::checkTaken() {
 	if (!mario->dying) {
 		if (itemSprite.getGlobalBounds().intersects(mario->marioSprite.getGlobalBounds()) && !faid) {
 			isTaken = true;
-			takenSound.play();
+			switch (itemType)
+			{
+			case COIN:
+				gameEngine->coinSound.play();
+				break;
+			case MASHROOM:
+			case FLOWER:
+				gameEngine->popUpSound.play();
+				break;
+			default:
+				break;
+			}
 		}
 		setTaken();
 	}

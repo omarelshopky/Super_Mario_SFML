@@ -1,12 +1,11 @@
 #pragma once
 #include "../Header/DEFINITION.h"
 #include "../Header/Mario.h"
-
+#include "../Header/GameEngine.h"
 
 class Blocks{
 private:
 	/***			Properties				***/
-	Texture stoneTexture, questionTexture, smashTextures[6];
 	IntRect blockRect, stoneRect, questionRect, bronzeRect, smashRect, rockRect;
 	Clock timer, popUpTimer;
 	int currentRect, maxRect, movingSpeed;
@@ -15,14 +14,13 @@ private:
 	position startPos;
 	block_t blockType;
 	Mario *mario;
-	SoundBuffer popUpBuffer, smashBuffer;
-	Sound hitSound;
+	GameEngine* gameEngine;
 
 public:
 	Sprite blockSprite;
 
-	Blocks(Mario& mario, block_t type, float x, float y); // Constructer
-
+	Blocks(Mario& mario, GameEngine& gameEngine, block_t type, float x, float y); // Constructer
+	
 
 	/***			Methods				***/
 
