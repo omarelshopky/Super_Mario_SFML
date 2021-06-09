@@ -24,12 +24,15 @@ typedef enum { COIN, MASHROOM, FLOWER , SPARKL, NONE} item_t;
 
 typedef enum { QUESTION, STONE , BRONZE, SMASH , ROCK} block_t;
 
+typedef enum { BLACK, SMASHED, TURTLE, SHELL} enemy_t;
+
 
 struct player {
 	string name;
 	string score;
 	string level;
 	int lifes;
+	float enemiesSpeed;
 };
 
 struct area {
@@ -146,5 +149,15 @@ struct position {
 #define LEVEL1_BACKGROUND "Resource/Textures/Backgrounds/Blue.jpg"
 
 #define LEVEL1_GROUND "Resource/Textures/blueGround.png"
+
+/**********************************************************/
+
+
+
+
+/***						Enemy							***/
+#define ENEMY "Resource/Textures/Enemies.png"
+
+#define KILL_SOUND "Resource/Sounds/kick.wav"
 
 /**********************************************************/

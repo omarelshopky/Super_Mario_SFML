@@ -1,6 +1,7 @@
 #pragma once
 #include "../Header/DEFINITION.h"
 #include "../Header/Blocks.h"	
+#include "../Header/Enemy.h"
 
 #define COINS_NUM 1500
 #define STONE_NUM 1500
@@ -19,6 +20,7 @@ class Level1
 private:
 	vector<Items> coin;
 	vector<Blocks> stone, question, rock;
+	vector<Enemy> black, turtle;
 	GameEngine* gameEngine;
 	position coinPosition[COINS_NUM], stonePosition[STONE_NUM], stoneCoinPosition[STONE_WITH_COIN_NUM],
 		questCoinPosition[QUESTION_WITH_COIN_NUM], questMashPosition[QUESTION_WITH_MASH_NUM],

@@ -128,7 +128,7 @@ void OptionsMenu::moveLeft() {
 }
 
 
-void OptionsMenu::changeSettings(bool up, player newPlayer) {
+void OptionsMenu::changeSettings(bool up, player &newPlayer) {
 	switch (activeSlide) {
 	case 0:
 		changeActiveMusicOption();
@@ -189,7 +189,7 @@ void OptionsMenu::updateControlSettings() {
 }
 
 
-void OptionsMenu::changeActiveDifficultyOption(bool up, player newPlayer) {
+void OptionsMenu::changeActiveDifficultyOption(bool up, player& newPlayer) {
 	if (up) {
 		if (selectedDifficulty == 1) {
 			difficultyBallSprite.setPosition(1377, 451);
@@ -214,7 +214,7 @@ void OptionsMenu::changeActiveDifficultyOption(bool up, player newPlayer) {
 }
 
 
-void OptionsMenu::updateDifficultySettings(player newPlayer) {
+void OptionsMenu::updateDifficultySettings(player& newPlayer) {
 	switch (selectedDifficulty)
 	{
 	case 1:

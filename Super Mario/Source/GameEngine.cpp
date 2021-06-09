@@ -63,6 +63,9 @@ GameEngine::GameEngine() : mario(500, 200){
 	powerUpBuffer.loadFromFile(POWERUP_SOUND);
 	powerUpSound.setBuffer(powerUpBuffer);
 
+	killBuffer.loadFromFile(KILL_SOUND);
+	killSound.setBuffer(killBuffer);
+
 	if (!powerUpAppearBuffer.loadFromFile(POWERUP_APPEAR_SOUND)) { cout << "faild to load powerup appear\n"; }
 	powerUpAppearSound.setBuffer(powerUpAppearBuffer);
 
@@ -70,6 +73,7 @@ GameEngine::GameEngine() : mario(500, 200){
 	questionTexture.loadFromFile(QUESTION_BLOCK);
 	stoneTexture.loadFromFile(STONE_BLOCK);
 	itemTexture.loadFromFile(ITEMS);
+	enemyTextrue.loadFromFile(ENEMY);
 
 	for (int i = 0; i < 6; i++) {
 		smashTextures[i].loadFromFile(SMASH_STONE_BLOCK + to_string(i) + ".png");

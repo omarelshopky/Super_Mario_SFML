@@ -173,6 +173,5 @@ void Items::setTaken() {
 		faid = true;
 		isTaken = false;
 		gameEngine->updateScore(takenScore);
-		
 	}
 }

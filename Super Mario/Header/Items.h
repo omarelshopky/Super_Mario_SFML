@@ -1,6 +1,5 @@
 #pragma once
 #include "../Header/DEFINITION.h"
-#include "../Header/Mario.h"
 #include "../Header/GameEngine.h"
 
 class Items
@@ -34,7 +33,7 @@ private:
 	void animation();
 
 
-	// Block moving up then down.
+	// Text floating Up when take the item
 	void TextFloat();
 
 

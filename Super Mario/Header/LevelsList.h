@@ -10,16 +10,16 @@ class LevelsList : public Menu
 {
 private:
 	/***			Properties				***/
-	GameEngine gameEngine;
 	Level1 level1;
 	Text levelsNameText[NUMBER_OF_LEVELS];
 	Texture optionShadowTexture;
 	Sprite optionShadowSprite;
 	int selectedLevel, maxLevel;
-	player currentPlayer;
 	fstream playersFile;
 
 public:
+	
+	GameEngine gameEngine;
 	bool levelStarted;
 
 	// Constructor

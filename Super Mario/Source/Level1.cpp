@@ -9,7 +9,20 @@ Level1::Level1(GameEngine& gameEngine) {
 	coinCnt = stoneCnt = stoneCoinCnt = quesCoinCnt = quesMashCnt = quesFlowerCnt = rockCnt = 0;
 	levelWidth = 13397;
 	
-		
+	// Set View Properites
+	camera.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	camera.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+
+	// Set Level's Background Properties
+	backGroundTexture.loadFromFile(LEVEL1_BACKGROUND);
+	backGroundTexture.setRepeated(true);
+	backGroundShape.setTexture(&backGroundTexture);
+	backGroundShape.setSize(Vector2f(levelWidth, WINDOW_HEIGHT));
+
+	// Set Level's Ground Properties
+	groundTexture.loadFromFile(LEVEL1_GROUND);
+	setGroundProperties();
+
 	// Set Positions
 	arrangeLevelBlocks();
 	
@@ -45,19 +58,7 @@ Level1::Level1(GameEngine& gameEngine) {
 		rock[i].blockSprite.setColor(Color::Color(70, 50, 180)); // blue filter
 	}
 
-	// Set Level's Background Properties
-	backGroundTexture.loadFromFile(LEVEL1_BACKGROUND);
-	backGroundTexture.setRepeated(true);
-	backGroundShape.setTexture(&backGroundTexture);
-	backGroundShape.setSize(Vector2f(levelWidth, WINDOW_HEIGHT));
-
-	// Set Level's Ground Properties
-	groundTexture.loadFromFile(LEVEL1_GROUND);
-	setGroundProperties();
-
-	// Set View Properites
-	camera.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	camera.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	black.push_back(*new Enemy(gameEngine, BLACK, rock[1].blockSprite, rock[2].blockSprite, groundShape[0], 900, 200));
 }
 
 
@@ -83,6 +84,7 @@ void Level1::draw(RenderWindow& window) {
 
 		for (int i = 0; i < quesMashCnt + quesCoinCnt + quesFlowerCnt; i++)
 			question[i].draw(window);
+		black[0].draw(window);
 
 		gameEngine->mario.draw(window);
 		gameEngine->draw(window);
@@ -131,7 +133,7 @@ void Level1::checkGround(int num){
 
 
 void Level1::handleView(RenderWindow& window) {
-	//if (!gameEngine->mario.stuck) { 
+	if (!gameEngine->mario.stuck) { 
 		position screenCenter = { gameEngine->mario.marioSprite.getPosition().x, 450 };
 
 		if (screenCenter.x > WINDOW_WIDTH / 2 && screenCenter.x < levelWidth - (WINDOW_WIDTH / 2)) {
@@ -139,7 +141,7 @@ void Level1::handleView(RenderWindow& window) {
 			gameEngine->setHeaderPosition(screenCenter);
 		}
 		window.setView(camera);
-	//}
+	}
 }
 
 
@@ -194,7 +196,7 @@ void Level1::arrangeLevelBlocks() {
 		{10,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,9,10,10,10,10,10,10,10,10,10,10,10,10,10,9,10,10,10,10,10,10,10,10,10,10,10,9,0,0,0,0,0,0,0,0,0,0,0,0,80,0,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,81,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25},
 		{10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,0,80,0,0,80,0,0,9,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,10,0,0,10,10,10,0,0,10,10,10,0,0,10,10,0,0,10,10,10,10,10,10,10,0,0,0,10,10,10,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25},
 		{10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,0,80,0,0,80,0,0,10,10,10,10,10,10,10,10,10,0,0,0,0,9,0,0,0,0,10,0,0,10,10,10,0,0,10,10,10,0,0,10,10,0,0,10,10,10,10,10,10,10,0,0,0,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25},
-		{10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,0,80,0,0,80,0,0,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,10,0,0,10,10,10,0,0,10,10,10,0,0,10,10,0,0,10,10,10,10,10,10,10,0,0,0,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25}
+		{10,10,10,10,10,10,10,10,10,10,10,10,10,6,10,10,10,10,10,10,82,82,82,82,82,6,82,82,82,82,82,82,82,82,82,82,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,0,80,0,0,80,0,0,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,10,0,0,10,10,10,0,0,10,10,10,0,0,10,10,0,0,10,10,10,10,10,10,10,0,0,0,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25}
 	};
 
 	

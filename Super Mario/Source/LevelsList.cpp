@@ -34,7 +34,7 @@ LevelsList::LevelsList() : level1(gameEngine) {
 
 void LevelsList::show(player newPlayer) {
 	display = true;
-	currentPlayer = newPlayer;
+	gameEngine.currentPlayer = newPlayer;
 
 	selectedLevel = 0;
 	optionShadowSprite.setPosition(695, 350 + selectedLevel * 200);
@@ -104,7 +104,7 @@ void LevelsList::checkOpendLevels() {
 	// Add players information to vector
 	for (int i = 0; i < lines; i++) {
 		playersFile >> tempPlayer.name >> tempPlayer.score >> tempPlayer.level;
-		if (tempPlayer.name == currentPlayer.name) {
+		if (tempPlayer.name == gameEngine.currentPlayer.name) {
 			maxLevel = stoi(tempPlayer.level);
 			break;
 		}

@@ -155,6 +155,7 @@ void MainMenu::mainMenuHandleSelection() {
 	{
 	case 0:
 		playerName.show();
+		controlEnemiesSpeed();
 		break;
 	case 1:
 		howToPlay.show();
@@ -186,4 +187,19 @@ void MainMenu::controlMusic() {
 }
 
 
-
+void MainMenu::controlEnemiesSpeed() {
+	switch (newPlayer.lifes)
+	{
+	case 5:
+		newPlayer.enemiesSpeed = 2;
+		break;
+	case 3:
+		newPlayer.enemiesSpeed = 3;
+		break;
+	case 1:
+		newPlayer.enemiesSpeed = 7;
+		break;
+	default:
+		break;
+	}
+}

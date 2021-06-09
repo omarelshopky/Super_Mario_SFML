@@ -9,7 +9,7 @@ int main()
 
 	/***			Open Startup Game Window			***/
 	RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Super Mario");
-	window.setFramerateLimit(60); // Limit the framerate to a maximum fixed frequency.
+	window.setFramerateLimit(45); // Limit the framerate to a maximum fixed frequency.
 
 	MainMenu menu;  // Create Menu 
 	

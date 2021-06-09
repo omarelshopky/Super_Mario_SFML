@@ -64,5 +64,9 @@ private:
 	
 	// Control which music will be started
 	void controlMusic();
+
+
+	// Control Enemies speed according to selected difficulty
+	void controlEnemiesSpeed();
 };
 
