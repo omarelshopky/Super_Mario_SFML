@@ -1,6 +1,6 @@
 #include "../Header/LevelsList.h"
 
-LevelsList::LevelsList() : level1(gameEngine) {
+LevelsList::LevelsList() : level1(gameEngine), level2(gameEngine) {
 	// Set intial values
 	display = levelStarted = false;
 	selectedLevel = 0;
@@ -54,6 +54,7 @@ void LevelsList::draw(RenderWindow& window) {
 		}
 	}
 	level1.draw(window);
+	level2.draw(window);
 }
 
 
@@ -73,11 +74,14 @@ void LevelsList::catchEvents(Event event, player& newPlayer) {
 				changingOptionSound.play();
 				break;
 			case Keyboard::Enter:
+				this->hide();
+				levelStarted = true;
 				switch (selectedLevel) {
 				case 0:
-					this->hide();
 					level1.start();
-					levelStarted = true;
+					break;
+				case 1:
+					level2.start();
 					break;
 				}
 				break;
@@ -92,6 +96,7 @@ void LevelsList::catchEvents(Event event, player& newPlayer) {
 	}
 
 	level1.catchEvents(event);
+	level2.catchEvents(event);
 }
 
 

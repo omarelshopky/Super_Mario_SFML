@@ -153,6 +153,7 @@
     <ClCompile Include="Source\HowToPlayMenu.cpp" />
     <ClCompile Include="Source\Items.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
+    <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\LevelsList.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\MainMenu.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Header\HowToPlayMenu.h" />
     <ClInclude Include="Header\Items.h" />
     <ClInclude Include="Header\Level1.h" />
+    <ClInclude Include="Header\Level2.h" />
     <ClInclude Include="Header\LevelsList.h" />
     <ClInclude Include="Header\MainMenu.h" />
     <ClInclude Include="Header\Mario.h" />

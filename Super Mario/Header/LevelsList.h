@@ -3,6 +3,7 @@
 #include "../Header/Menu.h"
 #include "../Header/GameEngine.h"
 #include "../Header/Level1.h"
+#include "../Header/Level2.h"
 
 #define NUMBER_OF_LEVELS 2
 
@@ -11,6 +12,7 @@ class LevelsList : public Menu
 private:
 	/***			Properties				***/
 	Level1 level1;
+	Level2 level2;
 	Text levelsNameText[NUMBER_OF_LEVELS];
 	Texture optionShadowTexture;
 	Sprite optionShadowSprite;

@@ -148,7 +148,11 @@ struct position {
 
 #define LEVEL1_BACKGROUND "Resource/Textures/Backgrounds/Blue.jpg"
 
+#define LEVEL2_BACKGROUND "Resource/Textures/Backgrounds/Red.jpg"
+
 #define LEVEL1_GROUND "Resource/Textures/blueGround.png"
+
+#define LEVEL2_GROUND "Resource/Textures/redGround.png"
 
 /**********************************************************/
 
