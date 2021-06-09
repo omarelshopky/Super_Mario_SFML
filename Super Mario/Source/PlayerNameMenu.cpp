@@ -52,7 +52,7 @@ void PlayerNameMenu::catchEvents(Event event, player& newPlayer) {
 					// Convert sfml String to std String
 					newPlayer.name = std::string(playerNameStr);
 
-					playerNameStr = "";
+					playerNameStr = ""; // To Clean last inputed name
 					playerNameText.setString(playerNameStr);
 
 					levelsList.show(newPlayer);

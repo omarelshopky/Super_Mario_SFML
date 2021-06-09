@@ -16,8 +16,7 @@ Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y
 	// Set item Sprite properties
 	itemSprite.setTexture(gameEngine.itemTexture);
 	itemSprite.setPosition(x, y);
-	itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
-	itemSprite.setScale(1.8, 1.8);
+	
 
 	switch (itemType) {
 	case COIN:
@@ -38,6 +37,8 @@ Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y
 	}
 
 	itemSprite.setTextureRect(itemIntRect);
+	itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
+	itemSprite.setScale(1.8, 1.8);
 
 	// Set Floating text properties
 	font.loadFromFile(FLOATING_FONT);
@@ -78,6 +79,7 @@ void Items::animation() {
 		case SPARKL:
 			itemIntRect.left = sparklsIntRect.left + CurrentRect * sparklsIntRect.width;
 			if (CurrentRect == maxRect - 1) itemSprite.setColor(Color::Transparent);
+			break;
 		}
 		itemSprite.setTextureRect(itemIntRect);
 		CurrentRect++;

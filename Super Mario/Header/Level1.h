@@ -3,10 +3,10 @@
 #include "../Header/Items.h"
 #include "../Header/Blocks.h"	
 
-#define COINS_NUM 16
-#define STONE_NUM 759
-#define ROCK_NUM 47
-#define QUESTION_NUM 20
+#define COINS_NUM 1500
+#define STONE_NUM 1500
+#define ROCK_NUM 1500
+#define QUESTION_NUM 1500
 #define GROUNDS_NUM 6
 
 class Level1
@@ -18,7 +18,8 @@ private:
 	GameEngine* gameEngine;
 	position coinPosition[COINS_NUM], stonePosition[STONE_NUM], questionPosition[QUESTION_NUM], rockPosition[ROCK_NUM];
 	bool display, marioOnGround[GROUNDS_NUM];
-	float levelWidth, row[13];
+	float levelWidth, row[14], col[300];
+	int stoneCnt, rockCnt, quesCnt, coinCnt;
 	Texture backGroundTexture, groundTexture;
 	RectangleShape backGroundShape, groundShape[GROUNDS_NUM];
 	View camera;
@@ -56,27 +57,11 @@ public:
 	void checkEnd();
 
 private:
-	// Arrange Array for Stone Blocks position on screen
-	void setStonesPosition();
-	
-
-	// Arrange Array for Rock Blocks position on screen
-	void setRocksPosition();
-
-
-	// Arrange Array for Question Blocks position on screen
-	void setQuestionPosition();
-
-
-	// Arrange Array for Coins position on screen
-	void setCoinPosition();
-
-
 	// Arrange Array for Grounds Properties on screen
 	void setGroundProperties();
 
 
-	// Fill positions for a sequence of things
-	void fillSequence(position arr[], int numOfThings, int firstIndex, float startingPos, float yPosition);
+	// Set Positions for all blocks in the level
+	void arrangeLevelBlocks();
 };
 

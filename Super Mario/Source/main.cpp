@@ -12,7 +12,7 @@ int main()
 	window.setFramerateLimit(60); // Limit the framerate to a maximum fixed frequency.
 
 	MainMenu menu;  // Create Menu 
-
+	
 	/***			Game Loop			***/
 	while (window.isOpen())
 	{

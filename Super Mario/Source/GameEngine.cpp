@@ -186,3 +186,5 @@ void GameEngine::setHeaderPosition(position screenCenter) {
 	coinSprite.setPosition(topLeft + 575, 38); // Coin sprite
 	levelText.setPosition(topLeft + 1000, 5); // Level Name
 }
+
+
