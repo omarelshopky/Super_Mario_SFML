@@ -79,43 +79,45 @@ void Mario::superState() {
 
 
 void Mario::catchEvents(Event& event) {
-	switch (event.type) {
-	case Event::KeyPressed:
-		switch (event.key.code)
-		{
-		case Keyboard::Key::Right:
-			goRight = true;
-			break;
-		
-		case Keyboard::Key::Left:
-			goLeft = true;
+	if (!dying) {
+		switch (event.type) {
+		case Event::KeyPressed:
+			switch (event.key.code)
+			{
+			case Keyboard::Key::Right:
+				goRight = true;
+				break;
+
+			case Keyboard::Key::Left:
+				goLeft = true;
+				break;
+
+			case Keyboard::Key::Space:
+				goUp = true;
+				break;
+
+			case Keyboard::Key::Down:
+				goDown = true;
+				break;
+			case Keyboard::Key::Z:
+				startDie();
+				break;
+			}
 			break;
 
-		case Keyboard::Key::Space:
-			goUp = true;
-			break;
+		case Event::KeyReleased:
+			switch (event.key.code)
+			{
+			case Keyboard::Key::Right:
+				goRight = false;
+				break;
 
-		case Keyboard::Key::Down:
-			goDown = true;
-			break;
-		case Keyboard::Key::Z:
-			startDie();
+			case Keyboard::Key::Left:
+				goLeft = false;
+				break;
+			}
 			break;
 		}
-		break;
-
-	case Event::KeyReleased:
-		switch (event.key.code)
-		{
-		case Keyboard::Key::Right:
-			goRight = false;
-			break;
-
-		case Keyboard::Key::Left:
-			goLeft = false;
-			break;
-		}
-		break;
 	}
 }
 
@@ -382,4 +384,6 @@ void Mario::startDie() {
 	dying = true;
 	dieSound.play();
 	changeStateCounter = 1;
+	speed[0] = 0;
+	speed[1] = 0;
 }

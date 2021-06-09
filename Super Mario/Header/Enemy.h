@@ -13,9 +13,9 @@ private:
 	enemy_t enemyType;
 	IntRect enemyRect, blackRect, smashedRect, turtleRect, shellRect;
 	Text floatingText;
-	Clock timer, textFloatTimer;
+	Clock timer, textFloatTimer, turtleTimer;
 	int CurrentRect, maxRect, floatingSpeed, killScore;
-	float speed[2];
+	float speed[2], scale, accSpeed;
 	bool faid, isKilled, resetTime, moving, onGround, firstTime;
 
 public:
@@ -53,5 +53,9 @@ private:
 
 	// Handle what will happend when enemy is killed
 	void setKilled();
+
+
+	// Make Turtle faid after 5s
+	void checkTurtleFaid();
 };
 

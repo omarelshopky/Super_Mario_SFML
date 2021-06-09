@@ -1,14 +1,3 @@
-﻿  Enemy.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(41,54): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(41,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(50,36): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(114,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(119,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(127,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(134,33): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Enemy.cpp(140,32): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Level1.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Level1.cpp(157,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

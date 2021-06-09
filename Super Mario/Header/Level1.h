@@ -11,6 +11,8 @@
 #define QUESTION_WITH_FLOWER_NUM 1500
 #define ROCK_NUM 1500
 #define GROUNDS_NUM 6
+#define BLACK_NUM 1
+#define TURTLE_NUM 1
 #define ROW_NUM 14
 #define COL_NUM 300
 
