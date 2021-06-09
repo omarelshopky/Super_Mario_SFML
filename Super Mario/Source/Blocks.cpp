@@ -124,16 +124,22 @@ void Blocks::popUp() {
 		if (currentTime < 150) // GoingUp Time
 		{
 			if(popUpBlock) movingSpeed += -1;
-			else movingSpeed += -3;
+			else {
+				if (itemType == COIN) movingSpeed += -3;
+				else movingSpeed += -1.05;
+			}
 		}
 		else if (currentTime < 200) // StandStill time
 		{
 			movingSpeed = 0;
+			if (itemType == MASHROOM || itemType == FLOWER) movingSpeed += -1;
 		}
 		else if (currentTime < 350) // GoingDown Time
 		{
 			if (popUpBlock) movingSpeed += 1;
-			else movingSpeed += 1.15;
+			else {
+				if (itemType == COIN) movingSpeed += 1.15;
+			}
 		}
 		else 
 		{
@@ -142,13 +148,12 @@ void Blocks::popUp() {
 			movingSpeed = 0;
 			if (!popUpBlock) {
 				isPopUp = false; // finish all pop up 
-				item.blockPoped = true;
+				item.blockPoped = true; // when its coin its take itself
 				item.itemSprite.setPosition(startPos.x, startPos.y - (blockHight / 2) - (item.itemHeight / 2));
 			}
 			if (popUpBlock){
 				popUpBlock = false; // start item pop up 
-				if (itemType == MASHROOM || itemType == FLOWER)
-					gameEngine->powerUpAppearSound.play();
+				if (itemType == MASHROOM || itemType == FLOWER) gameEngine->powerUpAppearSound.play(); // start sound effect
 				item.display = true;
 			}
 			

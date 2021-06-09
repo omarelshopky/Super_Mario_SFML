@@ -1,7 +1,8 @@
 ﻿  Blocks.cpp
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(43,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(43,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(136,28): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(159,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(161,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(129,30): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(141,46): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(164,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Blocks.cpp(166,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe
