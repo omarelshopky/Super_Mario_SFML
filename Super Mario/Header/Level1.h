@@ -4,9 +4,14 @@
 
 #define COINS_NUM 1500
 #define STONE_NUM 1500
+#define STONE_WITH_COIN_NUM 1500
+#define QUESTION_WITH_COIN_NUM 1500
+#define QUESTION_WITH_MASH_NUM 1500
+#define QUESTION_WITH_FLOWER_NUM 1500
 #define ROCK_NUM 1500
-#define QUESTION_NUM 1500
 #define GROUNDS_NUM 6
+#define ROW_NUM 14
+#define COL_NUM 300
 
 class Level1
 {
@@ -15,10 +20,12 @@ private:
 	vector<Items> coin;
 	vector<Blocks> stone, question, rock;
 	GameEngine* gameEngine;
-	position coinPosition[COINS_NUM], stonePosition[STONE_NUM], questionPosition[QUESTION_NUM], rockPosition[ROCK_NUM];
+	position coinPosition[COINS_NUM], stonePosition[STONE_NUM], stoneCoinPosition[STONE_WITH_COIN_NUM],
+		questCoinPosition[QUESTION_WITH_COIN_NUM], questMashPosition[QUESTION_WITH_MASH_NUM],
+		questFLowerPosition[QUESTION_WITH_FLOWER_NUM], rockPosition[ROCK_NUM];
 	bool display, marioOnGround[GROUNDS_NUM];
-	float levelWidth, row[14], col[300];
-	int stoneCnt, rockCnt, quesCnt, coinCnt;
+	float levelWidth, row[ROW_NUM], col[COL_NUM];
+	int coinCnt, stoneCnt, stoneCoinCnt, quesCoinCnt, quesMashCnt, quesFlowerCnt, rockCnt;
 	Texture backGroundTexture, groundTexture;
 	RectangleShape backGroundShape, groundShape[GROUNDS_NUM];
 	View camera;
