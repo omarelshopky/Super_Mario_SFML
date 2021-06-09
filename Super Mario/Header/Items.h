@@ -18,6 +18,7 @@ private:
 public:
 	Sprite itemSprite;
 	bool display, blockPoped;
+	float itemHeight;
 
 	/***			Constructor 			***/
 	Items(GameEngine& gameEngine, item_t item, float x, float y);

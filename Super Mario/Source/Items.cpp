@@ -4,12 +4,12 @@ Items::Items(GameEngine& gameEngine, item_t item, float x, float y) {
 	// Set initial values
 	this->gameEngine = &gameEngine;
 	display = true;
-	faid = isTaken = resetTime = false;
+	faid = isTaken = resetTime = blockPoped = false;
 	CurrentRect = floatingSpeed = 0;
 	itemType = item;
-	coinIntRect = IntRect(0, 86, 33, 30);
+	coinIntRect = IntRect(0, 86, 32, 30);
 	flowerIntRect = IntRect(32, 213, 32, 30);
-	mashroomIntRect = IntRect(128, 150, 32.5, 45);
+	mashroomIntRect = IntRect(128, 150, 32.5, 32);
 	sparklsIntRect = IntRect(0, 116, 40, 32);
 
 	// Set item Sprite properties
@@ -43,6 +43,7 @@ Items::Items(GameEngine& gameEngine, item_t item, float x, float y) {
 	itemSprite.setTextureRect(itemIntRect);
 	itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
 	itemSprite.setScale(1.8, 1.8);
+	itemHeight = itemSprite.getGlobalBounds().height;
 
 	// Set Floating text properties
 	floatingText.setFont(gameEngine.floatingTextFont);
@@ -131,7 +132,7 @@ void Items::TextFloat() {
 
 void Items::checkTaken() {
 	if (!gameEngine->mario.dying) {
-		if (itemSprite.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds()) && !faid || blockPoped) {
+		if (itemSprite.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds()) && !faid || (blockPoped && itemType == COIN)) {
 			isTaken = true;
 			switch (itemType)
 			{
@@ -158,6 +159,7 @@ void Items::setTaken() {
 			gameEngine->updateCoins(); // increase coin counter by one
 			itemType = SPARKL; 
 			itemIntRect = sparklsIntRect;
+			itemSprite.setOrigin(itemIntRect.width / 2, itemIntRect.height / 2);
 			CurrentRect = 0;
 			maxRect = 6;
 			break;

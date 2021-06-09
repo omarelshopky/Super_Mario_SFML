@@ -43,6 +43,7 @@ Blocks::Blocks(GameEngine& gameEngine, block_t blockType, item_t itemType, float
 	blockSprite.setTextureRect(blockRect);
 	blockSprite.setPosition(x, y);
 	blockSprite.setScale(2, 2);
+	blockHight = blockSprite.getGlobalBounds().height;
 }
 
 
@@ -140,12 +141,14 @@ void Blocks::popUp() {
 			movingSpeed = 0;
 			if (!popUpBlock) {
 				isPopUp = false; // finish all pop up 
-				if(itemType == COIN) item.blockPoped = true;
+				item.blockPoped = true;
+				item.itemSprite.setPosition(startPos.x, startPos.y - (blockHight / 2) - (item.itemHeight / 2));
 			}
 			if (popUpBlock){
 				popUpBlock = false; // start item pop up 
 				item.display = true;
 			}
+			
 			blockSprite.setPosition(startPos.x, startPos.y);
 			popUpTimer.restart();
 		}
