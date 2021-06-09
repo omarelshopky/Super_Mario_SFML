@@ -33,6 +33,11 @@ Items::Items(GameEngine& gameEngine, item_t item, float x, float y) {
 		itemIntRect = mashroomIntRect;
 		takenScore = 1000;
 		break;
+	case NONE:
+		maxRect = 0;
+		itemIntRect = IntRect(0, 0, 0, 0);
+		takenScore = 0;
+		break;
 	}
 
 	itemSprite.setTextureRect(itemIntRect);
@@ -40,8 +45,7 @@ Items::Items(GameEngine& gameEngine, item_t item, float x, float y) {
 	itemSprite.setScale(1.8, 1.8);
 
 	// Set Floating text properties
-	font.loadFromFile(FLOATING_FONT);
-	floatingText.setFont(font);
+	floatingText.setFont(gameEngine.floatingTextFont);
 	floatingText.setCharacterSize(20);
 	floatingText.setStyle(Text::Bold);
 	floatingText.setOrigin(9, 9);
@@ -53,8 +57,8 @@ Items::Items(GameEngine& gameEngine, item_t item, float x, float y) {
 
 
 void Items::draw(RenderWindow& window) {
-	animation();
-	if (display) {
+	if (display && itemType != NONE) {
+		animation();
 		if(faid) window.draw(floatingText);
 		window.draw(itemSprite);
 	}
@@ -127,7 +131,7 @@ void Items::TextFloat() {
 
 void Items::checkTaken() {
 	if (!gameEngine->mario.dying) {
-		if (itemSprite.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds()) && !faid) {
+		if (itemSprite.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds()) && !faid || blockPoped) {
 			isTaken = true;
 			switch (itemType)
 			{
@@ -136,7 +140,7 @@ void Items::checkTaken() {
 				break;
 			case MASHROOM:
 			case FLOWER:
-				gameEngine->popUpSound.play();
+				gameEngine->powerUpSound.play();
 				break;
 			default:
 				break;

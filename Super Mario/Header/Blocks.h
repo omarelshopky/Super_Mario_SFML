@@ -1,6 +1,7 @@
 #pragma once
 #include "../Header/DEFINITION.h"
 #include "../Header/GameEngine.h"
+#include "../Header/Items.h"
 
 class Blocks{
 private:
@@ -8,15 +9,17 @@ private:
 	IntRect blockRect, stoneRect, questionRect, bronzeRect, smashRect, rockRect;
 	Clock timer, popUpTimer;
 	int currentRect, maxRect, movingSpeed;
-	bool display, faid, isPopUp, marioOn, stuckOn;
+	bool display, faid, isPopUp, marioOn, stuckOn, popUpBlock;
 	position startPos;
 	block_t blockType;
+	item_t	itemType;
 	GameEngine* gameEngine;
+	Items item;
 
 public:
 	Sprite blockSprite;
 
-	Blocks(GameEngine& gameEngine, block_t type, float x, float y); // Constructer
+	Blocks(GameEngine& gameEngine, block_t blockType, item_t itemType, float x, float y); // Constructer
 	
 
 	/***			Methods				***/

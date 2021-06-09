@@ -12,7 +12,8 @@ GameEngine::GameEngine() : mario(500, 200){
 	
 	// Load font from file
 	if(!headerFont.loadFromFile(GAME_HEADER_FONT)) { std::cout << "Can't load GAME_HEADER_FONT\n"; }
-	
+	floatingTextFont.loadFromFile(FLOATING_FONT);
+
 	// set Score Text properties
 	scoreText.setPosition(20, 5);
 	scoreText.setFont(headerFont);

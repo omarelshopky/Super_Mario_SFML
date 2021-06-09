@@ -20,6 +20,7 @@ private:
 public:
     Mario mario;
     Text timerText, scoreText, coinsText, levelText;
+    Font floatingTextFont;
     Texture stoneTexture, questionTexture, smashTextures[6], itemTexture;
     Sound popUpSound, smashSound, coinSound, powerUpSound;
 

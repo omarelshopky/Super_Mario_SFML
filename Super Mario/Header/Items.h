@@ -8,16 +8,16 @@ class Items
 private:
 	/***			Properties				***/
 	GameEngine* gameEngine;
-	Sprite itemSprite;
 	IntRect itemIntRect, coinIntRect, flowerIntRect, mashroomIntRect, sparklsIntRect;
 	Clock timer, textFloatTimer;
 	Text floatingText;
-	Font font;
 	item_t itemType;
 	int CurrentRect, maxRect, floatingSpeed, takenScore;
-	bool display, faid, isTaken, resetTime;
+	bool faid, isTaken, resetTime;
 
 public:
+	Sprite itemSprite;
+	bool display, blockPoped;
 
 	/***			Constructor 			***/
 	Items(GameEngine& gameEngine, item_t item, float x, float y);

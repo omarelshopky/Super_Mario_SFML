@@ -22,19 +22,19 @@ Level1::Level1(GameEngine& gameEngine) {
 
 	// Call Constructer for all Stone Blocks
 	for (int i = 0; i < stoneCnt; i++) {
-		stone.push_back(*new Blocks(gameEngine, STONE, stonePosition[i].x, stonePosition[i].y));
+		stone.push_back(*new Blocks(gameEngine, STONE, COIN, stonePosition[i].x, stonePosition[i].y));
 		stone[i].blockSprite.setColor(Color::Color(70, 50, 180)); // Blue filter
 	}
 
 	// Call Constructer for all Rock Blocks
 	for (int i = 0; i < rockCnt; i++) {
-		rock.push_back(*new Blocks(gameEngine, ROCK, rockPosition[i].x, rockPosition[i].y));
+		rock.push_back(*new Blocks(gameEngine, ROCK, COIN, rockPosition[i].x, rockPosition[i].y));
 		rock[i].blockSprite.setColor(Color::Color(70, 50, 180)); // blue filter
 	}
 
 	// Call Constructer for all Question Blocks
 	for (int i = 0; i < quesCnt; i++) {
-		question.push_back(*new Blocks(gameEngine, QUESTION, questionPosition[i].x, questionPosition[i].y));
+		question.push_back(*new Blocks(gameEngine, QUESTION, COIN, questionPosition[i].x, questionPosition[i].y));
 	}
 
 	// Set Level's Background Properties

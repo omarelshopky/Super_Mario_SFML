@@ -1,6 +1,5 @@
 #pragma once
 #include "../Header/DEFINITION.h"
-#include "../Header/Items.h"
 #include "../Header/Blocks.h"	
 
 #define COINS_NUM 1500

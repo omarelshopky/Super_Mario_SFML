@@ -20,7 +20,7 @@ using namespace sf;
 /***			Special Variable			***/
 typedef enum { SMALL, BIG, SUPER } marioState_t;
 
-typedef enum { COIN, MASHROOM, FLOWER , SPARKL} item_t;
+typedef enum { COIN, MASHROOM, FLOWER , SPARKL, NONE} item_t;
 
 typedef enum { QUESTION, STONE , BRONZE, SMASH , ROCK} block_t;
 

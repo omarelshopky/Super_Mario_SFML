@@ -1,6 +1,7 @@
 #include "../Header/Blocks.h"
 
-Blocks::Blocks(GameEngine& gameEngine, block_t type, float x, float y) {
+Blocks::Blocks(GameEngine& gameEngine, block_t blockType, item_t itemType, float x, float y) : item(gameEngine, itemType, x, y)
+{
 	// Set initial values
 	this->gameEngine = &gameEngine;
 
@@ -12,13 +13,14 @@ Blocks::Blocks(GameEngine& gameEngine, block_t type, float x, float y) {
 
 	currentRect = movingSpeed = 0;
 	display = true;
-	faid = isPopUp = marioOn = stuckOn = false;
-	blockType = type;
+	item.display = false;
+	faid = isPopUp = marioOn = stuckOn = popUpBlock = false;
+	this->blockType = blockType;
 	startPos.x = x;
 	startPos.y = y;
 
 	// Set Sprite Properties
-	switch (type)
+	switch (blockType)
 	{
 	case QUESTION:
 		blockSprite.setTexture(gameEngine.questionTexture);
@@ -45,6 +47,7 @@ Blocks::Blocks(GameEngine& gameEngine, block_t type, float x, float y) {
 
 
 void Blocks::draw(RenderWindow& window) {
+	item.draw(window);
 	if (display) {
 		animation();
 		window.draw(blockSprite);
@@ -104,6 +107,8 @@ void Blocks::smash() {
 void Blocks::startPopUp() {
 	if (!isPopUp) {
 		isPopUp = true;
+		popUpBlock = true;
+		
 		popUpTimer.restart();
 		gameEngine->popUpSound.play();
 	}
@@ -116,7 +121,8 @@ void Blocks::popUp() {
 
 		if (currentTime < 150) // GoingUp Time
 		{
-			movingSpeed += -1;
+			if(popUpBlock) movingSpeed += -1;
+			else movingSpeed += -3;
 		}
 		else if (currentTime < 200) // StandStill time
 		{
@@ -124,18 +130,29 @@ void Blocks::popUp() {
 		}
 		else if (currentTime < 350) // GoingDown Time
 		{
-			movingSpeed += 1;
+			if (popUpBlock) movingSpeed += 1;
+			else movingSpeed += 1.15;
 		}
 		else 
 		{
 			if (blockType == QUESTION) blockType = BRONZE;
 
 			movingSpeed = 0;
-			isPopUp = false;
+			if (!popUpBlock) {
+				isPopUp = false; // finish all pop up 
+				if(itemType == COIN) item.blockPoped = true;
+			}
+			if (popUpBlock){
+				popUpBlock = false; // start item pop up 
+				item.display = true;
+			}
 			blockSprite.setPosition(startPos.x, startPos.y);
 			popUpTimer.restart();
 		}
-		blockSprite.move(0, movingSpeed);
+		if(popUpBlock) // blocks pop up
+			blockSprite.move(0, movingSpeed);
+		else // item pop up
+			item.itemSprite.move(0, movingSpeed);
 	}
 }
 
