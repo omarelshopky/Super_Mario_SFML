@@ -55,8 +55,8 @@ def checkMovement(sign):
     elif sign == 'jump':
         keyboard.send('space')
         
-    #elif sign == 'down':
-     #   keyboard.send('down')
+    elif sign == 'down':
+        keyboard.send('down')
         
     elif sign == 'fire':
         keyboard.send('z')

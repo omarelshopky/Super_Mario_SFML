@@ -1,0 +1,32 @@
+﻿  Blocks.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  CreditsMenu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Enemy.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  GameEngine.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  HighScoreMenu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  HowToPlayMenu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Items.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Level1.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Level2.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  LevelsList.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  main.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  MainMenu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Mario.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Menu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  OptionsMenu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  PlayerNameMenu.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Header\DEFINITION.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory

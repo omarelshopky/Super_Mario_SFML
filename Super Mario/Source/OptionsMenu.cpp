@@ -181,7 +181,7 @@ void OptionsMenu::changeActiveControlOption() {
 
 void OptionsMenu::updateControlSettings() {
 	if (handControlled) {
-		//system("python \"../Super Mario/HandControler/HandControl.py\"");
+		system("start cmd /k \"python  \"HandControler/HandControl.py\"\"");
 	}
 	else {
 
