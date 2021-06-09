@@ -14,7 +14,7 @@ private:
     map<string, int> levelsMap;
     Texture coinTexture;
     Sprite coinSprite;
-    SoundBuffer popUpBuffer, smashBuffer, coinBuffer, powerUpBuffer;
+    SoundBuffer popUpBuffer, smashBuffer, coinBuffer, powerUpBuffer, powerUpAppearBuffer;
     IntRect coinRect;
 
 public:
@@ -22,7 +22,7 @@ public:
     Text timerText, scoreText, coinsText, levelText;
     Font floatingTextFont;
     Texture stoneTexture, questionTexture, smashTextures[6], itemTexture;
-    Sound popUpSound, smashSound, coinSound, powerUpSound;
+    Sound popUpSound, smashSound, coinSound, powerUpSound, powerUpAppearSound;
 
     /*         Constractar          */
     GameEngine();

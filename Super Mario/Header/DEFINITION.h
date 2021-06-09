@@ -116,6 +116,8 @@ struct position {
 
 #define POWERUP_SOUND "Resource/Sounds/powerup.wav"
 
+#define POWERUP_APPEAR_SOUND "Resource/Sounds/powerup_appears.wav"
+
 /**********************************************************/
 
 

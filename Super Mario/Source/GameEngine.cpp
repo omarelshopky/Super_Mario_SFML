@@ -63,6 +63,9 @@ GameEngine::GameEngine() : mario(500, 200){
 	powerUpBuffer.loadFromFile(POWERUP_SOUND);
 	powerUpSound.setBuffer(powerUpBuffer);
 
+	if (!powerUpAppearBuffer.loadFromFile(POWERUP_APPEAR_SOUND)) { cout << "faild to load powerup appear\n"; }
+	powerUpAppearSound.setBuffer(powerUpAppearBuffer);
+
 	// Load Game Textures
 	questionTexture.loadFromFile(QUESTION_BLOCK);
 	stoneTexture.loadFromFile(STONE_BLOCK);

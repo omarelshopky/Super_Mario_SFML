@@ -233,8 +233,6 @@ void Level1::arrangeLevelBlocks() {
 			default:
 				break;
 			}
-			
-			
 		}
 	}
 }

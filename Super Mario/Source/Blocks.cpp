@@ -4,6 +4,8 @@ Blocks::Blocks(GameEngine& gameEngine, block_t blockType, item_t itemType, float
 {
 	// Set initial values
 	this->gameEngine = &gameEngine;
+	this->itemType = itemType;
+	this->blockType = blockType;
 
 	questionRect = IntRect(0, 0, 32, 31);
 	stoneRect = IntRect(32, 0, 32, 31);
@@ -15,7 +17,6 @@ Blocks::Blocks(GameEngine& gameEngine, block_t blockType, item_t itemType, float
 	display = true;
 	item.display = false;
 	faid = isPopUp = marioOn = stuckOn = popUpBlock = false;
-	this->blockType = blockType;
 	startPos.x = x;
 	startPos.y = y;
 
@@ -146,6 +147,8 @@ void Blocks::popUp() {
 			}
 			if (popUpBlock){
 				popUpBlock = false; // start item pop up 
+				if (itemType == MASHROOM || itemType == FLOWER)
+					gameEngine->powerUpAppearSound.play();
 				item.display = true;
 			}
 			
