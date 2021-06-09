@@ -1,5 +1,5 @@
 ﻿  Level1.cpp
 E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Level1.cpp(150,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Level1.cpp(200,48): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Level1.cpp(202,48): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+  Generating Code...
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe
