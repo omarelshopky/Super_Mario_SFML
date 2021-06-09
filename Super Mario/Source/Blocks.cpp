@@ -1,8 +1,7 @@
 #include "../Header/Blocks.h"
 
-Blocks::Blocks(Mario& mario, GameEngine& gameEngine, block_t type, float x, float y) {
+Blocks::Blocks(GameEngine& gameEngine, block_t type, float x, float y) {
 	// Set initial values
-	this->mario = &mario;
 	this->gameEngine = &gameEngine;
 
 	questionRect = IntRect(0, 0, 32, 31);
@@ -143,9 +142,9 @@ void Blocks::popUp() {
 
 void Blocks::checkIntersection() {
 	// Calculate Mario and Block bounds
-	FloatRect marioBounds = mario->marioSprite.getGlobalBounds(),
+	FloatRect marioBounds = gameEngine->mario.marioSprite.getGlobalBounds(),
 		blockBounds = blockSprite.getGlobalBounds();
-	Vector2f marioPos = mario->marioSprite.getPosition(), blockPos = blockSprite.getPosition();
+	Vector2f marioPos = gameEngine->mario.marioSprite.getPosition(), blockPos = blockSprite.getPosition();
 
 	float blockTopPoint = blockPos.y - (blockBounds.height / 2),
 		blockBottomPoint = blockPos.y + (blockBounds.height / 2),
@@ -155,46 +154,46 @@ void Blocks::checkIntersection() {
 	// In the block bounds
 	if (blockBounds.intersects(marioBounds)) {
 		if (marioPos.x >= blockLeftPoint && marioPos.x <= blockRightPoint) {
-			if (mario->speed[1] > 0 && blockType != SMASH) { // jump on the block
-				mario->marioSprite.setPosition(marioPos.x, blockBounds.top);
-				mario->onGround = true;
+			if (gameEngine->mario.speed[1] > 0 && blockType != SMASH) { // jump on the block
+				gameEngine->mario.marioSprite.setPosition(marioPos.x, blockBounds.top);
+				gameEngine->mario.onGround = true;
 				marioOn = true;
 			}
-			else if (mario->speed[1] < 0/*marioPos.y - (marioBounds.height/2) >= blockBottomPoint*/) { // Hit the block with head
+			else if (gameEngine->mario.speed[1] < 0/*marioPos.y - (marioBounds.height/2) >= blockBottomPoint*/) { // Hit the block with head
 				float blockBottom = blockBounds.top + blockBounds.height;
 
 				// Handle large size of smash sprite
 				if (blockType == SMASH) blockBottom = (blockBounds.top + blockBottom) / 2;
 
-				mario->marioSprite.setPosition(marioPos.x, blockBottom + marioBounds.height);
-				mario->speed[1] = 2;
+				gameEngine->mario.marioSprite.setPosition(marioPos.x, blockBottom + marioBounds.height);
+				gameEngine->mario.speed[1] = 2;
 				handleHitBlock();
 			}
 		}
 		else { // touch from side
-			if (mario->speed[1] > 1 && !mario->onGround || mario->speed[1] < 1) {
+			if (gameEngine->mario.speed[1] > 1 && !gameEngine->mario.onGround || gameEngine->mario.speed[1] < 1) {
 				float blockRight = blockBounds.left + blockBounds.width;
 				if (marioPos.x > blockPos.x)
-					mario->marioSprite.setPosition(blockRight + (marioBounds.width / 2), marioPos.y);
+					gameEngine->mario.marioSprite.setPosition(blockRight + (marioBounds.width / 2), marioPos.y);
 				else
-					mario->marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
-				mario->speed[0] = 0;
-				mario->stuck = true;
+					gameEngine->mario.marioSprite.setPosition(blockBounds.left - (marioBounds.width / 2), marioPos.y);
+				gameEngine->mario.speed[0] = 0;
+				gameEngine->mario.stuck = true;
 				stuckOn = true;
 			}
 		}
 	}
 	else {
-		if (marioOn && mario->onGround) { // Fall when mario left the block
+		if (marioOn && gameEngine->mario.onGround) { // Fall when mario left the block
 			marioOn = false;
-			mario->onGround = false;
-			mario->speed[1] = -5;
+			gameEngine->mario.onGround = false;
+			gameEngine->mario.speed[1] = -5;
 		}
 
 		// Fix Screen vibration when mario touch block side
-		if (mario->stuck && stuckOn) {
+		if (gameEngine->mario.stuck && stuckOn) {
 			if (abs(marioPos.x - blockPos.x) > 60 || abs(marioPos.y - blockPos.y) > 100) {
-				mario->stuck = false; // not touching the side anymore
+				gameEngine->mario.stuck = false; // not touching the side anymore
 				stuckOn = false;
 			}
 		}
@@ -206,7 +205,7 @@ void Blocks::handleHitBlock() {
 	switch (blockType)
 	{
 	case STONE:
-		switch (mario->marioState) {
+		switch (gameEngine->mario.marioState) {
 		case SMALL:
 			startPopUp();
 			break;

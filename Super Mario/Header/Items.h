@@ -7,7 +7,6 @@ class Items
 {
 private:
 	/***			Properties				***/
-	Mario *mario;
 	GameEngine* gameEngine;
 	Sprite itemSprite;
 	IntRect itemIntRect, coinIntRect, flowerIntRect, mashroomIntRect, sparklsIntRect;
@@ -21,7 +20,7 @@ private:
 public:
 
 	/***			Constructor 			***/
-	Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y);
+	Items(GameEngine& gameEngine, item_t item, float x, float y);
 
 
 	/***			Methods				***/

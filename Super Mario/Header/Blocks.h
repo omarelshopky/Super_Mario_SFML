@@ -1,6 +1,5 @@
 #pragma once
 #include "../Header/DEFINITION.h"
-#include "../Header/Mario.h"
 #include "../Header/GameEngine.h"
 
 class Blocks{
@@ -12,13 +11,12 @@ private:
 	bool display, faid, isPopUp, marioOn, stuckOn;
 	position startPos;
 	block_t blockType;
-	Mario *mario;
 	GameEngine* gameEngine;
 
 public:
 	Sprite blockSprite;
 
-	Blocks(Mario& mario, GameEngine& gameEngine, block_t type, float x, float y); // Constructer
+	Blocks(GameEngine& gameEngine, block_t type, float x, float y); // Constructer
 	
 
 	/***			Methods				***/

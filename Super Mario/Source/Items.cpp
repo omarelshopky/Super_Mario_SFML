@@ -1,8 +1,7 @@
 #include "../Header/Items.h"
 
-Items::Items(Mario& mario, GameEngine& gameEngine, item_t item, float x, float y) {
+Items::Items(GameEngine& gameEngine, item_t item, float x, float y) {
 	// Set initial values
-	this->mario = &mario;
 	this->gameEngine = &gameEngine;
 	display = true;
 	faid = isTaken = resetTime = false;
@@ -127,8 +126,8 @@ void Items::TextFloat() {
 
 
 void Items::checkTaken() {
-	if (!mario->dying) {
-		if (itemSprite.getGlobalBounds().intersects(mario->marioSprite.getGlobalBounds()) && !faid) {
+	if (!gameEngine->mario.dying) {
+		if (itemSprite.getGlobalBounds().intersects(gameEngine->mario.marioSprite.getGlobalBounds()) && !faid) {
 			isTaken = true;
 			switch (itemType)
 			{
@@ -159,10 +158,10 @@ void Items::setTaken() {
 			maxRect = 6;
 			break;
 		case MASHROOM:
-			mario->PoweringUpToBig = true;
+			gameEngine->mario.PoweringUpToBig = true;
 			break;
 		case FLOWER:
-			mario->PoweringUpToSuper = true;
+			gameEngine->mario.PoweringUpToSuper = true;
 			break;
 		}
 		faid = true;
