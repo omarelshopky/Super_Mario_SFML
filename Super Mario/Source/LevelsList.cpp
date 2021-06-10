@@ -2,7 +2,7 @@
 
 LevelsList::LevelsList() : level1(gameEngine), level2(gameEngine) {
 	// Set intial values
-	display = levelStarted = false;
+	display = false;
 	selectedLevel = 0;
 	maxLevel = 1;
 
@@ -45,7 +45,8 @@ void LevelsList::show(player newPlayer) {
 
 
 void LevelsList::draw(RenderWindow& window) {
-	if (display) {
+	cout << level1.finished;
+	if (display || level1.finished) {
 		window.draw(backGroundSprite);
 		window.draw(optionShadowSprite);
 		window.draw(backText);
@@ -53,8 +54,10 @@ void LevelsList::draw(RenderWindow& window) {
 			window.draw(levelsNameText[i]);
 		}
 	}
-	level1.draw(window);
-	level2.draw(window);
+	else {
+		level1.draw(window);
+		level2.draw(window);
+	}
 }
 
 
@@ -75,7 +78,7 @@ void LevelsList::catchEvents(Event event, player& newPlayer) {
 				break;
 			case Keyboard::Enter:
 				this->hide();
-				levelStarted = true;
+				gameEngine.gameRunning = true;
 				switch (selectedLevel) {
 				case 0:
 					level1.start();

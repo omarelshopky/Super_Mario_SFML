@@ -1,3 +1,25 @@
-﻿  OptionsMenu.cpp
-E:\Work\FCIS Projects\Super Mario\Super Mario\Source\OptionsMenu.cpp(34,36): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Mario.cpp
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(59,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(59,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(69,70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(69,53): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(131,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(136,51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+E:\Work\FCIS Projects\Super Mario\Super Mario\Source\Mario.cpp(152,22): warning C4305: '+=': truncation from 'double' to 'float'
   Super Mario.vcxproj -> E:\Work\FCIS Projects\Super Mario\Debug\Super Mario.exe

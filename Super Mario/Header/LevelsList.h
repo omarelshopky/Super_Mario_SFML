@@ -20,9 +20,7 @@ private:
 	fstream playersFile;
 
 public:
-	
 	GameEngine gameEngine;
-	bool levelStarted;
 
 	// Constructor
 	LevelsList();

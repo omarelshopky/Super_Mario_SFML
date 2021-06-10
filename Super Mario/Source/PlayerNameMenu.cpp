@@ -69,7 +69,8 @@ void PlayerNameMenu::catchEvents(Event event, player& newPlayer) {
 		case Event::TextEntered:
 			bool notForbidinKeys = (!Keyboard::isKeyPressed(Keyboard::Enter) && !Keyboard::isKeyPressed(Keyboard::BackSpace)) && (!Keyboard::isKeyPressed(Keyboard::Escape) && !Keyboard::isKeyPressed(Keyboard::Space));
 			if (playerNameStr.getSize() <= 20 && notForbidinKeys) {
-				playerNameStr += event.text.unicode;
+				if(event.text.unicode < '0' || event.text.unicode > '9')
+					playerNameStr += event.text.unicode;
 				playerNameText.setString(playerNameStr);
 			}
 			break;

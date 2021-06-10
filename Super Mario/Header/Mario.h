@@ -10,12 +10,12 @@ private:
 	bool goRight, goUp, goLeft, goDown, damaging;
 	float acceleration[2], startJumpPosition;
 	area marioArea;
-	Texture marioTexture, marioSuperTexture;
 	SoundBuffer jumpBuffer, damageBuffer, dieBuffer;
 	Sound jumpSound, damageSound, dieSound;
 
 public:
-	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper, dying, stuck;
+	Texture marioTexture, marioSuperTexture;
+	bool jumping, onGround, PoweringUpToBig, PoweringUpToSuper, dying, stuck, dead;
 	float speed[2];
 	Sprite marioSprite;
 	marioState_t marioState;

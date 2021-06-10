@@ -10,7 +10,7 @@ Mario::Mario(float x, float y) {
 	startJumpPosition = 500;
 	changeStateCounter = 0;
 	goRight = goUp = goLeft = goDown = jumping = onGround = false;
-	PoweringUpToSuper = PoweringUpToBig = damaging = dying = stuck = false;
+	PoweringUpToSuper = PoweringUpToBig = damaging = dying = stuck = dead = false;
 
 	// Set Mario Sprite Properties
 	if(!marioTexture.loadFromFile(MARIO_CHARACTER)) { std::cout << "Can't load MARIO_CHARACTER\n"; }
@@ -100,7 +100,7 @@ void Mario::catchEvents(Event& event) {
 				goDown = true;
 				break;
 			case Keyboard::Key::Z:
-				startDie();
+				//startDie();
 				break;
 			}
 			break;
@@ -375,6 +375,13 @@ void Mario::die(){
 			speed[1] = -60;
 			marioSprite.move(-75, 0);
 			changeStateCounter = 0;
+		}
+		if (marioSprite.getPosition().y > 900) {
+			dead = true;
+			dying = goLeft = goRight = false;
+			speed[0] = 0;
+			speed[1] = 0;
+			marioSprite.setPosition(500, 200);
 		}
 	}
 }

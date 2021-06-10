@@ -109,7 +109,7 @@ void MainMenu::draw(RenderWindow& window) {
 
 
 void MainMenu::checkShow() {
-	gameRunning = playerName.levelsList.levelStarted;
+	gameRunning = playerName.levelsList.gameEngine.gameRunning;
 	
 	bool allFormsClose = ((!playerName.display && !howToPlay.display) && (!highScore.display && !options.display))
 						&& (!credits.display && !playerName.levelsList.display);

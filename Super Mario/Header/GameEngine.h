@@ -7,19 +7,20 @@ class GameEngine
     /*          Properties          */
 private:
     Font headerFont;
-    ostringstream scoreStr, timerStr, coinsStr;
+    ostringstream scoreStr, timerStr, coinsStr, lifeStr;
     Clock timer, convertTimer, coinTimer;
-    int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt, remainTime;
+    int currentTime, levelTime, counterTime, scoreInt, fontSize, coinsInt, remainTime, lifeInt;
     fstream playersFile;
     map<string, int> levelsMap;
     Texture coinTexture;
-    Sprite coinSprite;
+    Sprite coinSprite, marioLifeSprite;
     SoundBuffer popUpBuffer, smashBuffer, coinBuffer, powerUpBuffer, powerUpAppearBuffer, killBuffer;
     IntRect coinRect;
 
 public:
+    bool lifeScreen, gameRunning;
     Mario mario;
-    Text timerText, scoreText, coinsText, levelText;
+    Text timerText, scoreText, coinsText, levelText, lifeText;
     Font floatingTextFont;
     Texture stoneTexture, questionTexture, smashTextures[6], itemTexture, enemyTextrue;
     Sound popUpSound, smashSound, coinSound, powerUpSound, powerUpAppearSound, killSound;
@@ -59,7 +60,7 @@ public:
 
 
     // Add player name , his score and level to Players file
-    void addPlayerInfo(std::string playerName);
+    void addPlayerInfo();
 
 
     // Set level Name text
@@ -74,7 +75,15 @@ public:
     void coinAnimation();
 
 
+    //update life times when mario dies
+    void updateLifes();
+
+
     // Set header position to move with Camera
     void setHeaderPosition(position screenCenter);
+
+
+    // Start Life Screen
+    void startLifeScreen(RenderWindow& window);
 };
 

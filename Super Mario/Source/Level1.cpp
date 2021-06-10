@@ -4,14 +4,13 @@
 Level1::Level1(GameEngine& gameEngine) {
 	// Set initial values
 	this->gameEngine = &gameEngine;
-	display = false;
+	display = finished = false;
 	memset(marioOnGround, false, sizeof marioOnGround);
 	coinCnt = stoneCnt = stoneCoinCnt = quesCoinCnt = quesMashCnt = quesFlowerCnt = rockCnt = 0;
 	levelWidth = 13397;
 	
 	// Set View Properites
 	camera.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	camera.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 
 	// Set Level's Background Properties
 	backGroundTexture.loadFromFile(LEVEL1_BACKGROUND);
@@ -58,12 +57,17 @@ Level1::Level1(GameEngine& gameEngine) {
 		rock[i].blockSprite.setColor(Color::Color(70, 50, 180)); // blue filter
 	}
 
-	black.push_back(*new Enemy(gameEngine, TURTLE, rock[1].blockSprite, rock[2].blockSprite, groundShape[0], 900, 200));
+	black.push_back(*new Enemy(gameEngine, BLACK, rock[39].blockSprite, rock[40].blockSprite, groundShape[0], 2500, 200));
+	turtle.push_back(*new Enemy(gameEngine, TURTLE, rock[41].blockSprite, rock[42].blockSprite, groundShape[1], 5700, 200));
 }
 
 
 void Level1::draw(RenderWindow& window) {
 	if (display) {
+		if (gameEngine->mario.dying) {
+			camera.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+			cout << "omar";
+		}
 		window.draw(backGroundShape);
 
 		for (int i = 0; i < GROUNDS_NUM; i++) {
@@ -88,7 +92,7 @@ void Level1::draw(RenderWindow& window) {
 		for (int i = 0; i < BLACK_NUM; i++)
 			black[i].draw(window);
 
-		for (int i = 0; i < 0; i++)
+		for (int i = 0; i < TURTLE_NUM; i++)
 			turtle[i].draw(window);
 
 		gameEngine->mario.draw(window);
@@ -109,6 +113,8 @@ void Level1::catchEvents(Event event) {
 
 
 void Level1::start() {
+	camera.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	gameEngine->lifeScreen = true;
 	display = true;
 	gameEngine->startCountDown();
 }
@@ -116,6 +122,8 @@ void Level1::start() {
 
 void Level1::end() {
 	display = false;
+	gameEngine->currentPlayer.level = 2;
+	finished = true;
 }
 
 
@@ -138,8 +146,10 @@ void Level1::checkGround(int num){
 
 
 void Level1::handleView(RenderWindow& window) {
-	if (/*!gameEngine->mario.stuck*/ !gameEngine->mario.dying) { 
-		position screenCenter = { gameEngine->mario.marioSprite.getPosition().x, 450 };
+	// a + (b - a) * c
+	if (/*!gameEngine->mario.stuck*/ !gameEngine->mario.dying) {
+		float fr = (1 / 50.0);
+		screenCenter = { screenCenter.x + (gameEngine->mario.marioSprite.getPosition().x - screenCenter.x) * fr * 20, 450 };
 
 		if (screenCenter.x > WINDOW_WIDTH / 2 && screenCenter.x < levelWidth - (WINDOW_WIDTH / 2)) {
 			camera.setCenter(screenCenter.x, screenCenter.y);
@@ -160,6 +170,8 @@ void Level1::checkEnd() {
 	else if (marioPos.x > levelWidth - space) {
 		gameEngine->mario.marioSprite.setPosition(levelWidth - space, marioPos.y);
 		gameEngine->mario.speed[0] = 0;
+		gameEngine->addPlayerInfo();
+		end();
 	}
 }
 

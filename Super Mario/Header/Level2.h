@@ -33,6 +33,7 @@ private:
 	Texture backGroundTexture, groundTexture;
 	RectangleShape backGroundShape, groundShape[GROUNDS_NUM];
 	View camera;
+	position screenCenter = { 0, 0 };
 
 public:
 	Level2(GameEngine& gameEngine);
