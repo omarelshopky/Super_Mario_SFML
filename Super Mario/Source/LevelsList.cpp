@@ -45,7 +45,7 @@ void LevelsList::show(player newPlayer) {
 
 
 void LevelsList::draw(RenderWindow& window) {
-	cout << level1.finished;
+	//cout << level1.finished;
 	if (display || level1.finished) {
 		window.draw(backGroundSprite);
 		window.draw(optionShadowSprite);

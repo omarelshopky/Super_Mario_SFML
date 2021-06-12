@@ -237,7 +237,7 @@ void GameEngine::setHeaderPosition(position screenCenter) {
 void GameEngine::updateLifes() {
 	lifeStr.str(string());
 	if (mario.dead) {
-		if (currentPlayer.lifes > 0) {
+		if (currentPlayer.lifes > 1) {
 			currentPlayer.lifes--;
 			lifeStr << "x" << currentPlayer.lifes;
 		}

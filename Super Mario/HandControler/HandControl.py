@@ -42,18 +42,20 @@ def detect_fn(image, detection_model):
 
 ## Control the keyboard
 def checkMovement(sign):
-    if sign == 'right':
+    if sign == 'jump':
+        keyboard.press('space')
+
+    elif sign == 'right':
         #if keyboard.is_pressed('left'):
         keyboard.release('left')
+        keyboard.release('space')
         keyboard.press('right')
         
     elif sign == 'left':
         #if keyboard.is_pressed('right'):
         keyboard.release('right')
+        keyboard.release('space')
         keyboard.press('left')
-        
-    elif sign == 'jump':
-        keyboard.send('space')
         
     elif sign == 'down':
         keyboard.send('down')
@@ -102,7 +104,7 @@ def startDetection(detection_model):
                 detections['detection_scores'],
                 category_index,
                 use_normalized_coordinates=True,
-                max_boxes_to_draw=5,
+                max_boxes_to_draw=1,
                 min_score_thresh=.5,
                 agnostic_mode=False)
     

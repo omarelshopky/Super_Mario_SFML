@@ -182,6 +182,7 @@ void OptionsMenu::changeActiveControlOption() {
 void OptionsMenu::updateControlSettings() {
 	if (handControlled) {
 		system("start cmd /k \"python  \"HandControler/HandControl.py\"\"");
+		handControlled = false;
 	}
 	else {
 
