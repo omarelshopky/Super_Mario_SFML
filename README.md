@@ -3,7 +3,7 @@
 
 # Super Mario Remake 
 
-We use :
+We used :
 
 - C++ in OOP concepts
 - SFML for game animations and sound effects.
