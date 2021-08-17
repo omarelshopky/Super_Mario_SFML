@@ -2,6 +2,10 @@
 ---
 
 # Super Mario Remake 
+Fully modified version of super mario game developed by C++ ( in OOP concept ) , sfml library and Data Structure container with the technology of Image Processing  ( object detection , DL. , Tensor flow, OpenCV ) 
+Which contains new levels and fully new graphics and designs with a unique controls " as you can play with your hand signs " and the game contains many difficulty levels.
+Hope you enjoy it 
+
 
 We used :
 
