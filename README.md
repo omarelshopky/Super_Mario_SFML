@@ -69,7 +69,7 @@ We used :
 
 [3]:<./ScreenShots/Levels.png>
 
-[4]:<./ScreenShots/Level1-1.png>
+[4]:<./ScreenShots/aLevel1-1.png>
 
 [5]:<./ScreenShots/Level1-2.png>
 
